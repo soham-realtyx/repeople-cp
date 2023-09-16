@@ -24,7 +24,8 @@ RxString countrycode = "+91".obs;
 
 class UpperCaseTextFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
     return TextEditingValue(
       text: capitalize(newValue.text),
       selection: newValue.selection,
@@ -33,7 +34,7 @@ class UpperCaseTextFormatter extends TextInputFormatter {
 }
 
 String capitalize(String value) {
-  if(value.trim().isEmpty) return "";
+  if (value.trim().isEmpty) return "";
   return "${value[0].toUpperCase()}${value.substring(1).toLowerCase()}";
 }
 
@@ -44,39 +45,39 @@ String? validation(String? value, String message) {
     return null;
   }
 }
+
 String? emailvalidation(String? value) {
   bool emailValid = RegExp(
-      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
+          r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
       .hasMatch(value!);
   if (value.trim().isEmpty) {
-    return ""+"Please enter your email";
+    return "" + "Please enter your email";
   } else if (!emailValid) {
-    return ""+"Please enter your valid email";
+    return "" + "Please enter your valid email";
   } else {
     return null;
   }
 }
 
-
 Widget commonDropDownTextField(
     {OnTapPress? onTap,
-      bool autoFocus = false,
-      String? imageIcon,
-      String? labelText,
-      String? hintText,
-      TextEditingController? controller,
-      List<TextInputFormatter>? inputformat,
-      String? Function(String?)? validator,
-      String? Function(String?)? onChanged,
-      String? Function(String?)? onFieldSubmitted,
-      TextInputType? textInputType,
-      int? maxLength,
-      int maxline = 1,
-      double leftIconPadding = 0,
-      bool labelAlwaysOpen = true,
-      bool noautovalidation=false,
-      double padding=0,
-      bool isFocus = false}) {
+    bool autoFocus = false,
+    String? imageIcon,
+    String? labelText,
+    String? hintText,
+    TextEditingController? controller,
+    List<TextInputFormatter>? inputformat,
+    String? Function(String?)? validator,
+    String? Function(String?)? onChanged,
+    String? Function(String?)? onFieldSubmitted,
+    TextInputType? textInputType,
+    int? maxLength,
+    int maxline = 1,
+    double leftIconPadding = 0,
+    bool labelAlwaysOpen = true,
+    bool noautovalidation = false,
+    double padding = 0,
+    bool isFocus = false}) {
   return TextFormField(
     onTap: onTap,
     style: boldTextStyle(fontSize: 16, txtColor: AppColors.appFontColor),
@@ -90,43 +91,52 @@ Widget commonDropDownTextField(
     //     validation(value, "Please select project"),
     decoration: InputDecoration(
         border: InputBorder.none,
-        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.greyColor)),
-        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.greyColor)),
-        errorBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-        disabledBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-        focusedErrorBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-
-        labelStyle:  TextStyle(
+        enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColors.greyColor)),
+        focusedBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: AppColors.greyColor)),
+        errorBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.red)),
+        disabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.red)),
+        focusedErrorBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.red)),
+        labelStyle: TextStyle(
             fontSize: 14.sp,
-            color:AppColors.labelGreyColor,
+            color: AppColors.labelGreyColor,
             fontFamily: fontFamily,
             fontWeight: FontWeight.w500),
         labelText: labelText,
         hintText: hintText,
-        hintStyle:  TextStyle(
+        hintStyle: TextStyle(
             height: 1.8,
             fontSize: 16.sp,
             fontFamily: fontFamily,
             color: HexColor("#898989"),
             fontWeight: FontWeight.w700),
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIconConstraints: const BoxConstraints(maxWidth: 30,minWidth: 10 ),
+        suffixIconConstraints: const BoxConstraints(maxWidth: 30, minWidth: 10),
         // prefixIconConstraints: BoxConstraints(maxWidth: 50),
         suffixIcon: Padding(
             padding: const EdgeInsets.only(top: 16.0),
-            child:
-            SvgPicture.asset(dropDownSvgIcons,height: 24,width: 24,)
-          //Icon(Icons.arrow_drop_down),
-        )
-    ),
+            child: SvgPicture.asset(
+              dropDownSvgIcons,
+              height: 24,
+              width: 24,
+            )
+            //Icon(Icons.arrow_drop_down),
+            )),
   );
 }
 
-Widget phoneNumberTextField(Rxn<TextEditingController>? controller,[bool? readonly=false,bool? showcursor=true,bool? isPrefix=true,Widget? prefixIcons]) {
-
+Widget phoneNumberTextField(Rxn<TextEditingController>? controller,
+    [bool? readonly = false,
+    bool? showCursor = true,
+    bool? isPrefix = true,
+    Widget? prefixIcons]) {
   return IntlPhoneCustomField(
-    readOnly: readonly??false,
-    showCursor: showcursor??true,
+    readOnly: readonly ?? false,
+    showCursor: showCursor ?? true,
     controller: controller?.value,
     disableLengthCheck: false,
     autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -139,15 +149,14 @@ Widget phoneNumberTextField(Rxn<TextEditingController>? controller,[bool? readon
     textAlignVertical: TextAlignVertical.bottom,
     selectedCountry: selectedCountry.value,
     flagsButtonPadding: const EdgeInsets.only(left: 0),
-    validator:(value)=>mobileValidation(value!),
-
-    onSubmitted: (value) {
-
-    },
-    style:  boldTextStyle(fontSize: 16, txtColor: AppColors.appFontColor),
+    validator: (value) => mobileValidation(value!),
+    onSubmitted: (value) {},
+    style: boldTextStyle(fontSize: 16, txtColor: AppColors.appFontColor),
     dropdownIconPosition: IconPosition.trailing,
-    dropdownIcon: Icon(Icons.arrow_drop_down,color: hex("#898989"),size: 26.h),
-    dropdownTextStyle:boldTextStyle(fontSize: 16, txtColor: AppColors.appFontColor),
+    dropdownIcon:
+        Icon(Icons.arrow_drop_down, color: hex("#898989"), size: 26.h),
+    dropdownTextStyle:
+        boldTextStyle(fontSize: 16, txtColor: AppColors.appFontColor),
     showCountryFlag: false,
     hintText: "9876543210",
     hintStyle: TextStyle(
@@ -159,10 +168,10 @@ Widget phoneNumberTextField(Rxn<TextEditingController>? controller,[bool? readon
     pickerDialogStyle: PickerDialogCustomStyle(
       backgroundColor: AppColors.whiteColor,
       countryCodeStyle:
-      mediumTextStyle(fontSize: 14, txtColor: AppColors.appFontColor),
+          mediumTextStyle(fontSize: 14, txtColor: AppColors.appFontColor),
       searchFieldCursorColor: AppColors.black,
       countryNameStyle:
-      mediumTextStyle(fontSize: 14, txtColor: AppColors.appFontColor),
+          mediumTextStyle(fontSize: 14, txtColor: AppColors.appFontColor),
       listTileDivider: Container(
         height: 0.8,
         color: AppColors.greyColor,
@@ -173,15 +182,12 @@ Widget phoneNumberTextField(Rxn<TextEditingController>? controller,[bool? readon
     onChanged: (phone) {
       countrystr.value = phone.countryISOCode;
       countrycode.value = phone.countryCode;
-      if (controller!.value!.text.isNotEmpty){
-
-      }
+      if (controller!.value!.text.isNotEmpty) {}
     },
     onCountryChanged: (country) {
       selectedCountry.value = country;
       controller?.value?.text = "";
     },
-
     decoration: InputDecoration(
       counterText: "",
       contentPadding: const EdgeInsets.only(bottom: 15),
@@ -200,108 +206,109 @@ Widget phoneNumberTextField(Rxn<TextEditingController>? controller,[bool? readon
           borderSide: BorderSide(color: AppColors.greyColor)),
       focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: AppColors.lightGrey)),
-      errorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.red)),
-      disabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.red)),
-      focusedErrorBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.red)),
-      //labelText: 'Email',
+      errorBorder:
+          const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+      disabledBorder:
+          const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
+      focusedErrorBorder:
+          const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
     ),
   );
 }
 
 Widget simpleTextFieldNewWithCustomization(
     {OnTapPress? onTap,
-      bool autoFocus = false,
-      String? imageIcon,
-      String? labelText,
-      String? hintText,
-      Color? labelColor,
-      Rxn<TextEditingController>? controller,
-      TextCapitalization? textCapitalization,
-      List<TextInputFormatter>? inputFormat,
-      String? Function(String?)? validator,
-      String? Function(String?)? onChanged,
-      String? Function(String?)? onFieldSubmitted,
-      TextInputType? textInputType,
-      Widget? suffixIcon,
-      int? maxLength,
-      int maxLine = 1,
-      double leftIconPadding = 0,
-      bool labelAlwaysOpen = true,
-      bool noAutoValidation=false,
-      bool isSuffixIcon=false,
-      bool isFocus = false} ) {
-  return Obx(() =>   TextFormField(
-    style: boldTextStyle(fontSize: 16, txtColor: AppColors.appFontColor),
-    autovalidateMode:
-    noAutoValidation?AutovalidateMode.disabled:AutovalidateMode.onUserInteraction,
-    onTap: onTap,
+    bool autoFocus = false,
+    String? imageIcon,
+    String? labelText,
+    String? hintText,
+    Color? labelColor,
+    Rxn<TextEditingController>? controller,
+    TextCapitalization? textCapitalization,
+    List<TextInputFormatter>? inputFormat,
+    String? Function(String?)? validator,
+    String? Function(String?)? onChanged,
+    String? Function(String?)? onFieldSubmitted,
+    TextInputType? textInputType,
+    Widget? suffixIcon,
+    int? maxLength,
+    int maxLine = 1,
+    double leftIconPadding = 0,
+    bool labelAlwaysOpen = true,
+    bool noAutoValidation = false,
+    bool isSuffixIcon = false,
+    bool isFocus = false}) {
+  return Obx(() => TextFormField(
+        style: boldTextStyle(fontSize: 16, txtColor: AppColors.appFontColor),
+        autovalidateMode: noAutoValidation
+            ? AutovalidateMode.disabled
+            : AutovalidateMode.onUserInteraction,
+        onTap: onTap,
 
-    onChanged: onChanged ?? (value){
-      controller?.update((val) { });
-    },
-    // textCapitalization: TextCapitalization.sentences,
-    textCapitalization: textCapitalization??TextCapitalization.none,
-    onFieldSubmitted: onFieldSubmitted,
-    maxLength: maxLength,
-    validator: validator,
+        onChanged: onChanged ??
+            (value) {
+              controller?.update((val) {});
+            },
+        // textCapitalization: TextCapitalization.sentences,
+        textCapitalization: textCapitalization ?? TextCapitalization.none,
+        onFieldSubmitted: onFieldSubmitted,
+        maxLength: maxLength,
+        validator: validator,
 
-    keyboardType: textInputType,
-    inputFormatters: inputFormat,
-    controller: controller?.value,
-    decoration: InputDecoration(
-      // counter: Container(),
-      counterText: "",
-      border: InputBorder.none,
-      enabledBorder:
-      UnderlineInputBorder(borderSide: BorderSide(color: AppColors.labelGreyColor)),
-      focusedBorder:
-      UnderlineInputBorder(borderSide: BorderSide(color: AppColors.labelGreyColor)),
-      errorBorder:
-      const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-      disabledBorder:
-      const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-      focusedErrorBorder:
-      const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-      enabled: true,
-      // contentPadding: EdgeInsets.all(20),
-      labelStyle:  TextStyle(
-          fontSize: 14.sp,
-          color:AppColors.labelGreyColor,
-          fontFamily: fontFamily,
-          fontWeight: FontWeight.w500),
-      labelText: labelText,
-      hintText: hintText,
-      hintStyle: TextStyle(
-          height: 1.8,
-          fontSize: 16.sp,
-          fontFamily: fontFamily,
-          color: HexColor("#898989"),
-          fontWeight: FontWeight.w700),
-      focusColor: Colors.white,
-      floatingLabelBehavior: labelAlwaysOpen
-          ? FloatingLabelBehavior.always
-          : FloatingLabelBehavior.auto,
-      suffixIcon: isSuffixIcon==true?suffixIcon:const SizedBox(),
-    ),
-  ));
+        keyboardType: textInputType,
+        inputFormatters: inputFormat,
+        controller: controller?.value,
+        decoration: InputDecoration(
+          // counter: Container(),
+          counterText: "",
+          border: InputBorder.none,
+          enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: AppColors.labelGreyColor)),
+          focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: AppColors.labelGreyColor)),
+          errorBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.red)),
+          disabledBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.red)),
+          focusedErrorBorder: const UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.red)),
+          enabled: true,
+          // contentPadding: EdgeInsets.all(20),
+          labelStyle: TextStyle(
+              fontSize: 14.sp,
+              color: AppColors.labelGreyColor,
+              fontFamily: fontFamily,
+              fontWeight: FontWeight.w500),
+          labelText: labelText,
+          hintText: hintText,
+          hintStyle: TextStyle(
+              height: 1.5,
+              fontSize: 16.sp,
+              fontFamily: fontFamily,
+              color: HexColor("#898989"),
+              fontWeight: FontWeight.w700),
+          focusColor: Colors.white,
+          floatingLabelBehavior: labelAlwaysOpen
+              ? FloatingLabelBehavior.always
+              : FloatingLabelBehavior.auto,
+          suffixIcon: isSuffixIcon == true ? suffixIcon : const SizedBox(),
+        ),
+      ));
 }
 
 String? mobileValidation(String value) {
   print(isoCode1.value.toString());
   print("isocode1.value.toString()");
   if (value.isEmpty) {
-    return "       ""Please enter mobile number";
+    return "       " "Please enter mobile number";
   } else if (value.trim().isNotEmpty && !value.trim().isNumericOnly) {
-    return "       ""Please enter only digits";
+    return "       " "Please enter only digits";
   } else if (value.length < 10) {
-    return "       ""Please enter 10 digits";
+    return "       " "Please enter 10 digits";
   } else if (value.length > 10) {
-    return "       ""Please enter only 10 digits";
-  } else if (isoCode1.value.isEmpty || isoCode1.value=="INDIA") {
-    return "       ""Please select country code";
+    return "       " "Please enter only 10 digits";
+  } else if (isoCode1.value.isEmpty || isoCode1.value == "INDIA") {
+    return "       " "Please select country code";
   } else {
     return null;
   }

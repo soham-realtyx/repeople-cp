@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:repeoplecp/Config/Helper/HexColor.dart';
+import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 
 class CustomDecorations {
@@ -17,7 +18,7 @@ class CustomDecorations {
   BoxDecoration exploreMoreBackground(String bgColor,double radius,double width,String borderColor){
     return BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(radius)),
-        boxShadow: [smallcontainerboxShadow],
+        boxShadow: [smallContainerBoxShadow],
         border: Border.all(
             color:HexColor(borderColor) ,
             width: width),
@@ -44,14 +45,14 @@ class CustomDecorations {
     );
   }
 
-  BoxDecoration backgroundWithShadow(
-      MaterialColor bgColor,double radius,double width,MaterialColor borderColor){
+  BoxDecoration backgroundWithShadow({
+      Color? bgColor,double? radius,double? width,Color? borderColor}){
     return BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(radius)),
-        boxShadow: [smallcontainerboxShadow],
+        borderRadius: BorderRadius.all(Radius.circular(radius??0)),
+        boxShadow: [smallContainerBoxShadow],
         border: Border.all(
-            color:borderColor,
-            width: width),
+            color:borderColor??AppColors.black,
+            width: width??0),
         color: bgColor
     );
   }

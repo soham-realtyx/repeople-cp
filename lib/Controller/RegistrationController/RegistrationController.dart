@@ -8,56 +8,40 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
-import 'package:repeoplecp/Widget/select_dailog.dart';
 
-class EditProfileController extends GetxController{
+class RegistrationController extends GetxController{
+
+  RxBool isResisterMyCompany = false.obs;
+  RxBool isMyCompanyIsRegister = false.obs;
+  RxBool isInvitationSuccess = false.obs;
+  RxBool isRERATextShow = false.obs;
+  RxBool isRERAValidationShow = false.obs;
+
+  GlobalKey<ScaffoldState> globalRegistrationPageKey = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> globalSuccessPageKey = GlobalKey<ScaffoldState>();
+  var formKey = GlobalKey<FormState>();
+  Rx<RegistrationSelect>? registerOption = RegistrationSelect.registerMyCompany.obs;
+  Rx<GSTCertificatesSelect>? gstCertificatesOption = GSTCertificatesSelect.gstCertificates.obs;
+  RxList<CertificateModel> arrCertificateList = RxList([]);
+  Rxn<TextEditingController> txtReraNo = Rxn(TextEditingController());
 
   @override
   void onInit() {
     super.onInit();
-    roleTypeData();
+    certificateData();
   }
 
-  GlobalKey<ScaffoldState> globalEditProfilePageKey = GlobalKey<ScaffoldState>();
+  certificateData(){
+    arrCertificateList = RxList([
+      CertificateModel(title: "RERA Certificate",isCheck: false.obs),
+      CertificateModel(title: "PAN Card",isCheck: false.obs),
+      CertificateModel(title: "Cancelled Cheque",isCheck: false.obs),
+    ]);
+  }
 
-  var formKey = GlobalKey<FormState>();
-
-  Rxn<TextEditingController> txtFirstName = Rxn(TextEditingController());
-  Rxn<TextEditingController> txtLastName = Rxn(TextEditingController());
-  Rxn<TextEditingController> txtContactNew = Rxn(TextEditingController());
-  Rxn<TextEditingController> txtEmail = Rxn(TextEditingController());
-  Rxn<TextEditingController> txtAlternateContactNew = Rxn(TextEditingController());
-  Rxn<TextEditingController> txtEmailNew = Rxn(TextEditingController());
-  TextEditingController txtUserRole = TextEditingController();
 
   ImagePicker imagePicker = ImagePicker();
-  RxString image="".obs;
- Rx<RoleModel> objRoleType = RoleModel().obs;
- RxList<RoleModel> arrRoleList = RxList([]);
- roleTypeData(){
-   arrRoleList = RxList([
-     RoleModel(label: "User"),
-     RoleModel(label: "Admin"),
-   ]);
-   objRoleType.value = arrRoleList[0];
- }
-  selectEmailType() {
-    selectEmailTypeDialog((value) {
-      objRoleType.value=value;
-      txtUserRole.text = objRoleType.value.label??"";
-    });
-  }
-
-  Future<dynamic> selectEmailTypeDialog(ValueChanged<RoleModel> onChange) {
-    return SelectDialog1.showModal<RoleModel>(
-
-      Get.context!,
-      label: "Select Role Type",
-      items: arrRoleList,
-      onChange: onChange,
-      searchBoxDecoration: InputDecoration(prefixIcon: Icon(Icons.search,color: AppColors.greyColor), hintText: "Search",hintStyle: TextStyle(color: AppColors.greyColor)),
-    );
-  }
+  RxString reRaImage="".obs;
 
   profileImagePicker(){
     showCupertinoModalPopup(
@@ -73,6 +57,7 @@ class EditProfileController extends GetxController{
             actions: [
               CupertinoActionSheetAction(
                 onPressed: () {
+                  reRaImage.value='';
                   Get.back();
                   checkCameraPermission();
                 },
@@ -83,8 +68,9 @@ class EditProfileController extends GetxController{
               ),
               CupertinoActionSheetAction(
                 onPressed: () {
+                  reRaImage.value='';
                   Get.back();
-                  ChooseImage();
+                  chooseImage();
                 },
                 child: Text(
                   "Choose Photo",
@@ -140,32 +126,30 @@ class EditProfileController extends GetxController{
       print("Error :--- \n $e");
     }
   }
-  Future<void> _cropImage(File _pickedFile) async {
+  Future<void> _cropImage(File pickedFile) async {
     final croppedFile = await ImageCropper().cropImage(
-      sourcePath: _pickedFile.path,
+      sourcePath: pickedFile.path,
       compressFormat: ImageCompressFormat.jpg,
       compressQuality: 100,
-      // uiSettings: buildUiSettings(context),
     );
     if (croppedFile != null) {
-      image.value=croppedFile.path;
-      print(image.value);
-      // SendUpdatedProfile(croppedFile);
+      reRaImage.value=croppedFile.path;
+      print(reRaImage.value);
       print("photo update succesfully");
     }
   }
 
-  Future<void> CheckStoargePermission() async {
+  Future<void> checkStoargePermission() async {
     if (Platform.isAndroid) {
       bool status = await Permission.storage.isGranted;
       if (status) {
         // further process
-        ChooseImage();
+        chooseImage();
       } else if (await Permission.storage.isDenied) {
         await Permission.storage.request().then((value) {
           if (value == PermissionStatus.granted) {
             // further process
-            ChooseImage();
+            chooseImage();
           } else if (value == PermissionStatus.denied) {
             // dialog
             // ValidationMsg("you can not access gallery");
@@ -185,11 +169,11 @@ class EditProfileController extends GetxController{
         });
       }
     } else {
-      ChooseImage();
+      chooseImage();
     }
   }
 
-  void ChooseImage() async {
+  void chooseImage() async {
     try {
       var response = await imagePicker.pickImage(
         source: ImageSource.gallery,
@@ -212,7 +196,11 @@ class EditProfileController extends GetxController{
 
 }
 
-class RoleModel{
-  String? label;
-  RoleModel({this.label});
+enum RegistrationSelect { registerMyCompany, myCompanyIsRegistered }
+enum GSTCertificatesSelect { gstCertificates, noGSTDeclaration }
+
+class CertificateModel{
+  String? title;
+  RxBool? isCheck;
+  CertificateModel({this.title,this.isCheck});
 }

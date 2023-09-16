@@ -20,7 +20,11 @@ const notificationSvgIcons ='assets/svgIcons/notification-icon.svg';
 const leftBackArrowSvgIcons = "assets/svgIcons/left-arrow-new.svg";
 const dropDownSvgIcons ='assets/svgIcons/dropdown.svg';
 const skipArrowSvgIcons ='assets/svgIcons/skip-arrow-icons.svg';
+const logOutSvgIcons ='assets/svgIcons/logout.svg';
+const registeredSvgIcons ='assets/svgIcons/registered.svg';
+const registeredSearchSvgIcons ='assets/svgIcons/registered-search.svg';
 
 // GIF Images
 const otpProgressGif = "assets/GIF/otp-progress.gif";
+const successGif = "assets/GIF/success.gif";
 

@@ -54,7 +54,6 @@ class _SendOTPPageState extends State<SendOTPPage> {
                     width: Get.width,
                     child: Image.asset(
                       splashBackImage,
-                      // height: 750,
                       height: Get.height,
                       width: Get.width,
                       fit: BoxFit.cover,

@@ -112,10 +112,8 @@ Widget leadingIconOfAppbar(/*MaterialColor color*/) {
             padding: const EdgeInsets.only(top: 5, bottom: 5),
             child:
             SvgPicture.asset(
-              // IMG_APPLOGO_SVG,
               rePeopleAppLogo,
               width: 126,
-
               color: hex("006CB5"),
               height: 20,
             )

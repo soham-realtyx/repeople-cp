@@ -8,6 +8,7 @@ import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/CommenHeaderController.dart';
 import 'package:repeoplecp/Controller/EditProfileController/EditProfileController.dart';
+import 'package:repeoplecp/View/SelectRegistrationPage/SelectRegistrationPage.dart';
 import 'package:repeoplecp/Widget/CustomBoxDecoration.dart';
 import 'package:repeoplecp/Widget/CustomButton/CustomButton.dart';
 import 'package:repeoplecp/Widget/CustomTextField.dart';
@@ -35,13 +36,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 children: [
                   SizedBox(height: appBarHeight),
                   themeForm1(),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 40),
                 ],
               ),
             ),
             cntCommonHeader.commonAppBar(
                 "Edit Profile", cntEditProfile.globalEditProfilePageKey,
-                color: AppColors.whiteColor,
               isSkipButtonHide: true
             )
           ],
@@ -108,7 +108,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         height: 16,
                       ),
                       phoneNumberTextField(
-                          cntEditProfile.txtContactNew, true, false),
+                          cntEditProfile.txtContactNew),
                     ],
                   ),
                 ),
@@ -247,9 +247,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
         child: OnTapButton(
             onTap: () {
-              if (cntEditProfile.formKey.currentState!.validate()) {
+              // if (cntEditProfile.formKey.currentState!.validate()) {
                 // cntEditProfile.editProfile();
-              }
+              Get.to(()=>const SelectRegistrationPage());
+              // }
             },
             height: 40.w,
             decoration: CustomDecorations().backgroundLocal(

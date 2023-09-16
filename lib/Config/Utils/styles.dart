@@ -49,13 +49,14 @@ BoxShadow fullcontainerboxShadow = BoxShadow(
     blurRadius: 4,
     offset: const Offset(0, 0),
     spreadRadius: 4);
-BoxShadow newcontainerboxShadow = BoxShadow(
-    color: AppColors.black.withOpacity(0.03),
-    blurRadius: 6,
+BoxShadow newContainerBoxShadow =  BoxShadow(
+    color: AppColors.black.withOpacity(0.1),
     offset: const Offset(0, 3),
-    spreadRadius: 0);
+    blurRadius: 6,
+    spreadRadius: 0
+);
 
-BoxShadow smallcontainerboxShadow = BoxShadow(
+BoxShadow smallContainerBoxShadow = BoxShadow(
     color: Colors.black.withOpacity(0.03),
     blurRadius: 4,
     offset: const Offset(0, 6),

@@ -38,25 +38,28 @@ class CommonHeaderController extends GetxController {
     Color? color,
     bool isMenuIconHide = false,
     bool isSkipButtonHide = false,
+    bool isLogOutButtonHide = false,
     bool isCenterTitle = false,
+    bool isShowBackArrow = false,
     isShowHistoryIcon = false,
     GestureTapCallback? skipOnTap,
+    GestureTapCallback? logOutOnTap,
+    GestureTapCallback? backOnTap,
   }) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 14.0,left: 14),
-      child: ClipRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-          child: CustomDetailsAppBar(
-            title: "Project List",
-            height: appBarHeight,
-            color: Colors.grey.shade200.withOpacity(0.2) ??
-                AppColors.whiteColor.withOpacity(0.0),
-            leadingWidget: [
+    return ClipRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+        child: CustomDetailsAppBar(
+          title: "Project List",
+          height: appBarHeight,
+          color: Colors.grey.shade200.withOpacity(0.2) ??
+              AppColors.whiteColor.withOpacity(0.0),
+          leadingWidget: [
+            isShowBackArrow?
               GestureDetector(
-                onTap: () => ClosePageCallback(),
+                onTap: backOnTap,
                 child: Container(
-                  // margin: const EdgeInsets.only(left: 14),
+                  margin: const EdgeInsets.only(left: 14),
                   width: 24,
                   height: 24,
                   decoration: BoxDecoration(
@@ -67,59 +70,101 @@ class CommonHeaderController extends GetxController {
                         height: 12, width: 6, color: AppColors.appThemeColor),
                   ),
                 ),
+              )
+              :GestureDetector(
+              onTap:() =>  backOnTap??ClosePageCallback(),
+              child: Container(
+                margin: const EdgeInsets.only(left: 14),
+                width: 24,
+                height: 24,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    color: hex("006CB5").withOpacity(0.2)),
+                child: Center(
+                  child: SvgPicture.asset(leftBackArrowSvgIcons,
+                      height: 12, width: 6, color: AppColors.appThemeColor),
+                ),
               ),
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 12),
-                  child: isCenterTitle
-                      ? Center(
-                          child: Text(
-                            title,
-                            style: TextStyle(
-                              color: AppColors.appThemeColor, fontSize: 18,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: fontFamily,
-                              // overflow: TextOverflow.ellipsis,
-                            ),
-                            maxLines: 1,
-                            textAlign: TextAlign.center,
-                          ),
-                        )
-                      : Text(
+            ),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: isCenterTitle
+                    ? Center(
+                        child: Text(
                           title,
                           style: TextStyle(
-                              color: AppColors.appThemeColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              overflow: TextOverflow.ellipsis),
+                            color: AppColors.appThemeColor, fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: fontFamily,
+                            // overflow: TextOverflow.ellipsis,
+                          ),
                           maxLines: 1,
+                          textAlign: TextAlign.center,
                         ),
-                ),
-              )
-            ],
-            trillingWidget: [
-              if (showSearch)
-                TrallingIconSearch(imgSearch, AppColors.appFontColor, () {}),
-              if (!isNotificationHide)
-                TrallingIconNotification(AppColors.appFontColor),
-              const SizedBox(
-                width: 12,
+                      )
+                    : Text(
+                        title,
+                        style: TextStyle(
+                            color: AppColors.appThemeColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                            overflow: TextOverflow.ellipsis),
+                        maxLines: 1,
+                      ),
               ),
-              if (isShowHistoryIcon) TrailingHistoryIcon(AppColors.appFontColor),
-              if (isMenuIconHide)
-                TrallingIconDrawer(imgMenu, AppColors.appFontColor, () {
-                  scaffoldKey.currentState!.openEndDrawer();
-                }),
-              if (isSkipButtonHide)
-                skipTextButton(text: "Skip",icons: SvgPicture.asset(skipArrowSvgIcons),skipOnTap: skipOnTap)
-            ],
-          ),
+            )
+          ],
+          trillingWidget: [
+            if (showSearch)
+              TrallingIconSearch(imgSearch, AppColors.appFontColor, () {}),
+            if (!isNotificationHide)
+              TrallingIconNotification(AppColors.appFontColor),
+            const SizedBox(
+              width: 12,
+            ),
+            if (isShowHistoryIcon) TrailingHistoryIcon(AppColors.appFontColor),
+            if (isMenuIconHide)
+              TrallingIconDrawer(
+                  imgMenu,
+                  AppColors.appFontColor, () {
+                      scaffoldKey.currentState!.openEndDrawer();
+                  }),
+            if (isSkipButtonHide)
+              skipTextButton(text: "Skip",icons: SvgPicture.asset(skipArrowSvgIcons),skipOnTap: skipOnTap),
+            if (isLogOutButtonHide)
+              logOutButton(text: "Logout",icons: SvgPicture.asset(logOutSvgIcons),skipOnTap: logOutOnTap),
+            const SizedBox(
+              width: 14,
+            ),
+          ],
         ),
       ),
     );
   }
 
   Widget skipTextButton({
+    String? text,
+    Widget? icons,
+    GestureTapCallback? skipOnTap,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(
+          text!.toUpperCase(),
+          style: mediumTextStyle(
+              fontSize: 10,
+              txtColor: AppColors.appThemeColor,
+              fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(width: 8),
+        icons??const SizedBox()
+      ],
+    );
+  }
+
+  Widget logOutButton({
     String? text,
     Widget? icons,
     GestureTapCallback? skipOnTap,
