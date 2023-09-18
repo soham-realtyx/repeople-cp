@@ -8,6 +8,9 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
+import 'package:repeoplecp/Model/CertificatesModel/CertificatesModel.dart';
+import 'package:repeoplecp/Model/EntityTypeModel/EntityTypeModel.dart';
+import 'package:repeoplecp/Widget/select_dailog.dart';
 
 class RegistrationController extends GetxController{
 
@@ -16,19 +19,60 @@ class RegistrationController extends GetxController{
   RxBool isInvitationSuccess = false.obs;
   RxBool isRERATextShow = false.obs;
   RxBool isRERAValidationShow = false.obs;
+  RxBool isPanValidationShow = false.obs;
+  RxBool isBankPassBookValidationShow = false.obs;
+  RxBool isGSTValidationShow = false.obs;
+
+  RxBool isResisterShowScreen = false.obs;
+  RxBool isInvitationSuccessShowScreen = false.obs;
+
+
+  RxBool isOpenReRaDetails=true.obs;
+  RxBool isOpenPanDetails=true.obs;
+  RxBool isOpenGSTDetails=true.obs;
+  RxBool isOpenBankDetails=true.obs;
 
   GlobalKey<ScaffoldState> globalRegistrationPageKey = GlobalKey<ScaffoldState>();
   GlobalKey<ScaffoldState> globalSuccessPageKey = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> globalReRaPageKey = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> globalPanPageKey = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> globalGSTDetailsPageKey = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> globalBankDetailsPageKey = GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState> globalContactDetailsPageKey = GlobalKey<ScaffoldState>();
   var formKey = GlobalKey<FormState>();
+  var reRaFormKey = GlobalKey<FormState>();
+  var bankFormKey = GlobalKey<FormState>();
+  var contactDetailsFormKey = GlobalKey<FormState>();
+  var pointOfContactDetailsFormKey = GlobalKey<FormState>();
   Rx<RegistrationSelect>? registerOption = RegistrationSelect.registerMyCompany.obs;
   Rx<GSTCertificatesSelect>? gstCertificatesOption = GSTCertificatesSelect.gstCertificates.obs;
   RxList<CertificateModel> arrCertificateList = RxList([]);
-  Rxn<TextEditingController> txtReraNo = Rxn(TextEditingController());
+  RxList<EntityTypeModel> arrEntityTypeList = RxList([]);
+  RxList<EntityTypeModel> arrAccountTypeList = RxList([]);
+  Rx<EntityTypeModel> objEntityType = EntityTypeModel().obs;
+  Rx<EntityTypeModel> objAccountType = EntityTypeModel().obs;
+  Rxn<TextEditingController> txtReRaNo = Rxn(TextEditingController());
+  Rxn<TextEditingController> txtEntityType = Rxn(TextEditingController());
+  Rxn<TextEditingController> txtAccountType = Rxn(TextEditingController());
+
+// Check if my Company is registered TextEditingController
+  Rxn<TextEditingController> txtMobileNo = Rxn(TextEditingController());
+  Rxn<TextEditingController> txtCorrespondenceAddress = Rxn(TextEditingController());
+  Rxn<TextEditingController> txtWebsite = Rxn(TextEditingController());
+
+// Point of Contact Details TextEditingController
+  Rxn<TextEditingController> txtFirstName = Rxn(TextEditingController());
+  Rxn<TextEditingController> txtLastName = Rxn(TextEditingController());
+  Rxn<TextEditingController> txtDesignation = Rxn(TextEditingController());
+  Rxn<TextEditingController> txtPointOfMobile = Rxn(TextEditingController());
+  Rxn<TextEditingController> txtPointOfEmail = Rxn(TextEditingController());
 
   @override
   void onInit() {
     super.onInit();
     certificateData();
+
+
   }
 
   certificateData(){
@@ -39,9 +83,67 @@ class RegistrationController extends GetxController{
     ]);
   }
 
+  selectEntityType() {
+    selectEntityTypeDialog((value) {
+      objEntityType.value=value;
+      txtEntityType.value!.text = objEntityType.value.title??"";
+    });
+  } 
+  selectAccountType() {
+    selectAccountTypeDialog((value) {
+      objAccountType.value=value;
+      txtAccountType.value!.text = objAccountType.value.title??"";
+    });
+  }
+
+  Future<dynamic> selectEntityTypeDialog(ValueChanged<EntityTypeModel> onChange) {
+    return SelectDialog1.showModal<EntityTypeModel>(
+      Get.context!,
+      label: "Select Role Type",
+      items: arrEntityTypeList,
+      onChange: onChange,
+      searchBoxDecoration: InputDecoration(prefixIcon: Icon(Icons.search,color: AppColors.greyColor), hintText: "Search",hintStyle: TextStyle(color: AppColors.greyColor)),
+    );
+  }
+  Future<dynamic> selectAccountTypeDialog(ValueChanged<EntityTypeModel> onChange) {
+    return SelectDialog1.showModal<EntityTypeModel>(
+      Get.context!,
+      label: "Select Account Type",
+      items: arrAccountTypeList,
+      onChange: onChange,
+      searchBoxDecoration: InputDecoration(prefixIcon: Icon(Icons.search,color: AppColors.greyColor), hintText: "Search",hintStyle: TextStyle(color: AppColors.greyColor)),
+    );
+  }
+
+  Future<List<EntityTypeModel>> entityTypeData() async{
+    arrEntityTypeList = RxList([]);
+    arrEntityTypeList.add(EntityTypeModel(title: "Private Company Limited"));
+    arrEntityTypeList.add(EntityTypeModel(title: "Public Limited Company"));
+    arrEntityTypeList.add(EntityTypeModel(title: "Limited Partnership"));
+    arrEntityTypeList.add(EntityTypeModel(title: "Unlimited Partnership"));
+    arrEntityTypeList.add(EntityTypeModel(title: "Statutory Corporation"));
+    arrEntityTypeList.add(EntityTypeModel(title: "Holding Company"));
+    arrEntityTypeList.add(EntityTypeModel(title: "Subsidiary Company"));
+    // for(int i=0;i<arrEntityTypeList.length;i++) {
+    //   objEntityType.value=arrEntityTypeList[i];
+    // }
+    return arrEntityTypeList;
+  }
+
+  Future<void> accountTypeData() async{
+    arrAccountTypeList = RxList([
+      EntityTypeModel(title: "Current Account"),
+      EntityTypeModel(title: "Salary Account"),
+      EntityTypeModel(title: "Saving Account"),
+      EntityTypeModel(title: "NRI Account"),
+    ]);
+  }
 
   ImagePicker imagePicker = ImagePicker();
   RxString reRaImage="".obs;
+  RxString panImage="".obs;
+  RxString gstImage="".obs;
+  RxString banPassbookImage="".obs;
 
   profileImagePicker(){
     showCupertinoModalPopup(
@@ -57,7 +159,7 @@ class RegistrationController extends GetxController{
             actions: [
               CupertinoActionSheetAction(
                 onPressed: () {
-                  reRaImage.value='';
+                  // reRaImage.value='';
                   Get.back();
                   checkCameraPermission();
                 },
@@ -68,7 +170,7 @@ class RegistrationController extends GetxController{
               ),
               CupertinoActionSheetAction(
                 onPressed: () {
-                  reRaImage.value='';
+                  // reRaImage.value='';
                   Get.back();
                   chooseImage();
                 },
@@ -86,18 +188,13 @@ class RegistrationController extends GetxController{
     if (Platform.isAndroid) {
       bool status = await Permission.camera.isGranted;
       if (status) {
-        // further process
         cameraSelect();
       } else if (await Permission.camera.isDenied) {
         await Permission.camera.request().then((value) {
           if (value == PermissionStatus.granted) {
-            // further process
             cameraSelect();
           } else if (value == PermissionStatus.denied) {
-            // dialog
-            // ValidationMsg("you can not access camera");
             print("you can not access camera");
-
           }
         });
       }
@@ -112,12 +209,7 @@ class RegistrationController extends GetxController{
           source: ImageSource.camera,
           preferredCameraDevice: CameraDevice.front);
       if (response != null) {
-        // ProfilePath.value=response.path;
-        // ProfilePath.refresh();
-        //
-        // txt_image.text=ProfilePath.value.split("/").last.toString();
         File file = File(response.path);
-        // SendUpdatedProfile(file);
         _cropImage(file);
       } else {
         print("No image selected");
@@ -133,38 +225,68 @@ class RegistrationController extends GetxController{
       compressQuality: 100,
     );
     if (croppedFile != null) {
-      reRaImage.value=croppedFile.path;
-      print(reRaImage.value);
-      print("photo update succesfully");
+      reRaImage.value='';
+      panImage.value='';
+      isRERAValidationShow.value=true;
+      isPanValidationShow.value=true;
+
+
+      if(reRaImage.value=="") {
+        reRaImage.value = croppedFile.path;
+      }
+      if(panImage.value=="") {
+        panImage.value = croppedFile.path;
+      }
     }
   }
 
-  Future<void> checkStoargePermission() async {
+  Future  CameraSelect(DocumentType logotype) async {
+    try {
+      var response = await imagePicker.pickImage(
+          source: ImageSource.camera,
+          imageQuality: 50,
+          preferredCameraDevice: CameraDevice.rear);
+      if (response != null) {
+        print("response not null");
+        if (DocumentType.reRaPhoto == logotype) {
+          reRaImage.value = response.path;
+          reRaImage.refresh();
+          isRERAValidationShow.value=true;
+
+        } else if (DocumentType.panPhoto == logotype) {
+          panImage.value = response.path;
+          panImage.refresh();
+          isPanValidationShow.value=true;
+        } else if (DocumentType.bankPassBookPhoto == logotype) {
+          banPassbookImage.value = response.path;
+          banPassbookImage.refresh();
+          isBankPassBookValidationShow.value=true;
+        } else if (DocumentType.gsTPhoto == logotype) {
+          gstImage.value = response.path;
+          gstImage.refresh();
+          isGSTValidationShow.value=true;
+        }
+        update();
+      } else {
+        print("No image selected");
+      }
+    } catch (e) {
+      print("Error :--- \n $e");
+    }
+  }
+
+
+  Future<void> checkStoragePermission() async {
     if (Platform.isAndroid) {
       bool status = await Permission.storage.isGranted;
       if (status) {
-        // further process
         chooseImage();
       } else if (await Permission.storage.isDenied) {
         await Permission.storage.request().then((value) {
           if (value == PermissionStatus.granted) {
-            // further process
             chooseImage();
           } else if (value == PermissionStatus.denied) {
-            // dialog
-            // ValidationMsg("you can not access gallery");
             print("you can not access gallery");
-            // BottomSheetDialog(
-            //     isDismissible: false,
-            //     child: Column(
-            //       mainAxisSize: MainAxisSize.min,
-            //       children: [
-            //         ShowMessage("You can not access Gallery"),
-            //       ],
-            //     ),
-            //     isHideAutoDialog: true,
-            //     message: "error",
-            //     backgroundColor: AppColors.RED);
           }
         });
       }
@@ -179,12 +301,8 @@ class RegistrationController extends GetxController{
         source: ImageSource.gallery,
       );
       if (response != null) {
-        // ProfilePath.value=response.path;
-        // ProfilePath.refresh();
-        // txt_image.text=FilePath.value.split("/").last.toString();
         File file = File(response.path);
         _cropImage(file);
-        // SendUpdatedProfile(file);
       } else {
         print("No Image Selected");
       }
@@ -198,9 +316,10 @@ class RegistrationController extends GetxController{
 
 enum RegistrationSelect { registerMyCompany, myCompanyIsRegistered }
 enum GSTCertificatesSelect { gstCertificates, noGSTDeclaration }
-
-class CertificateModel{
-  String? title;
-  RxBool? isCheck;
-  CertificateModel({this.title,this.isCheck});
+enum DocumentType {
+  reRaPhoto,
+  panPhoto,
+  gsTPhoto,
+  bankPassBookPhoto,
 }
+

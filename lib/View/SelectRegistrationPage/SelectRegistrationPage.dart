@@ -8,6 +8,7 @@ import 'package:repeoplecp/Config/Utils/string.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/CommenHeaderController.dart';
 import 'package:repeoplecp/Controller/RegistrationController/RegistrationController.dart';
+import 'package:repeoplecp/Model/CertificatesModel/CertificatesModel.dart';
 import 'package:repeoplecp/View/RERADetailsPage/RERADetailsPage.dart';
 import 'package:repeoplecp/View/RegistrationSuccessPage/RegistrationSuccessPage.dart';
 import 'package:repeoplecp/Widget/CustomBoxDecoration.dart';
@@ -61,7 +62,8 @@ class _SelectRegistrationPageState extends State<SelectRegistrationPage> {
                         : cntRegistration.isMyCompanyIsRegister.value==true ? "Check if my Company" : "Select",
                     cntRegistration.globalRegistrationPageKey,
                     color: AppColors.whiteColor,
-                    logOutOnTap: () {}, backOnTap: () {
+                    logOutOnTap: () {},
+                backOnTap: () {
                         if (cntRegistration.isResisterMyCompany.value == true
                             || cntRegistration.isMyCompanyIsRegister.value == true) {
                           cntRegistration.isResisterMyCompany.value = false;
@@ -116,7 +118,7 @@ class _SelectRegistrationPageState extends State<SelectRegistrationPage> {
                 cntRegistration.registerOption?.value =
                     RegistrationSelect.myCompanyIsRegistered;
                 cntRegistration.isMyCompanyIsRegister.value=true;
-                cntRegistration.txtReraNo.value!.text = '';
+                cntRegistration.txtReRaNo.value!.text = '';
               },
               icons: DefaultSvg(
                   imagePath: registeredSearchSvgIcons,
@@ -420,7 +422,7 @@ class _SelectRegistrationPageState extends State<SelectRegistrationPage> {
             Obx(() => cntRegistration.isRERATextShow.value != true
                 ? simpleTextFieldNewWithCustomization(
                     hintText: "EXAMPLEA51800035827",
-                    controller: cntRegistration.txtReraNo,
+                    controller: cntRegistration.txtReRaNo,
                     inputFormat: [UpperCaseTextFormatter()],
                     textInputType: TextInputType.text,
                     labelText: "RERA Number*",
@@ -431,7 +433,7 @@ class _SelectRegistrationPageState extends State<SelectRegistrationPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                          cntRegistration.txtReraNo.value!.text.toString(),
+                          cntRegistration.txtReRaNo.value!.text.toString(),
                         style: mediumTextStyle(txtColor: AppColors.green,fontWeight: FontWeight.w600,fontSize: 12),
                       ),
                       Text(
@@ -451,7 +453,7 @@ class _SelectRegistrationPageState extends State<SelectRegistrationPage> {
               onTap: (){
                 if(cntRegistration.isRERATextShow.value == true){
                   cntRegistration.isRERATextShow.value = false;
-                  cntRegistration.txtReraNo.value!.text = '';
+                  cntRegistration.txtReRaNo.value!.text = '';
                 }
               },
               child: Center(
@@ -507,7 +509,9 @@ class _SelectRegistrationPageState extends State<SelectRegistrationPage> {
   Widget requestAnInviteButton() {
     return OnTapButton(
         onTap: () {
-          Get.to(()=> const RegistrationSuccessPage());
+          Get.to(()=>  RegistrationSuccessPage(isInvitationSuccess: cntRegistration.isInvitationSuccessShowScreen.value=true))?.whenComplete(() {
+            // cntRegistration.isInvitationSuccessShowScreen.value=true;
+          });
         },
         height: 40.w,
         decoration: CustomDecorations().backgroundLocal(

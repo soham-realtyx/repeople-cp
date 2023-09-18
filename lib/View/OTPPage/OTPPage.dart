@@ -9,6 +9,7 @@ import 'package:repeoplecp/Config/Utils/string.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/LoginController/LoginController.dart';
 import 'package:repeoplecp/View/EditProfilePage/EditProfilePage.dart';
+import 'package:repeoplecp/View/HomePage/HomePage.dart';
 import 'package:repeoplecp/Widget/CustomBoxDecoration.dart';
 import 'package:repeoplecp/Widget/CustomButton/CustomButton.dart';
 import 'package:repeoplecp/Widget/CustomTextField.dart';
@@ -118,7 +119,11 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> with TickerProviderStateM
                         : GestureDetector(
                       onTap: () {
                         if (cntOtp.otpFormKeys.currentState!.validate()) {
-                          Get.to(()=>const EditProfilePage());
+                          if(cntOtp.isRegister.value=="1"){
+                            Get.to(() => const HomePage());
+                          }else {
+                            Get.to(() => const EditProfilePage());
+                          }
                         }
                       },
                       child: Container(

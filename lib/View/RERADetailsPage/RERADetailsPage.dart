@@ -8,8 +8,10 @@ import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/CommenHeaderController.dart';
 import 'package:repeoplecp/Controller/RegistrationController/RegistrationController.dart';
+import 'package:repeoplecp/View/PanDetailsPage/PanDetailsPage.dart';
 import 'package:repeoplecp/Widget/CustomBoxDecoration.dart';
 import 'package:repeoplecp/Widget/CustomButton/CustomButton.dart';
+import 'package:repeoplecp/Widget/CustomTextField.dart';
 import 'package:repeoplecp/Widget/HorizontalDividerWidget.dart';
 
 class RERADetailsPage extends StatefulWidget {
@@ -23,26 +25,40 @@ class _RERADetailsPageState extends State<RERADetailsPage> {
   CommonHeaderController cntCommonHeader = Get.put(CommonHeaderController());
   RegistrationController cntRegistration = Get.put(RegistrationController());
   @override
+  void initState() {
+    super.initState();
+    cntRegistration.entityTypeData();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
-      key: cntRegistration.globalSuccessPageKey,
+      key: cntRegistration.globalReRaPageKey,
       body: SafeArea(
         child: Stack(
           children: [
             SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: appBarHeight),
+                  const SizedBox(height: 80),
                   reRaDetailForm(),
                   const SizedBox(height: 40),
                 ],
               ),
             ),
-            cntCommonHeader.commonAppBar(
+           Obx(() =>  cntCommonHeader.commonAppBar(
               "RERA Details",
-              cntRegistration.globalSuccessPageKey,
-            )
+              cntRegistration.globalReRaPageKey,
+              backOnTap: (){
+                if(cntRegistration.isOpenReRaDetails.value == false){
+                  cntRegistration.isOpenReRaDetails.value = true;
+                }else {
+                  Get.back();
+                }
+              },
+              isShowBackArrow: true
+            ))
           ],
         ),
       ),
@@ -51,7 +67,7 @@ class _RERADetailsPageState extends State<RERADetailsPage> {
 
   Widget reRaDetailForm() {
     return Container(
-      padding: const EdgeInsets.only(top: 24, left: 8, right: 8, bottom: 24),
+      padding: const EdgeInsets.only(top: 24, left: 8, right: 8, bottom: 0),
       margin: const EdgeInsets.only(right: 20, left: 20),
       width: Get.width,
       decoration: BoxDecoration(
@@ -64,10 +80,7 @@ class _RERADetailsPageState extends State<RERADetailsPage> {
                 blurRadius: 6,
                 spreadRadius: 0)
           ]),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [editReRaImageData()],
-      ),
+      child: editReRaImageData(),
     );
   }
 
@@ -110,7 +123,8 @@ class _RERADetailsPageState extends State<RERADetailsPage> {
                                   child: Image.file(
                                     File(cntRegistration.reRaImage.value),
                                     fit: BoxFit.cover,
-                                  ))
+                                  ),
+                          )
                               : Container(
                                   clipBehavior: Clip.hardEdge,
                                   decoration: BoxDecoration(
@@ -123,7 +137,7 @@ class _RERADetailsPageState extends State<RERADetailsPage> {
                             ? const SizedBox()
                             : GestureDetector(
                                 onTap: () {
-                                  cntRegistration.profileImagePicker();
+                                  cntRegistration.CameraSelect(DocumentType.reRaPhoto);
                                 },
                                 child: Container(
                                   width: Get.width-52.w,
@@ -149,7 +163,7 @@ class _RERADetailsPageState extends State<RERADetailsPage> {
                     ))
                 : GestureDetector(
                     onTap: () {
-                      cntRegistration.profileImagePicker();
+                      cntRegistration.CameraSelect(DocumentType.reRaPhoto);
                     },
                     child: Container(
                       width: Get.width-52.w,
@@ -178,25 +192,138 @@ class _RERADetailsPageState extends State<RERADetailsPage> {
         ),
         HorizontalDivider(color: AppColors.labelGreyColor, height: 1),
         SizedBox(
-          height: 20.w,
+          height: 4.w,
         ),
-        verifyButton()
+       Obx(() =>  cntRegistration.isRERAValidationShow.value == false
+           ?  Text("Please Enter RERA Certificate",style: mediumTextStyle(fontSize: 12,fontWeight: FontWeight.w400,txtColor: AppColors.red),)
+           :  const SizedBox()),
+       Obx(() =>SizedBox(
+          height: cntRegistration.isOpenReRaDetails.value == true? 16.w:10,
+        )),
+        Obx(() => cntRegistration.isOpenReRaDetails.value == true? verifyButton() : const SizedBox()),
+
+        Obx(() =>  cntRegistration.isOpenReRaDetails.value != true ? reRaDetailsData() :const SizedBox())
       ],
     );
   }
+
+  Widget reRaDetailsData() {
+    return Obx(() => AnimatedContainer(
+      clipBehavior: Clip.hardEdge,
+      curve: Curves.fastOutSlowIn,
+      height: cntRegistration.isOpenReRaDetails.value == true ? 320.w : 530.w,
+      width: Get.width,
+      //margin: const EdgeInsets.only(left: 0, right:0, bottom: 35, top: 0),
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          color: AppColors.whiteColor,
+          boxShadow: [fullcontainerboxShadow]
+      ),
+      duration: const Duration(milliseconds: 500),
+      child: SingleChildScrollView(
+          physics: const NeverScrollableScrollPhysics(),
+          child: rERADetailsWidgetData()),
+    ));
+  }
+
+
+  Widget rERADetailsWidgetData(){
+    return SingleChildScrollView(
+      physics: const ScrollPhysics(),
+      child: Form(
+        key: cntRegistration.reRaFormKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            commonDropDownTextField(
+              labelText: "Entity Type*",
+              onTap: () {
+                cntRegistration.selectEntityType();
+              },
+            validator: (value) =>
+                validation(value, "Please select entity type"),
+              controller: cntRegistration.txtEntityType.value,
+              hintText: "Select Entity Type",
+            ),
+            SizedBox(height: 24.w,),
+            reRaDetailsWidget(
+                titleText: "Company Name",subTitleText: "Brikkin Martech Private Limited"
+            ),
+            SizedBox(height: 24.w,),
+            reRaDetailsWidget(
+                titleText: "RERA Number",subTitleText: "A51800035827"
+            ),
+            SizedBox(height: 24.w,),
+            reRaDetailsWidget(
+                titleText: "RERA State",subTitleText: "Maharashtra"
+            ),
+            SizedBox(height: 24.w,),
+            reRaDetailsWidget(
+                titleText: "Registered Address",subTitleText: "Tehsil: Andheri, Mumbai Suburban, 400093"
+            ),
+            SizedBox(height: 24.w,),
+            reRaDetailsWidget(
+                titleText: "Start Date",subTitleText: "30/05/2022"
+            ),
+            SizedBox(height: 24.w,),
+            reRaDetailsWidget(
+                titleText: "End Date",subTitleText: "30/05/2027"
+            ),
+            SizedBox(height: 24.w),
+            submitButton(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget reRaDetailsWidget({String? titleText,String? subTitleText}){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+      Text(titleText??"",style: mediumTextStyle(txtColor:  AppColors.maiGreyColor,fontWeight: FontWeight.w400,fontSize: 12),),
+      const SizedBox(height: 2),
+      Text(subTitleText??"",style: boldTextStyle(fontSize: 14,fontWeight: FontWeight.w700,txtColor: AppColors.appThemeColor),),
+    ]
+    );
+  }
+
   Widget verifyButton() {
-    return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
-        child: OnTapButton(
-            onTap: () {Get.to(()=>const RERADetailsPage());},
-            height: 40.w,
-            decoration: CustomDecorations().backgroundLocal(
-                AppColors.appThemeColor, 6, 0, AppColors.whiteColor),
-            text: "verify".toUpperCase(),
-            style: TextStyle(
-                color: AppColors.whiteColor,
-                fontFamily: fontFamily,
-                fontWeight: FontWeight.w500,
-                fontSize: 12.sp)));
+    return OnTapButton(
+        onTap: () {
+          if(cntRegistration.isRERAValidationShow.value==true) {
+            setState(() {
+              cntRegistration.isOpenReRaDetails.value =
+              !cntRegistration.isOpenReRaDetails.value;
+            });
+          }
+       },
+        height: 40.w,
+        decoration: CustomDecorations().backgroundLocal(
+            AppColors.appThemeColor, 6, 0, AppColors.whiteColor),
+        text: "verify".toUpperCase(),
+        style: TextStyle(
+            color: AppColors.whiteColor,
+            fontFamily: fontFamily,
+            fontWeight: FontWeight.w500,
+            fontSize: 12.sp));
+  }
+
+  Widget submitButton() {
+    return OnTapButton(
+        onTap: () {
+          if(cntRegistration.reRaFormKey.currentState!.validate()) {
+            Get.to(() => const PanDetailsPage());
+          }
+        },
+        height: 40.w,
+        decoration: CustomDecorations().backgroundLocal(
+            AppColors.appThemeColor, 6, 0, AppColors.whiteColor),
+        text: "submit".toUpperCase(),
+        style: TextStyle(
+            color: AppColors.whiteColor,
+            fontFamily: fontFamily,
+            fontWeight: FontWeight.w500,
+            fontSize: 12.sp));
   }
 }

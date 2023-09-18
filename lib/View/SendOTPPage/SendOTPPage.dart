@@ -11,7 +11,8 @@ import 'package:repeoplecp/Widget/CustomButton/CustomButton.dart';
 import 'package:repeoplecp/Widget/CustomTextField.dart';
 
 class SendOTPPage extends StatefulWidget {
-  const SendOTPPage({super.key});
+  final String? isRegistered;
+  const SendOTPPage({super.key,this.isRegistered});
 
   @override
   State<SendOTPPage> createState() => _SendOTPPageState();
@@ -19,6 +20,11 @@ class SendOTPPage extends StatefulWidget {
 
 class _SendOTPPageState extends State<SendOTPPage> {
   LoginController cntLogin = Get.put(LoginController());
+  @override
+  void initState() {
+    super.initState();
+    cntLogin.isRegister.value=widget.isRegistered??"";
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

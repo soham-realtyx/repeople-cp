@@ -23,7 +23,8 @@ class LoginController extends GetxController {
   RxBool timerIsActive = true.obs;
   
   RxInt isUser=0.obs;
-  
+  RxString isRegister="".obs;
+
   FocusNode mobileFocusNode = FocusNode();
   FocusNode referFocusNode = FocusNode();
   FocusNode otpFocusNode = FocusNode();

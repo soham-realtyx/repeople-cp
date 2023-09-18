@@ -247,10 +247,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
         padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 10),
         child: OnTapButton(
             onTap: () {
-              // if (cntEditProfile.formKey.currentState!.validate()) {
+              if (cntEditProfile.formKey.currentState!.validate()) {
                 // cntEditProfile.editProfile();
               Get.to(()=>const SelectRegistrationPage());
-              // }
+              }
             },
             height: 40.w,
             decoration: CustomDecorations().backgroundLocal(

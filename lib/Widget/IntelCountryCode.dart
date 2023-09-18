@@ -44,7 +44,7 @@ class IntlPhoneCustomField extends StatefulWidget {
   final FutureOr<String?> Function(String?)? validator;
 
   // final FutureOr<String?> Function(String?)? MobileValidation;
-  final String? Function(String?)? MobileValidation;
+  final String? Function(String?)? mobileValidation;
   final bool isValidate;
 
   /// {@macro flutter.widgets.editableText.keyboardType}
@@ -242,7 +242,7 @@ class IntlPhoneCustomField extends StatefulWidget {
     this.dropdownTextStyle,
     this.onSubmitted,
     this.validator,
-    this.MobileValidation,
+    this.mobileValidation,
     this.isValidate = false,
     this.onChanged,
     this.countries,
@@ -408,7 +408,7 @@ class _IntlPhoneFieldState extends State<IntlPhoneCustomField> {
       },
 
       validator: widget.isValidate
-          ? widget.MobileValidation!
+          ? widget.mobileValidation!
           : (value) {
         if (value!.isEmpty) {
           return "      "+"Please enter mobile number";

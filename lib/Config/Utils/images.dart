@@ -28,3 +28,10 @@ const registeredSearchSvgIcons ='assets/svgIcons/registered-search.svg';
 const otpProgressGif = "assets/GIF/otp-progress.gif";
 const successGif = "assets/GIF/success.gif";
 
+// bottomNavigation Icon
+const dashBoardSvgIcon = "assets/menuIcon/dashboard.svg";
+const propertiesSvgIcon = "assets/menuIcon/building-skyscraper.svg";
+const leadsSvgIcon = "assets/menuIcon/leads.svg";
+const ruppeySvgIcon = "assets/menuIcon/ruppey.svg";
+const userSvgIcon = "assets/menuIcon/user.svg";
+

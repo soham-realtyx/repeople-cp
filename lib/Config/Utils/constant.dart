@@ -15,6 +15,8 @@ Rx<Country> countryIndia = const Country(
   maxLength: 10, nameTranslations: {},
 ).obs;
 
+RxString isRegistered = "0".obs;
+
 RxBool Is_Login = false.obs;
 RxBool Is_WhatsApp_Active = false.obs;
 RxString username = "".obs;
@@ -31,3 +33,17 @@ RxString isWhatsApp = "".obs;
 RxString isAlternateWSwitch = "".obs;
 RxString userProffessionName = "".obs;
 RxInt redeemPoints = 0.obs;
+
+const HOMEMENU = "home";
+const SECONDMENU = "second";
+const REFERMENU = "refer";
+const FAVMENU = "favorite";
+const ACCOUNTMENU = "account";
+const PROFILE = "Profile";
+const KEYMENU = "key";
+const PROJECTMENU = "project";
+const NOTIFICTIONMENU = "notification";
+const EDITPROFILE = "Edit Profile";
+const ADDNEWHOME = "Add New Property";
+
+bool isBottomPageNavigate = false;

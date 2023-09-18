@@ -341,7 +341,7 @@ Widget closeButton() {
           )));
 }
 
-Widget ChooseButton(VoidCallback onPressed) {
+Widget chooseButton(VoidCallback onPressed) {
   return Align(
     alignment: Alignment.center,
     child: Padding(
