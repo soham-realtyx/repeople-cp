@@ -5,13 +5,17 @@ const splashBackImage = 'assets/images/splash-images.png';
 const rePeopleAppLogo = "assets/appLogos/app-logo.svg";
 
 
-//PNG Images
-const backArrowPng = "assets/icons/back-arrow.png";
-
 //PNG Icons
-const imgMenu = "assets/images/menu.png";
+const backArrowPng = "assets/icons/back-arrow.png";
 const whatsAppIcons = 'assets/icons/whatsapp.png';
+
+//PNG Images
+const imgMenu = "assets/images/menu.png";
 const imgSearch = "assets/images/search.png";
+const companyPngImage = "assets/images/logo.png";
+const userPngImage = "assets/images/user-image.png";
+const projectPngImage = "assets/images/building-image.png";
+const projectLogoPngImage = "assets/images/project-logo.png";
 
 //SVG Icons
 const sideMenuSvgIcons ='assets/svgIcons/side-menu-drawer.svg';
@@ -23,6 +27,15 @@ const skipArrowSvgIcons ='assets/svgIcons/skip-arrow-icons.svg';
 const logOutSvgIcons ='assets/svgIcons/logout.svg';
 const registeredSvgIcons ='assets/svgIcons/registered.svg';
 const registeredSearchSvgIcons ='assets/svgIcons/registered-search.svg';
+const companySvgLogo ='assets/svgIcons/company-logo.svg';
+const homeShareSvgIcons ='assets/svgIcons/share.svg';
+const homeHeartSvgIcons ='assets/svgIcons/home-heart.svg';
+const homeCancelSvgIcons ='assets/svgIcons/home-cancel.svg';
+const creditCardSvgIcons ='assets/svgIcons/credit-card.svg';
+const mapPinSvgIcons ='assets/svgIcons/map-pin.svg';
+const favouriteSvgIcons ='assets/svgIcons/heart.svg';
+const layOutBoardSvgIcons ='assets/svgIcons/layout-board.svg';
+const coinRupeeSvgIcons ='assets/svgIcons/coin-rupee.svg';
 
 // GIF Images
 const otpProgressGif = "assets/GIF/otp-progress.gif";

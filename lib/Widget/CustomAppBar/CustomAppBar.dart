@@ -9,14 +9,14 @@ import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 
-class dashBoardHeader extends StatefulWidget {
-  const dashBoardHeader({super.key});
+class DashBoardHeader extends StatefulWidget {
+  const DashBoardHeader({super.key});
 
   @override
-  _dashBoardHeaderState createState() => _dashBoardHeaderState();
+  _DashBoardHeaderState createState() => _DashBoardHeaderState();
 }
 
-class _dashBoardHeaderState extends State<dashBoardHeader> {
+class _DashBoardHeaderState extends State<DashBoardHeader> {
   // DashboardHeaderController cnt_DashboardHeader = Get.put(DashboardHeaderController());
   Rxn<dynamic> check=Rxn();
   @override
@@ -69,9 +69,9 @@ class _dashBoardHeaderState extends State<dashBoardHeader> {
                         child: Row(
                           children: [
                             TrallingIconNotification(AppColors.appFontColor,
-
+                              notificationIcon: notificationSvgIcons
                             ),
-                            SizedBox(width: 12,),
+                            const SizedBox(width: 12),
                             TrallingIconDrawer(imgMenu,AppColors.appFontColor,
                                     () => check.value.currentState!.openEndDrawer()
                             )

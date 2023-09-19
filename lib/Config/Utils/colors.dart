@@ -17,6 +17,11 @@ class AppColors {
   static Color labelGreyColor = const Color(0xff898989);
   static Color appGreyColor = const Color(0xffF8F8F8);
   static Color lightGreyColor = const Color(0xffE8E8E8);
+  static Color naviBlueColor = const Color(0xff7986CB);
+  static Color paleGreenColor = const Color(0xffB5E775);
+  static Color brightGreenColor = const Color(0xff00AB41);
+  static Color lightCynColor = const Color(0xffB0F0EE);
+  static Color pinkRedColor = const Color(0xffF0B0B0);
   static Color transParent = HexColor("#00FFFFFF");
   static Color appFontColor = HexColor("#000000");
 

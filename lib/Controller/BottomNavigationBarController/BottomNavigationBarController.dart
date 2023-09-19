@@ -27,10 +27,11 @@ class BottomNavigationBarController extends GetxController{
 
   Future<RxList<MenuItemModel>> bottomMenuData()async{
     arrBottomNavigationList = RxList([]);
-    arrBottomNavigationList.add(MenuItemModel(id: '1',name: "Dashboard",icon: dashBoardSvgIcon));
-    arrBottomNavigationList.add(MenuItemModel(id: '1',name: "Leads",icon: leadsSvgIcon));
-    arrBottomNavigationList.add(MenuItemModel(id: '1',name: "Properties",icon: propertiesSvgIcon));
-    arrBottomNavigationList.add(MenuItemModel(id: '1',name: "Account",icon: userSvgIcon));
+    arrBottomNavigationList.add(MenuItemModel(id: '1',name: "Dashboard",icon: dashBoardSvgIcon,alias: "home"));
+    arrBottomNavigationList.add(MenuItemModel(id: '1',name: "Leads",icon: leadsSvgIcon,alias: "leads"));
+    arrBottomNavigationList.add(MenuItemModel(id: '1',name: "earning",icon: leadsSvgIcon,alias: "earning"));
+    arrBottomNavigationList.add(MenuItemModel(id: '1',name: "Properties",icon: propertiesSvgIcon,alias: "properties"));
+    arrBottomNavigationList.add(MenuItemModel(id: '1',name: "Account",icon: userSvgIcon,alias: "account"));
     return arrBottomNavigationList;
   }
   RxInt selectedIndex = 0.obs;
@@ -61,29 +62,31 @@ class BottomNavigationBarController extends GetxController{
   onNavigation(int index){
     MenuItemModel obj = arrBottomNavigationList[index];
     switch(obj.alias){
-      case HOMEMENU:
+      case homeMenu:
         Get.offAll(() => const HomePage(),
           duration: const Duration(milliseconds: 0),
         );
         break;
-      case PROJECTMENU:
+      case leadsMenu:
         isBottomPageNavigate = true;
         gotoLeadsPage();
         break;
-      case FAVMENU:
+      case propertiesMenu:
         gotoPropertiesPage();
         break;
-      // case REFERMENU:
-      //     isBottomPageNavigate = true;
-      //   Get.offAll(() => NoticeUpdatePage(),duration: Duration(milliseconds: 10))?.then((value) => selectedIndex.value=0);
-      //   break;
-      case ACCOUNTMENU:
-        if(Is_Login.isTrue){
+      case earningMenu:
+          isBottomPageNavigate = true;
+          gotoEarningPage();
+          break;
+      case accountMenu:
+          isBottomPageNavigate = true;
+        // if(Is_Login.isTrue){
           gotoProfile();
-        }
-        else{
+          break;
+        // }
+        // else{
           // LoginDialog();
-        }
+        // }
     }
   }
 
@@ -91,6 +94,18 @@ class BottomNavigationBarController extends GetxController{
 
       var index = await Get.to(
         const LeadsPage(),
+        duration: Duration.zero,
+      )?.then((value) => selectedIndex.value=0);
+
+      if (index != null) {
+        selectIndex(index);
+      }
+
+  }
+  gotoEarningPage() async {
+
+      var index = await Get.to(
+        const EarningsPage(),
         duration: Duration.zero,
       )?.then((value) => selectedIndex.value=0);
 
@@ -112,7 +127,6 @@ class BottomNavigationBarController extends GetxController{
 
   }
   gotoProfile() async {
-
       var index = await Get.to(
         const ProfilePage(),
         duration: Duration.zero,

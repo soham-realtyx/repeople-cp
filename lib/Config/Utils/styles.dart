@@ -38,8 +38,9 @@ TextStyle boldTextStyle({int fontSize = 14, Color? txtColor,FontWeight? fontWeig
     fontWeight: fontWeight??FontWeight.w700,
     fontFamily: fontFamily);
 
-TextStyle extraBoldTextStyle({int fontSize = 14, Color? txtColor,FontWeight? fontWeight}) => TextStyle(
+TextStyle extraBoldTextStyle({int fontSize = 14, Color? txtColor,FontWeight? fontWeight,double? height}) => TextStyle(
     fontSize: fontSize.sp,
+    height: height,
     color: txtColor ?? AppColors.black,
     fontWeight: fontWeight??FontWeight.w800,
     fontFamily: fontFamily);

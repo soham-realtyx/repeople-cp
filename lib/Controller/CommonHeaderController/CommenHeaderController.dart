@@ -71,7 +71,7 @@ class CommonHeaderController extends GetxController {
                   ),
                 ),
               )
-              :GestureDetector(
+              : GestureDetector(
               onTap:() =>  backOnTap??ClosePageCallback(),
               child: Container(
                 margin: const EdgeInsets.only(left: 14),
@@ -134,7 +134,7 @@ class CommonHeaderController extends GetxController {
               skipTextButton(text: "Skip",icons: SvgPicture.asset(skipArrowSvgIcons),skipOnTap: skipOnTap),
             if (isLogOutButtonHide)
               logOutButton(text: "Logout",icons: SvgPicture.asset(logOutSvgIcons),skipOnTap: logOutOnTap),
-            const SizedBox(
+            if (isLogOutButtonHide)const SizedBox(
               width: 14,
             ),
           ],
