@@ -11,6 +11,8 @@ class LeadsController extends GetxController{
   RxList<LeadsModel> arrLeadsList = RxList([]);
   RxList<LeadsFilterModel> arrLeadFilterList = RxList([]);
 
+  RxInt filterIndex = 0.obs;
+
   Future<RxList<LeadsModel>> getLeadsListData()async{
     arrLeadsList = RxList([]);
     arrLeadsList.add(LeadsModel(
@@ -72,5 +74,12 @@ class LeadsController extends GetxController{
     return arrLeadsList;
   }
 
-
+  Future<RxList<LeadsFilterModel>> getLeadsFilterListData()async{
+    arrLeadFilterList = RxList([]);
+    arrLeadFilterList.add(LeadsFilterModel(title: "All",totalCount: "122"));
+    arrLeadFilterList.add(LeadsFilterModel(title: "Site Visit",totalCount: "80"));
+    arrLeadFilterList.add(LeadsFilterModel(title: "EOI",totalCount: "20"));
+    arrLeadFilterList.add(LeadsFilterModel(title: "Registration",totalCount: "10"));
+    return arrLeadFilterList;
+  }
 }

@@ -23,7 +23,7 @@ class HomeController extends GetxController{
     arrCountList.add(DashBoardCountModel(title: "EOI",color: AppColors.paleGreenColor,icons: creditCardSvgIcons,count: "2"));
     return arrCountList;
   }
-  Future <RxList<ProjectListModel>> getProjectList()async{
+  Future<RxList<ProjectListModel>> getProjectList()async{
     arrProjectList = RxList([]);
     arrProjectList.add(ProjectListModel(
       address: "White Field, Bengaluru",

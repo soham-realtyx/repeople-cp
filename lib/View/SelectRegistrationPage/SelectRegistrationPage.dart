@@ -437,7 +437,7 @@ class _SelectRegistrationPageState extends State<SelectRegistrationPage> {
                         style: mediumTextStyle(txtColor: AppColors.green,fontWeight: FontWeight.w600,fontSize: 12),
                       ),
                       Text(
-                        reraText,
+                        reRaText,
                         style: mediumTextStyle(txtColor: AppColors.green,fontWeight: FontWeight.w400,fontSize: 12),
                       )
                     ],

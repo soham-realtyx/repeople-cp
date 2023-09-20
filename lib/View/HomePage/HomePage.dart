@@ -219,8 +219,8 @@ class _HomePageState extends State<HomePage> {
   Widget dashBoardCountDetails() {
     return Container(
       width: Get.width,
-      padding: const EdgeInsets.only(bottom: 10,top: 20,left: 20,right: 20),
-      margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+      padding: const EdgeInsets.only(bottom: 20,top: 20,left: 20,right: 20),
+      margin: const EdgeInsets.only(left: 20, right: 20, top: 20,),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: AppColors.whiteColor,

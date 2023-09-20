@@ -11,7 +11,9 @@ class AppColors {
   static Color green = const Color(0xff00AB41);
   static Color lightRed = const Color(0xffD63031);
   static Color red = const Color(0xffE20000);
+  static Color lightWhite = const Color(0xffF5F6FA);
   static Color lightGrey = const Color(0xffC2C2C2);
+  static Color boldLightGrey = const Color(0xff686868);
   static Color greyColor = const Color(0xff323232);
   static Color maiGreyColor = const Color(0xff707070);
   static Color labelGreyColor = const Color(0xff898989);
@@ -24,6 +26,8 @@ class AppColors {
   static Color pinkRedColor = const Color(0xffF0B0B0);
   static Color transParent = HexColor("#00FFFFFF");
   static Color appFontColor = HexColor("#000000");
+
+  // static Color transParent = HexColor("#00FFFFFF");
 
 }
 MaterialColor darkBlue = hex("006CB5");

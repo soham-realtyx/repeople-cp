@@ -1,7 +1,8 @@
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/countries.dart';
-
+BuildContext contextCommon = Get.context!;
 const appName = "RepeopleCP";
 double appBarHeight = 70;
 RxBool isBadgeShow=false.obs;

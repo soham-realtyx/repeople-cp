@@ -1,10 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:repeoplecp/Config/Utils/SizeConfig.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/constant.dart';
+import 'package:repeoplecp/Config/Utils/images.dart';
+import 'package:repeoplecp/Config/Utils/string.dart';
+import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/CommenHeaderController.dart';
 import 'package:repeoplecp/Controller/MyAccountController/MyAccountController.dart';
 import 'package:repeoplecp/View/BottomNavigationBarPage/BottomNavigationBarPage.dart';
+import 'package:repeoplecp/View/EditProfilePage/EditProfilePage.dart';
 import 'package:repeoplecp/View/HomePage/HomePage.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -43,7 +52,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   children: [
                     SizedBox(height: appBarHeight),
-
+                    accountHeaderData(),
+                    const SizedBox(height: 20),
+                    myLoginDetailsData(),
+                    const SizedBox(height: 20),
+                    whatsAppStatusData(),
                     const SizedBox(height: 40),
                   ],
                 ),
@@ -60,4 +73,278 @@ class _ProfilePageState extends State<ProfilePage> {
       );
     // );
   }
+
+  Widget accountHeaderData() {
+    return Container(
+      height: 130.w,
+      color: AppColors.lightWhite,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              color: AppColors.appThemeColor,
+            ),
+            height: 88.w,
+            width: Get.width,
+          ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                    loginUserImage1(),
+                  const SizedBox(width: 12),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => const EditProfilePage());
+                    },
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Stack(
+                          clipBehavior: Clip.none,
+                          children: <Widget>[
+                            Text(
+                              /*firstname.value*/"YASH",
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  fontSize: 22.sp,
+                                  fontFamily: fontFamily,
+                                  fontWeight: FontWeight.w900,
+                                  height: 0.9.w,
+                                  // letterSpacing: 0.8,
+                                  foreground: Paint()
+                                    ..style = PaintingStyle.stroke
+                                    ..strokeWidth = 6
+                                    ..color = AppColors.appThemeColor,
+                                ),
+                              ),
+                            ),
+                            Text(/*firstname.value*/"YASH",
+                                style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                      fontFamily: fontFamily,
+                                      // letterSpacing: 0.8,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 22.sp,
+                                      color: AppColors.whiteColor,
+                                      height: 0.9.w),
+                                )),
+                          ],
+                        ),
+                         Stack(
+                          clipBehavior: Clip.none,
+                          children: <Widget>[
+                            Text(
+                              /*lastname.value*/"GOSWAMI",
+                              style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(
+                                  fontSize: 22.sp,
+                                  fontFamily: fontFamily,
+                                  fontWeight: FontWeight.w900,
+                                  height: 0.9.w,
+                                  foreground: Paint()
+                                    ..style = PaintingStyle.stroke
+                                    ..strokeWidth = 6
+                                    ..color = AppColors.appThemeColor,
+                                ),
+                              ),
+                            ),
+                            Text(/*lastname.value*/"GOSWAMI",
+                                style: GoogleFonts.montserrat(
+                                  textStyle: TextStyle(
+                                      fontFamily: fontFamily,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 22.sp,
+                                      color: AppColors.whiteColor,
+                                      height: 0.9.w),
+                                )),
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        GestureDetector(
+                          onTap: () {
+                            Get.to(() => const EditProfilePage()/*)?.whenComplete(() => cntAccount.getProfileData()*/);
+                          },
+                          child: Text(
+                            lblEditProfile.toUpperCase(),
+                            style: TextStyle(
+                                fontFamily: fontFamily,
+                                fontSize: 10.sp,
+                                color: AppColors.newBlack,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        SizedBox(height: 12.h),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget loginUserImage1() {
+    return Obx(
+          () => Container(
+        width: 70.w,
+        height: 70.w,
+        margin: const EdgeInsets.only(bottom: 9),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: AppColors.whiteColor, width: 2),
+            color: AppColors.whiteColor),
+        child: InkWell(
+          onTap: () {
+            if (Is_Login.isTrue) {
+              Get.to(const EditProfilePage());
+            } else {
+              Get.back();
+              //LoginDialog();
+            }
+          },
+          child: Container(
+            width: 70.h,
+            height: 70.w,
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: AppColors.whiteColor),
+            child: !Is_Login.isTrue
+                ? SvgPicture.asset(userDefaultImage)
+                : cntAccount.userImage.value != ""
+                ? Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Image.file(
+                  File(cntAccount.userImage.value),
+                  fit: BoxFit.cover,
+                ))
+                : Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Image(
+                    image: NetworkImage(profile_pic.value),
+                    fit: BoxFit.cover)),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget myLoginDetailsData() {
+    return Container(
+      width: Get.width,
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: AppColors.whiteColor,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withOpacity(0.1),
+            blurRadius: 6,
+            spreadRadius: 0,
+            offset: const Offset(0, 3),
+          ),
+        ],
+        border: Border.all(color: AppColors.whiteColor,width: 2)
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          myLoginDataDetailsWidget(title: "Role", subtitle: "Admin"),
+          SizedBox(height: 20.h),
+          myLoginDataDetailsWidget(
+            title: "Email",
+            subtitle: /*email.value*/"yash@themidnight.in",
+          ),
+          SizedBox(height: 20.h),
+              myLoginDataDetailsWidget(
+                  title: "Mobile", subtitle: "${"+91"} ${/*mobile.value*/"9876543210"}"),
+        ],
+      ),
+    );
+  }
+
+  Widget myLoginDataDetailsWidget({String? title, String? subtitle}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title.toString(),
+          style: TextStyle(
+            color: AppColors.labelGreyColor,
+            fontWeight: FontWeight.w700,
+            fontSize: 12.sp,
+            fontFamily: fontFamily,
+          ),
+        ),
+        SizedBox(height: 2.h),
+        Text(
+          subtitle.toString(),
+          style: TextStyle(
+            color: AppColors.newBlack,
+            fontWeight: FontWeight.w600,
+            fontSize: 12.sp,
+            fontFamily: fontFamily,
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget whatsAppStatusData(){
+    return Container(
+      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.only(left: 20,right: 20),
+      decoration: BoxDecoration(
+        color: hex("D0EEE1"),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SvgPicture.asset(whatsAppSvgIcons,width: 32,height: 32),
+          const SizedBox(width: 8),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Are you on WhatsApp?",style: semiBoldTextStyle(txtColor: AppColors.lightGreen,fontWeight: FontWeight.w600,fontSize: 12),),
+              SizedBox(width: 192.w,child: Text("We’ll share all your updates with you there",style: mediumTextStyle(txtColor: AppColors.boldLightGrey,fontWeight: FontWeight.w600,fontSize: 10),)),
+            ],
+          ),
+          // const SizedBox(width: 5),
+          Obx(() => Switch(
+              value: cntAccount.isWhatsAppEnable.value,
+              onChanged: (value) {
+                cntAccount.isWhatsAppEnable.value=value;
+              },
+            splashRadius: 80,
+            hoverColor: AppColors.whiteColor,
+            activeColor: AppColors.whiteColor,
+            activeTrackColor: AppColors.green,
+            inactiveThumbColor: AppColors.whiteColor,
+            // inactiveTrackColor: AppColors.whiteColor,
+
+          ))
+
+        ],
+      ),
+    );
+  }
+
 }

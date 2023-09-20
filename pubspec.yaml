@@ -48,6 +48,9 @@ dependencies:
   cached_network_image: ^3.2.3
   shimmer: ^3.0.0
   carousel_slider: ^4.2.1
+  google_maps_flutter: ^2.5.0
+  intl: ^0.18.1
+  google_fonts: ^6.0.0
 
 dev_dependencies:
   flutter_test:
