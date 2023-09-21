@@ -24,8 +24,10 @@ const connectivityPngImage = "assets/images/connectivity-image.png";
 const galleryPngImage = "assets/images/gallery-image.png";
 const siteProgressPngImage = "assets/images/site-progress.png";
 const layoutImagePngImage = "assets/images/layout-image.png";
-
+const projectImage = "assets/images/project-images.png";
+const earningsImage = "assets/images/ernings-image.png";
 const IMG_DATE_SVG_NEW = "assets/myimages/site_visit_icons/date.svg";
+const LOGIN_KEY_PNG_IMAGE = "assets/images/login-keys-image.png";
 
 
 
@@ -53,6 +55,20 @@ const mapSearchSvgIcons ='assets/svgIcons/map-search.svg';
 const searchSvgIcons ='assets/svgIcons/search.svg';
 const fileDownloadSvgIcons ='assets/svgIcons/file-download.svg';
 const whatsAppSvgIcons ='assets/svgIcons/whtasApp-icons.svg';
+const newRightArrowSvgIcons ='assets/svgIcons/chevron-right.svg';
+const reportSvgIcons ='assets/svgIcons/TermsConditions.svg';
+const buildingBankSvgIcons ='assets/svgIcons/building-bank.svg';
+const heartIconSvgIcons ='assets/svgIcons/heart-icon.svg';
+const user2IconSvgIcons ='assets/svgIcons/user2.svg';
+const heartHandshakeSvgIcons ='assets/svgIcons/heart-handshake.svg';
+const relationShipManagerSvgIcons ='assets/svgIcons/relationShipManager.svg';
+const versionSvgIcons ='assets/svgIcons/v.svg';
+const privacyPolicySvgIcons ='assets/svgIcons/PrivacyPolicy.svg';
+const contactSvgIcons ='assets/svgIcons/contact.svg';
+const closeSvgIcons = "assets/svgIcons/close.svg";
+const refreshSvgIcons = "assets/svgIcons/refresh.svg";
+
+const offersSvgIcons ='assets/svgIcons/offers.svg';
 
 const userDefaultImage = "assets/svgIcons/editprofile.svg";
 

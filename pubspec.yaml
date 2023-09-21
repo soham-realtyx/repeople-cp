@@ -51,6 +51,7 @@ dependencies:
   google_maps_flutter: ^2.5.0
   intl: ^0.18.1
   google_fonts: ^6.0.0
+  timelines: ^0.1.0
 
 dev_dependencies:
   flutter_test:

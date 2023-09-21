@@ -6,8 +6,10 @@ import 'package:get/get.dart';
 import 'package:repeoplecp/Config/Functions.dart';
 import 'package:repeoplecp/Config/Utils/SizeConfig.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
+import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
+import 'package:repeoplecp/Controller/HomeController/HomeController.dart';
 
 class DashBoardHeader extends StatefulWidget {
   const DashBoardHeader({super.key});
@@ -17,17 +19,21 @@ class DashBoardHeader extends StatefulWidget {
 }
 
 class _DashBoardHeaderState extends State<DashBoardHeader> {
-  // DashboardHeaderController cnt_DashboardHeader = Get.put(DashboardHeaderController());
-  Rxn<dynamic> check=Rxn();
+  HomeController cntHome = Get.put(HomeController());
+
   @override
   void initState() {
     super.initState();
     // cnt_DashboardHeader.ListOfHedaer();
   }
-
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return appBarHeader();
+  }
+  void openDrawer() {
+    // _scaffoldKey.currentState?.openDrawer();
+    check.value.currentState?.openEndDrawer();
   }
   Widget appBarHeader(){
     return ClipRect(
@@ -72,8 +78,9 @@ class _DashBoardHeaderState extends State<DashBoardHeader> {
                               notificationIcon: notificationSvgIcons
                             ),
                             const SizedBox(width: 12),
+
                             TrallingIconDrawer(imgMenu,AppColors.appFontColor,
-                                    () => check.value.currentState!.openEndDrawer()
+                                    () =>check.value.currentState?.openEndDrawer()
                             )
                           ],
                         ),

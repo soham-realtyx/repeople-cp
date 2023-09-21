@@ -19,6 +19,7 @@ import 'package:repeoplecp/Model/ProjectListModel/ProjectListModel.dart';
 import 'package:repeoplecp/View/BottomNavigationBarPage/BottomNavigationBarPage.dart';
 import 'package:repeoplecp/Widget/CustomBoxDecoration.dart';
 import 'package:repeoplecp/Widget/CustomButton/CustomButton.dart';
+import 'package:repeoplecp/Widget/CustomDrawer/CustomDrawer.dart';
 import 'package:repeoplecp/Widget/CustomTextField.dart';
 import 'package:repeoplecp/Widget/HorizontalDividerWidget.dart';
 import 'package:repeoplecp/Widget/ShimmerWidget/ShimmerWidget.dart';
@@ -46,7 +47,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
     cntProperties.getAmenitiesData();
     cntProperties.getSiteProgressData();
     cntProperties.getProjectDetailsList();
-
+    check.value=globalPropertiesDetailsPageKey;
   }
 
   @override
@@ -54,6 +55,9 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
     return Scaffold(
       backgroundColor: AppColors.whiteColor,
       key: globalPropertiesDetailsPageKey,
+      endDrawer: CustomDrawer(
+        animatedOffset: const Offset(1.0, 0),
+      ),
       body: SafeArea(
         child: Stack(
           children: [
@@ -110,7 +114,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                         scrollDirection: Axis.vertical,
                         itemCount: cntProperties.arrProjectDetailsList.length,
                         itemBuilder: (context, i) {
-                          return _generateProjectListData1(i);
+                          return _generateProjectListData(i);
                         }),
                   ),
                 );
@@ -125,112 +129,110 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
         ));
   }
 
-  Widget _generateProjectListData1(int index) {
+  Widget _generateProjectListData(int index) {
     ProjectListModel obj = cntProperties.arrProjectDetailsList[index];
     return GestureDetector(
       onTap: () {},
-      child: Stack(
-        clipBehavior: Clip.none,
-        alignment: Alignment.topCenter,
-        children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SizedBox(
-              height: 323.w,
-              width: Get.width,
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Stack(
-                      children: [
-                        CarouselSlider.builder(
-                          carouselController: cntProperties.controllerEvent,
-                          itemCount: obj.projectImageList?.length,
-                          itemBuilder: (context, index2, realIndex) {
-                            return InkWell(
-                              onTap: () {},
-                              child: ClipRRect(
-                                  child: CachedNetworkImage(
-                                height: 211.w,
-                                width: Get.width,
-                                placeholder: (context, url) => shimmerWidget(
-                                  height: 211.w,
-                                  width: Get.width,
-                                ),
-                                fadeInDuration: Duration.zero,
-                                fadeOutDuration: Duration.zero,
-                                placeholderFadeInDuration: Duration.zero,
-                                imageUrl: obj.projectImageList?[index2] ?? "",
-                                fit: BoxFit.cover,
-                                errorWidget: (context, url, error) {
-                                  return Image.asset(
-                                    // IMG_BUILD4,
-                                    obj.projectImageList?[index2] ?? "",
-                                    // height: 250,
-                                    width: Get.width,
-                                    fit: BoxFit.cover,
-                                  );
-                                },
-                              )),
-                            );
-                          },
-                          options: CarouselOptions(
-                              autoPlay: true,
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: SizedBox(
+          height: 323.w,
+          width: Get.width,
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Align(
+                alignment: Alignment.topCenter,
+                child: Stack(
+                  children: [
+                    CarouselSlider.builder(
+                      carouselController: cntProperties.controllerEvent,
+                      itemCount: obj.projectImageList?.length,
+                      itemBuilder: (context, index2, realIndex) {
+                        return InkWell(
+                          onTap: () {},
+                          child: ClipRRect(
+                              child: CachedNetworkImage(
+                            height: 211.w,
+                            width: Get.width,
+                            placeholder: (context, url) => shimmerWidget(
                               height: 211.w,
-                              viewportFraction: 1,
-                              onPageChanged: (index, _) {
-                                cntProperties.current.value = index;
-                                cntProperties.current.refresh();
-                              }),
-                        ),
-                        Container(
-                          height: 211.w,
-                          width: Get.width,
-                          decoration: BoxDecoration(
-                              color: AppColors.whiteColor.withOpacity(0.9),
-                              border: Border.all(
-                                  color: AppColors.lightWhite, width: 3),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: AppColors.black.withOpacity(0.1),
-                                    offset: const Offset(0, 3),
-                                    blurRadius: 6,
-                                    spreadRadius: 0)
-                              ]),
-                          child: Container(
-                            width: 93.w,
-                            height: 73.w,
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 140, vertical: 64),
-                            child: CachedNetworkImage(
-                              width: 93.w,
-                              height: 73.w,
-                              placeholder: (context, url) => shimmerWidget(
-                                  width: 93.w, height: 73.w, radius: 10),
-                              fadeInDuration: Duration.zero,
-                              fadeOutDuration: Duration.zero,
-                              placeholderFadeInDuration: Duration.zero,
-                              imageUrl: obj.projectLogo ?? "",
-                              fit: BoxFit.fill,
-                              errorWidget: (context, url, error) {
-                                return Image.asset(obj.projectLogo ?? "",
-                                    width: 93.w,
-                                    height: 73.w,
-                                    fit: BoxFit.fill);
-                              },
+                              width: Get.width,
                             ),
-                          ),
-                        ),
-                      ],
+                            fadeInDuration: Duration.zero,
+                            fadeOutDuration: Duration.zero,
+                            placeholderFadeInDuration: Duration.zero,
+                            imageUrl: obj.projectImageList?[index2] ?? "",
+                            fit: BoxFit.cover,
+                            errorWidget: (context, url, error) {
+                              return Image.asset(
+                                // IMG_BUILD4,
+                                obj.projectImageList?[index2] ?? "",
+                                // height: 250,
+                                width: Get.width,
+                                fit: BoxFit.cover,
+                              );
+                            },
+                          )),
+                        );
+                      },
+                      options: CarouselOptions(
+                          autoPlay: true,
+                          height: 211.w,
+                          viewportFraction: 1,
+                          onPageChanged: (index, _) {
+                            cntProperties.current.value = index;
+                            cntProperties.current.refresh();
+                          }),
                     ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
+                    Container(
+                      height: 211.w,
                       width: Get.width,
-                      height: 136.w,
+                      decoration: BoxDecoration(
+                          color: AppColors.whiteColor.withOpacity(0.9),
+                          border: Border.all(
+                              color: AppColors.lightWhite, width: 3),
+                          boxShadow: [
+                            BoxShadow(
+                                color: AppColors.black.withOpacity(0.1),
+                                offset: const Offset(0, 3),
+                                blurRadius: 6,
+                                spreadRadius: 0)
+                          ]),
+                      child: Container(
+                        width: 93.w,
+                        height: 73.w,
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 140, vertical: 64),
+                        child: CachedNetworkImage(
+                          width: 93.w,
+                          height: 73.w,
+                          placeholder: (context, url) => shimmerWidget(
+                              width: 93.w, height: 73.w, radius: 10),
+                          fadeInDuration: Duration.zero,
+                          fadeOutDuration: Duration.zero,
+                          placeholderFadeInDuration: Duration.zero,
+                          imageUrl: obj.projectLogo ?? "",
+                          fit: BoxFit.fill,
+                          errorWidget: (context, url, error) {
+                            return Image.asset(obj.projectLogo ?? "",
+                                width: 93.w,
+                                height: 73.w,
+                                fit: BoxFit.fill);
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Stack(
+                  children: [
+                    Container(
+                      width: Get.width,
+                      height: 138.w,
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       // padding: EdgeInsets.only(top: 10.w,bottom: 10.w,right: 8.w,left: 8.w),
                       decoration: BoxDecoration(
@@ -360,43 +362,45 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                           const SizedBox(
                             height: 9.2,
                           ),
-                          Positioned(
-                            bottom: 0,
-                            //alignment: Alignment.bottomCenter,
-                            child: Container(
-                              padding: const EdgeInsets.only(
-                                  right: 20, left: 20, bottom: 4, top: 4),
-                              decoration: BoxDecoration(
-                                  color:
-                                      AppColors.appThemeColor.withOpacity(0.2),
-                                  borderRadius: const BorderRadius.only(
-                                      bottomRight: Radius.circular(10),
-                                      bottomLeft: Radius.circular(10))),
-                              child: Row(
-                                children: [
-                                  Text('MAHARERA Reg. No.:',
-                                      style: mediumTextStyle(
-                                          txtColor: AppColors.newBlack,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 10)),
-                                  Text(' A51800035827',
-                                      style: boldTextStyle(
-                                          txtColor: AppColors.newBlack,
-                                          fontWeight: FontWeight.w700,
-                                          fontSize: 10))
-                                ],
-                              ),
-                            ),
-                          ),
+
                         ],
                       ),
                     ),
-                  ),
-                ],
+                    Positioned(
+                      bottom: 0,
+                      left: 20,
+                      right: 20,
+                      child: Container(
+                        padding: const EdgeInsets.only(
+                            right: 8, left: 8, bottom: 4, top: 4),
+                        decoration: BoxDecoration(
+                            color:
+                            AppColors.appThemeColor.withOpacity(0.2),
+                            borderRadius: const BorderRadius.only(
+                                bottomRight: Radius.circular(10),
+                                bottomLeft: Radius.circular(10))),
+                        child: Row(
+                          children: [
+                            Text('MAHARERA Reg. No.:',
+                                style: mediumTextStyle(
+                                    txtColor: AppColors.newBlack,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 10)),
+                            Text(' A51800035827',
+                                style: boldTextStyle(
+                                    txtColor: AppColors.newBlack,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 10))
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
@@ -1277,11 +1281,11 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
         itemBuilder: (context, index) {
           return Padding(
             padding: EdgeInsets.only(
-                left: index == 0 ? 10 : 0,
+                left: index == 0 ? 20 : 10,
                 right: (cntProperties.arrSiteProgressList.length)! -
                     1 ==
                     index
-                    ? 10
+                    ? 20
                     : 0,
                 bottom: 0,
                 top: 0),
@@ -1319,8 +1323,8 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                         ),
                       ),
                       Positioned(
-                          left: 12.w,
-                          bottom: 12.w,
+                          left: 8.w,
+                          bottom: 10.w,
                           child: Container(
                             padding: EdgeInsets.all(6.w),
                             decoration: BoxDecoration(
@@ -1362,7 +1366,6 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
     final unique = layoutList?.layoutdata
         ?.where((str) => seen.add(str.layouttype.toString()))
         .toList();
-
     return SizedBox(
         width: double.infinity,
         child: Obx(()=>FutureBuilder(
@@ -1520,13 +1523,13 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
 
   Widget siteVisitData([bool isshow=false]) {
     return Obx(() =>  Padding(
-      padding:  const EdgeInsets.only(left: 20.0,right: 20,top: 10,bottom: 20),
+      padding:  const EdgeInsets.only(left: 20.0,right: 20,top: 0,bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Text("Site Progress",
+              Text("Schedule a Site Visit",
                   style: TextStyle(
                       color: AppColors.labelGreyColor,
                       fontSize: 12.sp,
@@ -1536,19 +1539,10 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
               Expanded(
                 child: Container(
                   height: 1.h,
-                  // margin: EdgeInsets.only(right: 30),
                   width: Get.width,
                   color: AppColors.lightGreyColor,
                 ),
               ),
-              SizedBox(width: 10.w),
-              Text(
-                  "${cntProperties.arrAmenitiesList.length - 1}+",
-                  style: TextStyle(
-                      color: AppColors.labelGreyColor,
-                      fontSize: 12.sp,
-                      fontFamily: fontFamily,
-                      fontWeight: FontWeight.w700)),
             ],
           ),
           const SizedBox(height: 8),

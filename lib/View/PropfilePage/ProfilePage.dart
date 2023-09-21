@@ -15,6 +15,8 @@ import 'package:repeoplecp/Controller/MyAccountController/MyAccountController.da
 import 'package:repeoplecp/View/BottomNavigationBarPage/BottomNavigationBarPage.dart';
 import 'package:repeoplecp/View/EditProfilePage/EditProfilePage.dart';
 import 'package:repeoplecp/View/HomePage/HomePage.dart';
+import 'package:repeoplecp/Widget/CustomDrawer/CustomDrawer.dart';
+import 'package:repeoplecp/Widget/CustomStyledSwitch/CustomStyledSwitch.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -30,47 +32,51 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    BottomNavigationBarPage().selectedIndex=4;
+    cntAccount.getLoginDetailData();
+    check.value=globalMyAccountPageKey;
+    BottomNavigationBarPage().selectedIndex = 4;
   }
+
   @override
   Widget build(BuildContext context) {
     return
-      // WillPopScope(
-      // onWillPop: ()async{
-      //   BottomNavigationBarPage().selectedIndex=4;
-      //   Get.offAll(const HomePage());
-      //   return false;
-      // },
-      // child:
-      Scaffold(
-        backgroundColor: AppColors.whiteColor,
-        key: globalMyAccountPageKey,
-        body: SafeArea(
-          child: Stack(
-            children: [
-              SingleChildScrollView(
-                child: Column(
-                  children: [
-                    SizedBox(height: appBarHeight),
-                    accountHeaderData(),
-                    const SizedBox(height: 20),
-                    myLoginDetailsData(),
-                    const SizedBox(height: 20),
-                    whatsAppStatusData(),
-                    const SizedBox(height: 40),
-                  ],
-                ),
-              ),
-              cntCommonHeader.commonAppBar(
-                "Profile", globalMyAccountPageKey,
-                isMenuIconHide: true
-              )
-            ],
+        // WillPopScope(
+        // onWillPop: ()async{
+        //   BottomNavigationBarPage().selectedIndex=4;
+        //   Get.offAll(const HomePage());
+        //   return false;
+        // },
+        // child:
+        Scaffold(
+      backgroundColor: AppColors.whiteColor,
+      key: globalMyAccountPageKey,
+          endDrawer: CustomDrawer(
+            animatedOffset: const Offset(1.0, 0),
           ),
-
+      body: SafeArea(
+        child: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: appBarHeight),
+                  accountHeaderData(),
+                  const SizedBox(height: 20),
+                  myLoginDetailsData(),
+                  const SizedBox(height: 20),
+                  whatsAppStatusData(),
+                  const SizedBox(height: 40),
+                  loginDetailsListData()
+                ],
+              ),
+            ),
+            cntCommonHeader.commonAppBar("Profile", globalMyAccountPageKey,
+                isMenuIconHide: true)
+          ],
         ),
-        bottomNavigationBar:  BottomNavigationBarPage(selectedIndex: 4),
-      );
+      ),
+      bottomNavigationBar: BottomNavigationBarPage(selectedIndex: 4),
+    );
     // );
   }
 
@@ -96,7 +102,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                    loginUserImage1(),
+                  loginUserImage1(),
                   const SizedBox(width: 12),
                   GestureDetector(
                     onTap: () {
@@ -110,7 +116,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           clipBehavior: Clip.none,
                           children: <Widget>[
                             Text(
-                              /*firstname.value*/"YASH",
+                              /*firstname.value*/ "YASH",
                               style: GoogleFonts.montserrat(
                                 textStyle: TextStyle(
                                   fontSize: 22.sp,
@@ -125,7 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                             ),
-                            Text(/*firstname.value*/"YASH",
+                            Text(/*firstname.value*/ "YASH",
                                 style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
                                       fontFamily: fontFamily,
@@ -137,11 +143,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                 )),
                           ],
                         ),
-                         Stack(
+                        Stack(
                           clipBehavior: Clip.none,
                           children: <Widget>[
                             Text(
-                              /*lastname.value*/"GOSWAMI",
+                              /*lastname.value*/ "GOSWAMI",
                               style: GoogleFonts.montserrat(
                                 textStyle: TextStyle(
                                   fontSize: 22.sp,
@@ -155,7 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                             ),
-                            Text(/*lastname.value*/"GOSWAMI",
+                            Text(/*lastname.value*/ "GOSWAMI",
                                 style: GoogleFonts.montserrat(
                                   textStyle: TextStyle(
                                       fontFamily: fontFamily,
@@ -169,7 +175,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         const SizedBox(height: 10),
                         GestureDetector(
                           onTap: () {
-                            Get.to(() => const EditProfilePage()/*)?.whenComplete(() => cntAccount.getProfileData()*/);
+                            Get.to(() =>
+                                const EditProfilePage() /*)?.whenComplete(() => cntAccount.getProfileData()*/);
                           },
                           child: Text(
                             lblEditProfile.toUpperCase(),
@@ -195,7 +202,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget loginUserImage1() {
     return Obx(
-          () => Container(
+      () => Container(
         width: 70.w,
         height: 70.w,
         margin: const EdgeInsets.only(bottom: 9),
@@ -222,23 +229,23 @@ class _ProfilePageState extends State<ProfilePage> {
             child: !Is_Login.isTrue
                 ? SvgPicture.asset(userDefaultImage)
                 : cntAccount.userImage.value != ""
-                ? Container(
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Image.file(
-                  File(cntAccount.userImage.value),
-                  fit: BoxFit.cover,
-                ))
-                : Container(
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Image(
-                    image: NetworkImage(profile_pic.value),
-                    fit: BoxFit.cover)),
+                    ? Container(
+                        clipBehavior: Clip.hardEdge,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Image.file(
+                          File(cntAccount.userImage.value),
+                          fit: BoxFit.cover,
+                        ))
+                    : Container(
+                        clipBehavior: Clip.hardEdge,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Image(
+                            image: NetworkImage(profile_pic.value),
+                            fit: BoxFit.cover)),
           ),
         ),
       ),
@@ -251,18 +258,17 @@ class _ProfilePageState extends State<ProfilePage> {
       margin: const EdgeInsets.symmetric(horizontal: 20),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: AppColors.whiteColor,
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black.withOpacity(0.1),
-            blurRadius: 6,
-            spreadRadius: 0,
-            offset: const Offset(0, 3),
-          ),
-        ],
-        border: Border.all(color: AppColors.whiteColor,width: 2)
-      ),
+          borderRadius: BorderRadius.circular(10),
+          color: AppColors.whiteColor,
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.black.withOpacity(0.1),
+              blurRadius: 6,
+              spreadRadius: 0,
+              offset: const Offset(0, 3),
+            ),
+          ],
+          border: Border.all(color: AppColors.whiteColor, width: 2)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -270,11 +276,12 @@ class _ProfilePageState extends State<ProfilePage> {
           SizedBox(height: 20.h),
           myLoginDataDetailsWidget(
             title: "Email",
-            subtitle: /*email.value*/"yash@themidnight.in",
+            subtitle: /*email.value*/ "yash@themidnight.in",
           ),
           SizedBox(height: 20.h),
-              myLoginDataDetailsWidget(
-                  title: "Mobile", subtitle: "${"+91"} ${/*mobile.value*/"9876543210"}"),
+          myLoginDataDetailsWidget(
+              title: "Mobile",
+              subtitle: "${"+91"} ${/*mobile.value*/ "9876543210"}"),
         ],
       ),
     );
@@ -307,10 +314,76 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget whatsAppStatusData(){
+  Widget loginActionListData(
+      {String? icons,
+      String? title,
+      GestureTapCallback? onTap,
+      String? count}) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 20,right: 20,bottom: 24),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              SvgPicture.asset(
+                icons ?? "",
+                height: 24.w,
+                width: 24.w,
+                color: AppColors.black,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                title.toString(),
+                style: TextStyle(
+                    fontFamily: fontFamily,
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.black),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                width: 16.w,
+                height: 16.w,
+                // padding: const EdgeInsets.only(top: 2, bottom: 2, left: 5, right: 5),
+                decoration: BoxDecoration(
+                  // borderRadius: BorderRadius.circular(19),
+                  shape: BoxShape.circle,
+                  color: AppColors.red,
+                ),
+                child: Center(
+                  child: Text(
+                    count.toString(),
+                    textAlign: TextAlign.center,
+                    style: mediumTextStyle(
+                        fontSize: 10,
+                        fontWeight: FontWeight.w600,
+                        txtColor: AppColors.whiteColor),
+                  ),
+                ),
+              ),
+              SvgPicture.asset(
+                newRightArrowSvgIcons,
+                height: 24.w,
+                width: 24.w,
+                color: AppColors.black,
+              )
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget whatsAppStatusData() {
     return Container(
-      padding: const EdgeInsets.all(20),
-      margin: const EdgeInsets.only(left: 20,right: 20),
+      padding: const EdgeInsets.only(right: 20, left: 20, bottom: 20, top: 20),
+      margin: const EdgeInsets.only(left: 20, right: 20),
       decoration: BoxDecoration(
         color: hex("D0EEE1"),
         borderRadius: BorderRadius.circular(10),
@@ -318,33 +391,69 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SvgPicture.asset(whatsAppSvgIcons,width: 32,height: 32),
+          SvgPicture.asset(whatsAppSvgIcons, width: 32, height: 32),
           const SizedBox(width: 8),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Are you on WhatsApp?",style: semiBoldTextStyle(txtColor: AppColors.lightGreen,fontWeight: FontWeight.w600,fontSize: 12),),
-              SizedBox(width: 192.w,child: Text("We’ll share all your updates with you there",style: mediumTextStyle(txtColor: AppColors.boldLightGrey,fontWeight: FontWeight.w600,fontSize: 10),)),
+              Text(
+                "Are you on WhatsApp?",
+                style: semiBoldTextStyle(
+                    txtColor: AppColors.lightGreen,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12),
+              ),
+              const SizedBox(height: 4),
+              SizedBox(
+                  width: 190.w,
+                  child: Text(
+                    "We’ll share all your updates with you there",
+                    style: mediumTextStyle(
+                        txtColor: AppColors.boldLightGrey,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 10),
+                  )),
             ],
           ),
-          // const SizedBox(width: 5),
-          Obx(() => Switch(
-              value: cntAccount.isWhatsAppEnable.value,
-              onChanged: (value) {
-                cntAccount.isWhatsAppEnable.value=value;
-              },
-            splashRadius: 80,
-            hoverColor: AppColors.whiteColor,
-            activeColor: AppColors.whiteColor,
-            activeTrackColor: AppColors.green,
-            inactiveThumbColor: AppColors.whiteColor,
-            // inactiveTrackColor: AppColors.whiteColor,
-
-          ))
-
+          const SizedBox(width: 10),
+          StyledSwitch(
+            onToggled: (isToggled) {
+              cntAccount.isWhatsAppEnable.value = isToggled;
+            },
+          )
         ],
       ),
     );
   }
 
+  Widget loginDetailsListData(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        loginActionListData(onTap: (){},icons: reportSvgIcons,title: "RERA Details",count: "3"),
+        loginActionListData(onTap: (){},icons: reportSvgIcons,title: "PAN Details",count: "0"),
+        loginActionListData(onTap: (){},icons: reportSvgIcons,title: "GST Details",count: "3"),
+        loginActionListData(onTap: (){},icons: buildingBankSvgIcons,title: "Bank Account Details",count: "2"),
+        loginActionListData(onTap: (){},icons: reportSvgIcons,title: "Contact Details",count: "0"),
+        loginActionListData(onTap: (){},icons: reportSvgIcons,title: "Marketing Information",count: "0"),
+        loginActionListData(onTap: (){},icons: logOutSvgIcons,title: "Logout",count: "0"),
+      ],
+    );
+    /*return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      itemCount: cntAccount.arrLoginDetailsList.length,
+      itemBuilder: (context, index) {
+        LoginDetailsModel objLoginDetails = cntAccount.arrLoginDetailsList[index];
+        return
+          loginActionListData(
+          count: objLoginDetails.count??"",
+          title: objLoginDetails.name??"",
+          icons: objLoginDetails.icon??"",
+          onTap: objLoginDetails.onTap
+        );
+      },
+    );*/
+  }
 }

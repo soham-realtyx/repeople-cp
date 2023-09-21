@@ -5,12 +5,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:repeoplecp/Config/Utils/SizeConfig.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
+import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/HomeController/HomeController.dart';
 import 'package:repeoplecp/Model/ProjectListModel/ProjectListModel.dart';
 import 'package:repeoplecp/View/BottomNavigationBarPage/BottomNavigationBarPage.dart';
 import 'package:repeoplecp/Widget/CustomAppBar/CustomAppBar.dart';
+import 'package:repeoplecp/Widget/CustomDrawer/CustomDrawer.dart';
 import 'package:repeoplecp/Widget/HorizontalDividerWidget.dart';
 import 'package:repeoplecp/Widget/ShimmerWidget/ShimmerWidget.dart';
 
@@ -28,13 +30,18 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     cntHome.getDashBoardCount();
     cntHome.getProjectList();
+    check.value=cntHome.scaffoldHomeKey;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: cntHome.scaffoldHomeKey,
       backgroundColor: AppColors.whiteColor,
       bottomNavigationBar: BottomNavigationBarPage(selectedIndex: 0),
+      endDrawer: CustomDrawer(
+        animatedOffset: const Offset(1.0, 0),
+      ),
       body: SafeArea(
         child: Stack(
           children: [
@@ -409,10 +416,10 @@ class _HomePageState extends State<HomePage> {
 
           Align(
             alignment: Alignment.bottomCenter,
-            child: SizedBox(
-              height: 328.w,
+            child: Container(
+              height: 322.w,
               width: Get.width,
-              // margin: const EdgeInsets.only(bottom: 20),
+              margin: const EdgeInsets.only(bottom: 10),
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
@@ -463,131 +470,141 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: Container(
-                      width: Get.width,
-                      height: 136.w,
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      // padding: EdgeInsets.only(top: 10.w,bottom: 10.w,right: 8.w,left: 8.w),
-                      decoration: BoxDecoration(
-                          color: AppColors.whiteColor,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [newContainerBoxShadow]),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 10.w,right: 8.w,left: 8.w),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Stack(
+                      children: [
+                        Container(
+                          width: Get.width,
+                          height: 138.w,
+                          margin: const EdgeInsets.symmetric(horizontal: 20),
+                          // padding: EdgeInsets.only(top: 10.w,bottom: 10.w,right: 8.w,left: 8.w),
+                          decoration: BoxDecoration(
+                              color: AppColors.whiteColor,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [newContainerBoxShadow]),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.only(top: 10.w,right: 8.w,left: 8.w),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(obj.projectTitle ?? "",
-                                        style: boldTextStyle(
-                                            fontSize: 15, txtColor: AppColors.appThemeColor)),
-                                    const SizedBox(
-                                      height: 5,
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(obj.projectTitle ?? "",
+                                            style: boldTextStyle(
+                                                fontSize: 15, txtColor: AppColors.appThemeColor)),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        Text(obj.address ?? "",
+                                            style: mediumTextStyle(
+                                                fontSize: 10, txtColor: AppColors.newBlack)),
+                                      ],
                                     ),
-                                    Text(obj.address ?? "",
-                                        style: mediumTextStyle(
-                                            fontSize: 10, txtColor: AppColors.newBlack)),
+                                    GestureDetector(
+                                      onTap: () {
+
+                                      },
+                                      child: Container(
+                                        height: 35,
+                                        width: 35,
+                                        padding: const EdgeInsets.all(4),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(5),
+                                          color: AppColors.whiteColor.withOpacity(0.8),
+                                        ),
+                                        child:/* obj.isfavorite.toString() == "1"
+                                            ? SvgPicture.asset(IMG_FAVORITE_SVG_2)
+                                            : */SvgPicture.asset(
+                                          favouriteSvgIcons,
+                                        )
+                                      ),
+                                    ),
                                   ],
                                 ),
-                                GestureDetector(
-                                  onTap: () {
-
+                              ),
+                              SizedBox(
+                                height: 8.w,
+                              ),
+                              obj.configureList!=null?SizedBox(
+                                height: 55.w,
+                                // alignment: Alignment.centerLeft,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount:  obj.configureList?.length,
+                                  scrollDirection: Axis.horizontal,
+                                  padding: EdgeInsets.only(right: 8.w,left: 8.w),
+                                  physics: const BouncingScrollPhysics(),
+                                  itemBuilder: (BuildContext context, int i) {
+                                    return Container(
+                                      margin: const EdgeInsets.only(right: 10),
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 8.h, vertical: 6.w),
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                              offset: const Offset(0, 0),
+                                              color:
+                                              AppColors.appThemeColor.withOpacity(0.1),
+                                              spreadRadius: 0
+                                          )
+                                        ],
+                                        color: hex("F5F6FA"),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            obj.configureList![i].totalBHK??"",
+                                            style: boldTextStyle(
+                                                fontSize: 10, txtColor: AppColors.appThemeColor),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          Text(
+                                            obj.configureList![i].totalRS??"",
+                                            style: boldTextStyle(
+                                                fontSize: 10,
+                                                txtColor: hex("707070")),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          const SizedBox(
+                                            width: 4,
+                                          ),
+                                          Text(
+                                            obj.configureList![i].onWords??"",
+                                            style: regularTextStyle(
+                                                fontSize: 10,
+                                                txtColor: hex("707070")),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                    // :SizedBox();
                                   },
-                                  child: Container(
-                                    height: 35,
-                                    width: 35,
-                                    padding: const EdgeInsets.all(4),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: AppColors.whiteColor.withOpacity(0.8),
-                                    ),
-                                    child:/* obj.isfavorite.toString() == "1"
-                                        ? SvgPicture.asset(IMG_FAVORITE_SVG_2)
-                                        : */SvgPicture.asset(
-                                      favouriteSvgIcons,
-                                    )
-                                  ),
                                 ),
-                              ],
-                            ),
+                              ):const SizedBox(),
+                              //  const SizedBox(
+                              //   height: 9.3,
+                              // ),
+
+                            ],
                           ),
-                          SizedBox(
-                            height: 8.w,
-                          ),
-                          obj.configureList!=null?SizedBox(
-                            height: 55.w,
-                            // alignment: Alignment.centerLeft,
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount:  obj.configureList?.length,
-                              scrollDirection: Axis.horizontal,
-                              padding: EdgeInsets.only(right: 8.w,left: 8.w),
-                              physics: const BouncingScrollPhysics(),
-                              itemBuilder: (BuildContext context, int i) {
-                                return Container(
-                                  margin: const EdgeInsets.only(right: 10),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 8.h, vertical: 6.w),
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                          offset: const Offset(0, 0),
-                                          color:
-                                          AppColors.appThemeColor.withOpacity(0.1),
-                                          spreadRadius: 0
-                                      )
-                                    ],
-                                    color: hex("F5F6FA"),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        obj.configureList![i].totalBHK??"",
-                                        style: boldTextStyle(
-                                            fontSize: 10, txtColor: AppColors.appThemeColor),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      Text(
-                                        obj.configureList![i].totalRS??"",
-                                        style: boldTextStyle(
-                                            fontSize: 10,
-                                            txtColor: hex("707070")),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      const SizedBox(
-                                        width: 4,
-                                      ),
-                                      Text(
-                                        obj.configureList![i].onWords??"",
-                                        style: regularTextStyle(
-                                            fontSize: 10,
-                                            txtColor: hex("707070")),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
-                                );
-                                // :SizedBox();
-                              },
-                            ),
-                          ):const SizedBox(),
-                           const SizedBox(
-                            height: 9.2,
-                          ),
-                          Align(
-                            alignment: Alignment.bottomCenter,
+                        ),
+                        Positioned(
+                          bottom: 0,
+                          left: 20,
+                          right: 20,
+                          // alignment: Alignment.bottomCenter,
+                          child: Center(
                             child: Container(
                               padding:
-                              const EdgeInsets.only(right: 20, left: 20, bottom: 4, top: 4),
+                              const EdgeInsets.only(right: 8, left: 8, bottom: 4, top: 4),
                               decoration: BoxDecoration(
                                   color: AppColors.appThemeColor.withOpacity(0.2),
                                   borderRadius: const BorderRadius.only(
@@ -609,8 +626,8 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

@@ -7,6 +7,8 @@ const appName = "RepeopleCP";
 double appBarHeight = 70;
 RxBool isBadgeShow=false.obs;
 
+Rxn<dynamic> check=Rxn();
+
 Rx<Country> countryIndia = const Country(
   name: "India",
   flag: "🇮🇳",

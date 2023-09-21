@@ -82,10 +82,10 @@ class PropertiesController extends GetxController{
 
   Future<RxList<TrendingModel>> getSiteProgressData()async{
     arrSiteProgressList = RxList([]);
-    arrSiteProgressList.add(TrendingModel(image: siteProgressPngImage,title: "2nd Phase Completed"));
-    arrSiteProgressList.add(TrendingModel(image: siteProgressPngImage,title: "2nd Phase Completed"));
-    arrSiteProgressList.add(TrendingModel(image: siteProgressPngImage,title: "1st Phase Completed"));
-    arrSiteProgressList.add(TrendingModel(image: siteProgressPngImage,title: "1st Phase Completed"));
+    arrSiteProgressList.add(TrendingModel(image: projectPngImage,title: "2nd Phase Completed"));
+    arrSiteProgressList.add(TrendingModel(image: projectPngImage,title: "2nd Phase Completed"));
+    arrSiteProgressList.add(TrendingModel(image: projectPngImage,title: "1st Phase Completed"));
+    arrSiteProgressList.add(TrendingModel(image: projectPngImage,title: "1st Phase Completed"));
     return arrSiteProgressList;
   }
   
@@ -214,6 +214,7 @@ class PropertiesController extends GetxController{
           )
         ]
     ));
+    obj_svprojectdetails.value=arrProjectList[0];
     return arrProjectList;
   }
 

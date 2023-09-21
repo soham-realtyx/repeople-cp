@@ -7,7 +7,8 @@ import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Model/ProjectListModel/ProjectListModel.dart';
 
 class HomeController extends GetxController{
-  
+
+  GlobalKey<ScaffoldState> scaffoldHomeKey = GlobalKey<ScaffoldState>();
   RxList<DashBoardCountModel> arrCountList = RxList([]);
   RxList<ProjectListModel> arrProjectList = RxList([]);
   Rx<Future<List<ProjectListModel>>> futureArrProjectList =

@@ -24,13 +24,26 @@ class AppColors {
   static Color brightGreenColor = const Color(0xff00AB41);
   static Color lightCynColor = const Color(0xffB0F0EE);
   static Color pinkRedColor = const Color(0xffF0B0B0);
+  static Color lightYellowColor = const Color(0xffFFE297);
   static Color transParent = HexColor("#00FFFFFF");
   static Color appFontColor = HexColor("#000000");
+
+
+  static Color dashBoardColor = HexColor("#FFB74D");
+  static Color favouriteColor = HexColor("#E57373");
+  static Color offersColor = HexColor("#F06292");
+  static Color relationShipManagerColor = HexColor("#4FC3F7");
+  static Color leadsColor = HexColor("#BA68C8");
+  static Color teamsColor = HexColor("#FF8A65");
+  static Color accountColor = HexColor("#A1887F");
 
   // static Color transParent = HexColor("#00FFFFFF");
 
 }
 MaterialColor darkBlue = hex("006CB5");
+
+
+
 MaterialColor hex(String hex) => _factoryColor(_getColorHexFromStr(hex));
 MaterialColor _factoryColor(int color) {
   return MaterialColor(color, <int, Color>{

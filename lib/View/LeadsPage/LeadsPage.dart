@@ -12,6 +12,7 @@ import 'package:repeoplecp/Model/LeadsModel/LeadsModel.dart';
 import 'package:repeoplecp/View/BottomNavigationBarPage/BottomNavigationBarPage.dart';
 import 'package:repeoplecp/View/HomePage/HomePage.dart';
 import 'package:repeoplecp/Widget/CustomAppBar/CustomAppBar.dart';
+import 'package:repeoplecp/Widget/CustomDrawer/CustomDrawer.dart';
 import 'package:repeoplecp/Widget/HorizontalDividerWidget.dart';
 
 class LeadsPage extends StatefulWidget {
@@ -31,6 +32,7 @@ class _LeadsPageState extends State<LeadsPage> {
     cntLeads.getLeadsFilterListData();
     cntLeads.filterIndex.value=0;
     cntLeads.filterIndex.value=cntLeads.arrLeadFilterList.length;
+    check.value=cntLeads.globalLeadsPageKey;
     BottomNavigationBarPage().selectedIndex = 1;
   }
 
@@ -45,6 +47,9 @@ class _LeadsPageState extends State<LeadsPage> {
       child: Scaffold(
         backgroundColor: AppColors.whiteColor,
         key: cntLeads.globalLeadsPageKey,
+        endDrawer: CustomDrawer(
+          animatedOffset: const Offset(1.0, 0),
+        ),
         body: SafeArea(
           child: Stack(
             children: [
@@ -52,7 +57,7 @@ class _LeadsPageState extends State<LeadsPage> {
                 child: Column(
                   crossAxisAlignment:  CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 90),
+                    const SizedBox(height: 85),
                     leadFilterListData(),
                     const SizedBox(height: 20),
                     leadListData(),
@@ -75,7 +80,7 @@ class _LeadsPageState extends State<LeadsPage> {
 
   Widget leadFilterListData() {
     return SizedBox(
-      height: 48.w,
+      height: 50.w,
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.only(left: 20, right: 10),
@@ -108,7 +113,6 @@ class _LeadsPageState extends State<LeadsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(objFilter.totalCount??"",style: boldTextStyle(fontSize: 16,fontWeight: FontWeight.w700,txtColor: cntLeads.filterIndex.value==index?AppColors.whiteColor:AppColors.newBlack),),
-
             Text(objFilter.title??"",style: mediumTextStyle(fontSize: 10,fontWeight: FontWeight.w500,txtColor: cntLeads.filterIndex.value==index?AppColors.whiteColor:AppColors.newBlack),)
           ],
         ),
