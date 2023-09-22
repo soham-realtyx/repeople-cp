@@ -1,4 +1,3 @@
-
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -9,6 +8,7 @@ import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
+import 'package:repeoplecp/Controller/CommonHeaderController/CommenHeaderController.dart';
 import 'package:repeoplecp/Controller/HomeController/HomeController.dart';
 
 class DashBoardHeader extends StatefulWidget {
@@ -20,22 +20,26 @@ class DashBoardHeader extends StatefulWidget {
 
 class _DashBoardHeaderState extends State<DashBoardHeader> {
   HomeController cntHome = Get.put(HomeController());
+  CommonHeaderController cntCommonHeader = Get.put(CommonHeaderController());
 
   @override
   void initState() {
     super.initState();
     // cnt_DashboardHeader.ListOfHedaer();
   }
+
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return appBarHeader();
   }
+
   void openDrawer() {
     // _scaffoldKey.currentState?.openDrawer();
-    check.value.currentState?.openEndDrawer();
+    cntCommonHeader.check.value.currentState?.openEndDrawer();
   }
-  Widget appBarHeader(){
+
+  Widget appBarHeader() {
     return ClipRect(
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
@@ -46,10 +50,7 @@ class _DashBoardHeaderState extends State<DashBoardHeader> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
               color: Colors.white.withOpacity(0.0),
-              boxShadow: [
-                fullcontainerboxShadow
-              ]
-          ),
+              boxShadow: [fullcontainerboxShadow]),
           child: SafeArea(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -63,9 +64,7 @@ class _DashBoardHeaderState extends State<DashBoardHeader> {
                         top: 5,
                         bottom: 5,
                         child: Row(
-                          children:[
-                            leadingIconOfAppbar()
-                          ],
+                          children: [leadingIconOfAppbar()],
                         ),
                       ),
                       Positioned(
@@ -75,13 +74,10 @@ class _DashBoardHeaderState extends State<DashBoardHeader> {
                         child: Row(
                           children: [
                             TrallingIconNotification(AppColors.appFontColor,
-                              notificationIcon: notificationSvgIcons
-                            ),
+                                notificationIcon: notificationSvgIcons),
                             const SizedBox(width: 12),
-
-                            TrallingIconDrawer(imgMenu,AppColors.appFontColor,
-                                    () =>check.value.currentState?.openEndDrawer()
-                            )
+                            trailingIconDrawer(imgMenu, AppColors.appFontColor,
+                                () => cntCommonHeader.check.value.currentState?.openEndDrawer())
                           ],
                         ),
                       ),
@@ -100,16 +96,16 @@ class _DashBoardHeaderState extends State<DashBoardHeader> {
 class CustomDetailsAppBar extends StatefulWidget {
   late final String title;
   late final double height;
-  Color? color;
-  List<Widget>? leadingWidget;
-  List<Widget>? trillingWidget;
+  final Color? color;
+  final List<Widget>? leadingWidget;
+  final List<Widget>? trillingWidget;
 
   CustomDetailsAppBar(
       {required this.title,
-        required this.height,
-        this.leadingWidget,
-        this.trillingWidget,
-        this.color});
+      required this.height,
+      this.leadingWidget,
+      this.trillingWidget,
+      this.color});
 
   @override
   _CustomDetailsAppBarState createState() => _CustomDetailsAppBarState();
@@ -121,7 +117,7 @@ class _CustomDetailsAppBarState extends State<CustomDetailsAppBar> {
     return Container(
       decoration: BoxDecoration(
         boxShadow: [fullcontainerboxShadow],
-        color: widget.color /*== null ? Colors.white : widget.color*/,
+        color: widget.color/*== null ? Colors.white : widget.color*/,
       ),
       height: widget.height,
       child: Row(

@@ -7,6 +7,7 @@ class AppColors {
   static Color newBlack = const Color(0xff333333);
   static Color appThemeColor = const Color(0xff006CB5);
   static Color whiteColor = const Color(0xffFFFFFF);
+  static Color pageBackgroundColor = const Color(0xffF5F6FA);
   static Color lightGreen = const Color(0xff2CB741);
   static Color green = const Color(0xff00AB41);
   static Color lightRed = const Color(0xffD63031);
@@ -25,6 +26,7 @@ class AppColors {
   static Color lightCynColor = const Color(0xffB0F0EE);
   static Color pinkRedColor = const Color(0xffF0B0B0);
   static Color lightYellowColor = const Color(0xffFFE297);
+  static Color darkGreenishBlue  = const Color(0xff00A5A1);
   static Color transParent = HexColor("#00FFFFFF");
   static Color appFontColor = HexColor("#000000");
 

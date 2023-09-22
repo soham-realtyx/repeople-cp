@@ -172,7 +172,7 @@ Widget phoneNumberTextField(Rxn<TextEditingController>? controller,
         color: HexColor("#898989"),
         fontWeight: FontWeight.w700),
     pickerDialogStyle: PickerDialogCustomStyle(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.pageBackgroundColor,
       countryCodeStyle:
           mediumTextStyle(fontSize: 14, txtColor: AppColors.appFontColor),
       searchFieldCursorColor: AppColors.black,

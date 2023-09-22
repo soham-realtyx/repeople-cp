@@ -35,11 +35,11 @@ class _PropertiesPageState extends State<PropertiesPage> {
   void initState() {
     super.initState();
     cntProperties.trendingData();
-    check.value=globalPropertiesPageKey;
+    // cntCommonHeader.check.value=globalPropertiesPageKey;
     cntProperties.getProjectList();
     cntProperties.getProjectDetailsList();
     cntProperties.isTrending.value=cntProperties.arrTrendingList.length;
-    BottomNavigationBarPage().selectedIndex=3;
+    BottomNavigationBarPage().selectedIndex = 3;
   }
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
       },
       child:
       Scaffold(
-        backgroundColor: AppColors.whiteColor,
+        backgroundColor: AppColors.pageBackgroundColor,
         key: globalPropertiesPageKey,
         endDrawer: CustomDrawer(
           animatedOffset: const Offset(1.0, 0),

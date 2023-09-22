@@ -11,6 +11,7 @@ import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Widget/CustomAppBar/CustomAppBar.dart';
 
 class CommonHeaderController extends GetxController {
+  Rxn<dynamic> check=Rxn();
   @override
   void onInit() {
     // TODO: implement onInit
@@ -125,7 +126,7 @@ class CommonHeaderController extends GetxController {
             ),
             if (isShowHistoryIcon) TrailingHistoryIcon(AppColors.appFontColor),
             if (isMenuIconHide)
-              TrallingIconDrawer(
+              trailingIconDrawer(
                   imgMenu,
                   AppColors.appFontColor, () {
                       scaffoldKey.currentState!.openEndDrawer();

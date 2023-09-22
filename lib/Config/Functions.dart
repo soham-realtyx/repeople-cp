@@ -33,7 +33,7 @@ Widget TrailingHistoryIcon(Color color, {String notificationIcon = ""}){
 
 }
 
-Widget TrallingIconDrawer(String drawerIcon, Color color , VoidCallback onTap) {
+Widget trailingIconDrawer(String drawerIcon, Color color , VoidCallback onTap) {
   return Stack(
     children: [
       InkWell(

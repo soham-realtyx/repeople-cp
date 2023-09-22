@@ -30,7 +30,7 @@ class _SelectRegistrationPageState extends State<SelectRegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.pageBackgroundColor,
       key: cntRegistration.globalRegistrationPageKey,
       body: SafeArea(
         child: Stack(

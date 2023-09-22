@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
-import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/CommenHeaderController.dart';
-import 'package:repeoplecp/View/HomePage/HomePage.dart';
+import 'package:repeoplecp/Controller/TeamController/TeamController.dart';
+import 'package:repeoplecp/View/BottomNavigationBarPage/BottomNavigationBarPage.dart';
 import 'package:repeoplecp/Widget/CustomDrawer/CustomDrawer.dart';
 
-class FavoritePage extends StatefulWidget {
-  const FavoritePage({super.key});
+class AddTeamsPage extends StatefulWidget {
+  const AddTeamsPage({super.key});
 
   @override
-  State<FavoritePage> createState() => _FavoritePageState();
+  State<AddTeamsPage> createState() => _AddTeamsPageState();
 }
 
-class _FavoritePageState extends State<FavoritePage> {
+class _AddTeamsPageState extends State<AddTeamsPage> {
   CommonHeaderController cntCommonHeader = Get.put(CommonHeaderController());
-  GlobalKey<ScaffoldState> globalFavouritePageKey = GlobalKey<ScaffoldState>();
+  TeamController cntTeam = Get.put(TeamController());
+  GlobalKey<ScaffoldState> globalAddTeamPageKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     super.initState();
-    // check.value=globalFavouritePageKey;
-    // selectedIndex.value = 0;
+    BottomNavigationBarPage().selectedIndex = 3;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.pageBackgroundColor,
-      key: globalFavouritePageKey,
+      key: globalAddTeamPageKey,
       endDrawer: CustomDrawer(
         animatedOffset: const Offset(1.0, 0),
       ),
@@ -38,17 +38,14 @@ class _FavoritePageState extends State<FavoritePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: appBarHeight),
+                  const SizedBox(height: 90),
 
                   const SizedBox(height: 10),
                 ],
               ),
             ),
-            cntCommonHeader.commonAppBar(
-                "Favourites",
-                globalFavouritePageKey,
-                isMenuIconHide: true
-            ),
+            cntCommonHeader.commonAppBar("Add Team Member", globalAddTeamPageKey,
+                isMenuIconHide: true),
           ],
         ),
       ),

@@ -46,14 +46,13 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
     cntProperties.getGalleryData();
     cntProperties.getAmenitiesData();
     cntProperties.getSiteProgressData();
-    cntProperties.getProjectDetailsList();
-    check.value=globalPropertiesDetailsPageKey;
+    // check.value=globalPropertiesDetailsPageKey;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.pageBackgroundColor,
       key: globalPropertiesDetailsPageKey,
       endDrawer: CustomDrawer(
         animatedOffset: const Offset(1.0, 0),
@@ -83,8 +82,8 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                   const SizedBox(height: 20),
                   siteProgressSection(),
                   const SizedBox(height: 20),
-                  planLayoutSection(),
-                  const SizedBox(height: 20),
+                  //planLayoutSection(),
+                  //const SizedBox(height: 20),
                   siteVisitData(false),
                   const SizedBox(height: 20),
                 ],
@@ -1368,7 +1367,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
         .toList();
     return SizedBox(
         width: double.infinity,
-        child: Obx(()=>FutureBuilder(
+        child: Obx(()=> FutureBuilder(
           builder: (_, snapshot) {
             if (snapshot.connectionState == ConnectionState.done &&
                 !snapshot.hasError &&
@@ -1400,8 +1399,8 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                               color: AppColors.lightGreyColor,
                             ),
                           ),
-                          Obx(() => SizedBox(
-                            height: 40,
+                           SizedBox(
+                            height: 50,
                             child: Padding(
                                 padding: const EdgeInsets.only(
                                     right: 1, left: 8, top: 8, bottom: 8),
@@ -1452,7 +1451,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                                     ));
                                   }).toList(),
                                 )),
-                          )),
+                          ),
                         ],
                       ),
                     ),
@@ -1468,8 +1467,9 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
               return const SizedBox();
             }
           },
-          future: cntProperties.futureArrProjectList.value,
-        )));
+          future: cntProperties.futureArrProjectList2.value,
+        ))
+    );
   }
 
   Widget planLayoutBlock() {

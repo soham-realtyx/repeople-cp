@@ -47,7 +47,7 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> with TickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.pageBackgroundColor,
       resizeToAvoidBottomInset: true,
       key: cntOtp.globalOtpPageKey,
       body: SafeArea(

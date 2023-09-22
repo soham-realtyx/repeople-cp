@@ -33,7 +33,7 @@ class _RERADetailsPageState extends State<RERADetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.pageBackgroundColor,
       key: cntRegistration.globalReRaPageKey,
       body: SafeArea(
         child: Stack(

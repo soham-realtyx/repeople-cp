@@ -32,9 +32,11 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    cntAccount.getLoginDetailData();
-    check.value=globalMyAccountPageKey;
-    BottomNavigationBarPage().selectedIndex = 4;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // check.value = globalMyAccountPageKey;
+      BottomNavigationBarPage().selectedIndex = 4;
+
+    });
   }
 
   @override
@@ -48,7 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
         // },
         // child:
         Scaffold(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.pageBackgroundColor,
       key: globalMyAccountPageKey,
           endDrawer: CustomDrawer(
             animatedOffset: const Offset(1.0, 0),
@@ -201,8 +203,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Widget loginUserImage1() {
-    return Obx(
-      () => Container(
+    return  Container(
         width: 70.w,
         height: 70.w,
         margin: const EdgeInsets.only(bottom: 9),
@@ -248,8 +249,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             fit: BoxFit.cover)),
           ),
         ),
-      ),
-    );
+      );
   }
 
   Widget myLoginDetailsData() {
@@ -405,7 +405,7 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               const SizedBox(height: 4),
               SizedBox(
-                  width: 190.w,
+                  width: 185.w,
                   child: Text(
                     "We’ll share all your updates with you there",
                     style: mediumTextStyle(

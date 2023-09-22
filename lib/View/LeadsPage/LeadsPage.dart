@@ -25,14 +25,15 @@ class LeadsPage extends StatefulWidget {
 class _LeadsPageState extends State<LeadsPage> {
   LeadsController cntLeads = Get.put(LeadsController());
   CommonHeaderController cntCommonHeader = Get.put(CommonHeaderController());
+  GlobalKey<ScaffoldState> globalLeadsPageKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     super.initState();
     cntLeads.getLeadsListData();
     cntLeads.getLeadsFilterListData();
-    cntLeads.filterIndex.value=0;
-    cntLeads.filterIndex.value=cntLeads.arrLeadFilterList.length;
-    check.value=cntLeads.globalLeadsPageKey;
+    // cntLeads.filterIndex.value=0;
+    // cntLeads.filterIndex.value=cntLeads.arrLeadFilterList.length;
+    cntCommonHeader.check.value=globalLeadsPageKey;
     BottomNavigationBarPage().selectedIndex = 1;
   }
 
@@ -45,8 +46,8 @@ class _LeadsPageState extends State<LeadsPage> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: AppColors.whiteColor,
-        key: cntLeads.globalLeadsPageKey,
+        backgroundColor: AppColors.pageBackgroundColor,
+        key: globalLeadsPageKey,
         endDrawer: CustomDrawer(
           animatedOffset: const Offset(1.0, 0),
         ),
@@ -142,7 +143,7 @@ class _LeadsPageState extends State<LeadsPage> {
         color: AppColors.whiteColor,
         boxShadow: [
           BoxShadow(
-              color: AppColors.black.withOpacity(0.1),
+              color: AppColors.black.withOpacity(0.05),
               offset: const Offset(0, 3),
               blurRadius: 6,
               spreadRadius: 0),

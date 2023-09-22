@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:repeoplecp/Config/Utils/SizeConfig.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
+import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/BottomNavigationBarController/BottomNavigationBarController.dart';
@@ -18,6 +19,10 @@ class BottomNavigationBarPage extends StatefulWidget {
 
 class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
   BottomNavigationBarController cntBottom = Get.put(BottomNavigationBarController());
+  @override
+  void initState() {
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return bottomNavigationList();

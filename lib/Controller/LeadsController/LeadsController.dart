@@ -6,7 +6,7 @@ import 'package:repeoplecp/Model/LeadsModel/LeadsModel.dart';
 
 class LeadsController extends GetxController{
 
-  GlobalKey<ScaffoldState> globalLeadsPageKey = GlobalKey<ScaffoldState>();
+
 
   RxList<LeadsModel> arrLeadsList = RxList([]);
   RxList<LeadsFilterModel> arrLeadFilterList = RxList([]);

@@ -1,6 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Model/EarngingModel/EarningModel.dart';
 
 class EarningsController extends GetxController {
@@ -49,7 +55,7 @@ class EarningsController extends GetxController {
         name: "Harshil Chauhan",
         address: "809, Tower-C, WorldHome Superstar",
         invoiceText: "Share Invoice",
-        isInvoiceText: "1",
+        isInvoiceText: "0",
         earningCountList: [
           EarningCountModel(earningText: "Site Visit",isEarningCount: "1"),
           EarningCountModel(earningText: "EOI",isEarningCount: "1"),
@@ -69,7 +75,7 @@ class EarningsController extends GetxController {
     arrEarningList.add(EarningModel(
         name: "Vimal Patel",
         address: "702, Tower-B, WorldHome Superstar",
-        invoiceText: "Share Invoice",
+        invoiceText: "View Invoice",
         isInvoiceText: "0",
         earningCountList: [
           EarningCountModel(earningText: "Site Visit",isEarningCount: "1"),
@@ -90,7 +96,7 @@ class EarningsController extends GetxController {
     arrEarningList.add(EarningModel(
         name: "Vimal Patel",
         address: "702, Tower-B, WorldHome Superstar",
-        invoiceText: "Share Invoice",
+        invoiceText: "View Invoice",
         isInvoiceText: "0",
         receiptText: "Receipt",
         earningCountList: [
@@ -112,9 +118,6 @@ class EarningsController extends GetxController {
     arrEarningList.add(EarningModel(
         name: "Vimal Patel",
         address: "702, Tower-B, WorldHome Superstar",
-        invoiceText: "Share Invoice",
-        isInvoiceText: "0",
-        receiptText: "Receipt",
         earningCountList: [
           EarningCountModel(earningText: "Site Visit",isEarningCount: "1"),
           EarningCountModel(earningText: "EOI",isEarningCount: "1"),
@@ -128,5 +131,130 @@ class EarningsController extends GetxController {
           EarningDateModel(title: "Cancelled",earningValue: "28 Jul, 2023"),
         ]));
     return arrEarningList;
+  }
+
+  ImagePicker imagePicker = ImagePicker();
+  RxString invoiceImage = "".obs;
+  invoiceImagePicker(){
+    showCupertinoModalPopup(
+        context: Get.context!,
+        builder: (context) {
+          return CupertinoActionSheet(
+            cancelButton: CupertinoActionSheetAction(
+              child: const Text("Close"),
+              onPressed: () {
+                Get.back();
+              },
+            ),
+            actions: [
+              CupertinoActionSheetAction(
+                onPressed: () {
+                  // reRaImage.value='';
+                  Get.back();
+                  checkCameraPermission();
+                },
+                child: Text(
+                  "Camera",
+                  style: TextStyle(color: AppColors.appFontColor,fontSize: 16, fontWeight:FontWeight.normal),
+                ),
+              ),
+              CupertinoActionSheetAction(
+                onPressed: () {
+                  // reRaImage.value='';
+                  Get.back();
+                  chooseImage();
+                },
+                child: Text(
+                  "Choose Photo",
+                  style: TextStyle(color: AppColors.appFontColor,fontSize: 16, fontWeight:FontWeight.normal),
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
+  Future<void> checkCameraPermission() async {
+    if (Platform.isAndroid) {
+      bool status = await Permission.camera.isGranted;
+      if (status) {
+        cameraSelect();
+      } else if (await Permission.camera.isDenied) {
+        await Permission.camera.request().then((value) {
+          if (value == PermissionStatus.granted) {
+            cameraSelect();
+          } else if (value == PermissionStatus.denied) {
+            print("you can not access camera");
+          }
+        });
+      }
+    } else {
+      cameraSelect();
+    }
+  }
+
+  void cameraSelect() async {
+    try {
+      var response = await imagePicker.pickImage(
+          source: ImageSource.camera,
+          preferredCameraDevice: CameraDevice.front);
+      if (response != null) {
+        File file = File(response.path);
+        _cropImage(file);
+      } else {
+        print("No image selected");
+      }
+    } catch (e) {
+      print("Error :--- \n $e");
+    }
+  }
+  Future<void> _cropImage(File pickedFile) async {
+    final croppedFile = await ImageCropper().cropImage(
+      sourcePath: pickedFile.path,
+      compressFormat: ImageCompressFormat.jpg,
+      compressQuality: 100,
+    );
+    if (croppedFile != null) {
+      invoiceImage.value='';
+      
+      if(invoiceImage.value=="") {
+        invoiceImage.value = croppedFile.path;
+      }
+    }
+  }
+
+  Future<void> checkStoragePermission() async {
+    if (Platform.isAndroid) {
+      bool status = await Permission.storage.isGranted;
+      if (status) {
+        chooseImage();
+      } else if (await Permission.storage.isDenied) {
+        await Permission.storage.request().then((value) {
+          if (value == PermissionStatus.granted) {
+            chooseImage();
+          } else if (value == PermissionStatus.denied) {
+            print("you can not access gallery");
+          }
+        });
+      }
+    } else {
+      chooseImage();
+    }
+  }
+
+  void chooseImage() async {
+    try {
+      var response = await imagePicker.pickImage(
+        source: ImageSource.gallery,
+      );
+      if (response != null) {
+        File file = File(response.path);
+        _cropImage(file);
+      } else {
+        print("No Image Selected");
+      }
+    } catch (e) {
+      print("Error :--- \n $e");
+    }
   }
 }

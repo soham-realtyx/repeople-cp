@@ -30,7 +30,7 @@ class _GSTDetailsPageState extends State<GSTDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.pageBackgroundColor,
       key: cntRegistration.globalGSTDetailsPageKey,
       body: SafeArea(
         child: Stack(

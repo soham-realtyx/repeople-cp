@@ -7,6 +7,13 @@ class MyAccountController extends GetxController{
   RxString userImage = "".obs;
   RxBool isWhatsAppEnable = false.obs;
 
+
+  @override
+  void onInit() {
+    super.onInit();
+    getLoginDetailData();
+  }
+
   RxList<LoginDetailsModel> arrLoginDetailsList = RxList([]);
 
   Future<RxList<LoginDetailsModel>> getLoginDetailData()async{

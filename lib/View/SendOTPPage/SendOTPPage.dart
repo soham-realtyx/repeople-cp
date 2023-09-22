@@ -28,7 +28,7 @@ class _SendOTPPageState extends State<SendOTPPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.pageBackgroundColor,
       resizeToAvoidBottomInset: true,
       key: cntLogin.globalLoginPageKey,
       body: SafeArea(

@@ -39,6 +39,7 @@ class RegistrationController extends GetxController{
   GlobalKey<ScaffoldState> globalGSTDetailsPageKey = GlobalKey<ScaffoldState>();
   GlobalKey<ScaffoldState> globalBankDetailsPageKey = GlobalKey<ScaffoldState>();
   GlobalKey<ScaffoldState> globalContactDetailsPageKey = GlobalKey<ScaffoldState>();
+
   var formKey = GlobalKey<FormState>();
   var reRaFormKey = GlobalKey<FormState>();
   var bankFormKey = GlobalKey<FormState>();
@@ -71,8 +72,6 @@ class RegistrationController extends GetxController{
   void onInit() {
     super.onInit();
     certificateData();
-
-
   }
 
   certificateData(){
@@ -88,7 +87,7 @@ class RegistrationController extends GetxController{
       objEntityType.value=value;
       txtEntityType.value!.text = objEntityType.value.title??"";
     });
-  } 
+  }
   selectAccountType() {
     selectAccountTypeDialog((value) {
       objAccountType.value=value;
@@ -144,6 +143,41 @@ class RegistrationController extends GetxController{
   RxString panImage="".obs;
   RxString gstImage="".obs;
   RxString banPassbookImage="".obs;
+
+  Future  CameraSelect(DocumentType logotype) async {
+    try {
+      var response = await imagePicker.pickImage(
+          source: ImageSource.camera,
+          imageQuality: 50,
+          preferredCameraDevice: CameraDevice.rear);
+      if (response != null) {
+        print("response not null");
+        if (DocumentType.reRaPhoto == logotype) {
+          reRaImage.value = response.path;
+          reRaImage.refresh();
+          isRERAValidationShow.value=true;
+
+        } else if (DocumentType.panPhoto == logotype) {
+          panImage.value = response.path;
+          panImage.refresh();
+          isPanValidationShow.value=true;
+        } else if (DocumentType.bankPassBookPhoto == logotype) {
+          banPassbookImage.value = response.path;
+          banPassbookImage.refresh();
+          isBankPassBookValidationShow.value=true;
+        } else if (DocumentType.gsTPhoto == logotype) {
+          gstImage.value = response.path;
+          gstImage.refresh();
+          isGSTValidationShow.value=true;
+        }
+        update();
+      } else {
+        print("No image selected");
+      }
+    } catch (e) {
+      print("Error :--- \n $e");
+    }
+  }
 
   profileImagePicker(){
     showCupertinoModalPopup(
@@ -239,42 +273,6 @@ class RegistrationController extends GetxController{
       }
     }
   }
-
-  Future  CameraSelect(DocumentType logotype) async {
-    try {
-      var response = await imagePicker.pickImage(
-          source: ImageSource.camera,
-          imageQuality: 50,
-          preferredCameraDevice: CameraDevice.rear);
-      if (response != null) {
-        print("response not null");
-        if (DocumentType.reRaPhoto == logotype) {
-          reRaImage.value = response.path;
-          reRaImage.refresh();
-          isRERAValidationShow.value=true;
-
-        } else if (DocumentType.panPhoto == logotype) {
-          panImage.value = response.path;
-          panImage.refresh();
-          isPanValidationShow.value=true;
-        } else if (DocumentType.bankPassBookPhoto == logotype) {
-          banPassbookImage.value = response.path;
-          banPassbookImage.refresh();
-          isBankPassBookValidationShow.value=true;
-        } else if (DocumentType.gsTPhoto == logotype) {
-          gstImage.value = response.path;
-          gstImage.refresh();
-          isGSTValidationShow.value=true;
-        }
-        update();
-      } else {
-        print("No image selected");
-      }
-    } catch (e) {
-      print("Error :--- \n $e");
-    }
-  }
-
 
   Future<void> checkStoragePermission() async {
     if (Platform.isAndroid) {

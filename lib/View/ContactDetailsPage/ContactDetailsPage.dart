@@ -27,7 +27,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.pageBackgroundColor,
       key: cntRegistration.globalContactDetailsPageKey,
       body: SafeArea(
         child: Stack(

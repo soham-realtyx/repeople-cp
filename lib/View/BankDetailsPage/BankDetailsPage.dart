@@ -32,7 +32,7 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.pageBackgroundColor,
       key: cntRegistration.globalBankDetailsPageKey,
       body: SafeArea(
         child: Stack(

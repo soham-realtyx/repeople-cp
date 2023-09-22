@@ -22,6 +22,8 @@ class PropertiesController extends GetxController{
       Future.value(<AmenitiesModel>[]).obs;
   Rx<Future<List<ProjectListModel>>> futureArrProjectList =
       Future.value(<ProjectListModel>[]).obs;
+  Rx<Future<List<ProjectListModel>>> futureArrProjectList2 =
+      Future.value(<ProjectListModel>[]).obs;
   Rx<Future<List<TrendingModel>>> futureGalleryProjectList =
       Future.value(<TrendingModel>[]).obs;
   Rx<Future<List<TrendingModel>>> futureHeaderBlockList =
@@ -58,7 +60,7 @@ class PropertiesController extends GetxController{
   final Set<Marker> markers = Set();
 
   RxList<bool> isSelected=RxList();
-  RxString layoutString='Intialized'.obs;
+  RxString layoutString='Initialized'.obs;
 
   Future<RxList<TrendingModel>> getGalleryData()async{
     arrGalleryList = RxList([]);
@@ -142,6 +144,7 @@ class PropertiesController extends GetxController{
 
   Future<RxList<ProjectListModel>> getProjectList()async{
     arrProjectList = RxList([]);
+
     arrProjectList.add(ProjectListModel(
         address: "White Field, Bengaluru",
         projectImageList: [
@@ -214,7 +217,7 @@ class PropertiesController extends GetxController{
           )
         ]
     ));
-    obj_svprojectdetails.value=arrProjectList[0];
+
     return arrProjectList;
   }
 
@@ -222,7 +225,7 @@ class PropertiesController extends GetxController{
     arrProjectDetailsList = RxList([]);
     arrProjectDetailsList.add(ProjectListModel(
       layout: LayoutModal(
-        lable: "Layouts",
+        lable: "Project Layout",
         layoutdata: [
           LayoutDataModal(
             icon: layoutImagePngImage,
@@ -257,7 +260,12 @@ class PropertiesController extends GetxController{
         projectLogo: projectLogoPngImage,
         projectTitle: "WorldHome Superstar"
     ));
-    return arrProjectList;
+    // for(int i=0;i<arrProjectDetailsList.length;i++) {
+      obj_svprojectdetails.value=arrProjectDetailsList[0];
+      print(obj_svprojectdetails.value.layout?.lable);
+      print("obj_svprojectdetails.value.address");
+    // }
+    return arrProjectDetailsList;
   }
 
   List<String> plan_layout = [

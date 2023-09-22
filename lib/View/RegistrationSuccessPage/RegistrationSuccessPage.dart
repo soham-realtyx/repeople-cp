@@ -33,7 +33,7 @@ class _RegistrationSuccessPageState extends State<RegistrationSuccessPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.whiteColor,
+      backgroundColor: AppColors.pageBackgroundColor,
       key: cntRegistration.globalSuccessPageKey,
       body: SafeArea(
         child: Stack(

@@ -12,6 +12,9 @@ import 'package:repeoplecp/Controller/EarningsController/EarningsController.dart
 import 'package:repeoplecp/Model/EarngingModel/EarningModel.dart';
 import 'package:repeoplecp/View/BottomNavigationBarPage/BottomNavigationBarPage.dart';
 import 'package:repeoplecp/View/HomePage/HomePage.dart';
+import 'package:repeoplecp/View/ShareInvoicePage/ShareInvoicePage.dart';
+import 'package:repeoplecp/Widget/CustomDrawer/CustomDrawer.dart';
+import 'package:repeoplecp/Widget/HorizontalDividerWidget.dart';
 import 'package:timelines/timelines.dart';
 
 class EarningsPage extends StatefulWidget {
@@ -30,12 +33,12 @@ class _EarningsPageState extends State<EarningsPage> {
     super.initState();
     cntEarning.getEarningFilterListData();
     cntEarning.getEarningData();
+    // check.value=globalEarningPageKey;
     BottomNavigationBarPage().selectedIndex = 2;
   }
 
   @override
   Widget build(BuildContext context) {
-    int processIndex = 1;
     return WillPopScope(
       onWillPop: () async {
         BottomNavigationBarPage().selectedIndex = 2;
@@ -43,8 +46,11 @@ class _EarningsPageState extends State<EarningsPage> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: AppColors.whiteColor,
+        backgroundColor: AppColors.pageBackgroundColor,
         key: globalEarningPageKey,
+        endDrawer: CustomDrawer(
+          animatedOffset: const Offset(1.0, 0),
+        ),
         body: SafeArea(
           child: Stack(
             children: [
@@ -57,23 +63,24 @@ class _EarningsPageState extends State<EarningsPage> {
                         titleText: 'Last Update: ',
                         subText: "28 Jul, 2024 11:30 AM",
                       refreshIcon: refreshSvgIcons,
-                      refreshOnTap: (){}
+                      refreshOnTap: (){
+
+                      }
                     ),
                     const SizedBox(height: 12),
                     totalCountData(),
                     const SizedBox(height: 12),
                     leadFilterListData(),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 20),
                     earningListData(),
-
-
-                    const SizedBox(height: 40),
+                    const SizedBox(height: 10),
                   ],
                 ),
               ),
               cntCommonHeader.commonAppBar(
                 "Earning",
                 globalEarningPageKey,
+                  isMenuIconHide: true
               ),
             ],
           ),
@@ -228,14 +235,14 @@ class _EarningsPageState extends State<EarningsPage> {
   Widget _generateEarningList(int index){
     EarningModel objEarning = cntEarning.arrEarningList[index];
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding:  EdgeInsets.only(right: 20,bottom:objEarning.receiptText=="Receipt"||objEarning.invoiceText=="Share Invoice"||objEarning.invoiceText=="View Invoice"?20: 0,top: 20,left: 20),
       margin: const EdgeInsets.only(right: 20,bottom: 20,left: 20),
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: AppColors.black.withOpacity(0.1),
+            color: AppColors.black.withOpacity(0.08),
             spreadRadius: 0,
             blurRadius: 6,
             offset: const Offset(0, 3)
@@ -248,36 +255,41 @@ class _EarningsPageState extends State<EarningsPage> {
           Text(objEarning.name??"",style: boldTextStyle(txtColor: AppColors.newBlack,fontWeight: FontWeight.w700,fontSize: 14),),
           const SizedBox(height: 2),
           Text(objEarning.address ??"",style: mediumTextStyle(txtColor: AppColors.appThemeColor,fontWeight: FontWeight.w700,fontSize: 12),),
-          const SizedBox(height: 12),
-          SizedBox(
-            height: 30,
+          Container(
+            height: 50.w,
             width: Get.width,
+            alignment: Alignment.topLeft,
               child: Timeline.tileBuilder(
               shrinkWrap: true,
+
               padding: EdgeInsets.zero,
               theme: TimelineThemeData(
+                indicatorPosition: 0,
                 direction: Axis.horizontal,
                 connectorTheme: const ConnectorThemeData(
                     space: 9.0, thickness: 2.0),
               ),
               physics: const NeverScrollableScrollPhysics(),
-
               builder: TimelineTileBuilder.connected(
-
                 connectionDirection: ConnectionDirection.before,
                 itemCount: objEarning.earningCountList!.length,
                 contentsAlign: ContentsAlign.basic,
                 itemExtentBuilder: (_, __) {
-                  return (MediaQuery.of(context).size.width-60)/5;
+                  return (MediaQuery.of(context).size.width-36)/5;
                 },
                 oppositeContentsBuilder: (context, index1) {
                   return Container();
                 },
                 contentsBuilder: (context, index2) {
-                  return  Text(
-                    objEarning.earningCountList![index2].earningText??"",
-                    textAlign: TextAlign.right,
-                    style: mediumTextStyle(fontSize: 8,fontWeight: FontWeight.w600,txtColor: objEarning.earningCountList![index2].isEarningCount=="1"?AppColors.green:AppColors.lightGreyColor),
+                  return  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        objEarning.earningCountList![index2].earningText??"",
+                        style: mediumTextStyle(fontSize: 8,fontWeight: FontWeight.w600,txtColor: objEarning.earningCountList![index2].isEarningCount=="1"?AppColors.green:AppColors.lightGreyColor),
+                      ),
+                    ),
                   );
                 },
                 indicatorBuilder: (_, index3) {
@@ -288,7 +300,7 @@ class _EarningsPageState extends State<EarningsPage> {
                     );
                   } else {
                     return OutlinedDotIndicator(
-                      borderWidth: 3.0,
+                      borderWidth: 2.5,
                       color: AppColors.lightGreyColor,
                     );
                   }
@@ -296,7 +308,7 @@ class _EarningsPageState extends State<EarningsPage> {
                 connectorBuilder: (_, index4, type) {
                   if (index4 > 0) {
                     return SolidLineConnector(
-                      thickness: 3,
+                      thickness: 2.8,
                       color: objEarning.earningCountList![index4].isEarningCount=="1"
                           ? AppColors.green
                           : AppColors.lightGreyColor,
@@ -306,6 +318,54 @@ class _EarningsPageState extends State<EarningsPage> {
                   }
                 },
               ),
+            ),
+          ),
+          const SizedBox(height: 20),
+          HorizontalDivider(color: AppColors.lightGreyColor, height: 1),
+          const SizedBox(height: 20),
+          if(objEarning.earningDateList!=null)
+          for(int i=0;i<objEarning.earningDateList!.length;i++)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 24),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                      objEarning.earningDateList![i].title??"",
+                    style: mediumTextStyle(txtColor: AppColors.labelGreyColor,fontWeight: FontWeight.w600,fontSize: 12),
+                  ),
+                  Text(
+                      objEarning.earningDateList![i].earningValue??"",
+                    style: boldTextStyle(txtColor: AppColors.newBlack,fontWeight: FontWeight.w700,fontSize: 14),
+                  ),
+                ],
+              ),
+            ),
+          if(objEarning.invoiceText!=null||objEarning.receiptText!=null)
+          HorizontalDivider(color: AppColors.lightGreyColor, height: 1),
+          if(objEarning.invoiceText!=null||objEarning.receiptText!=null)
+          const SizedBox(height: 20),
+          GestureDetector(
+            onTap: (){
+              if(objEarning.invoiceText=="Share Invoice"){
+                Get.to(()=>ShareInvoicePage(objEarning: objEarning));
+              }
+            },
+            child: Row(
+              mainAxisAlignment: objEarning.invoiceText!="Share Invoice"?MainAxisAlignment.center:MainAxisAlignment.spaceBetween,
+              children: [
+                if(objEarning.invoiceText!=null)
+                Text(
+                  objEarning.invoiceText!.toUpperCase(),
+                  // textAlign: TextAlign.center,
+                  style: mediumTextStyle(txtColor: objEarning.isInvoiceText=="1"?AppColors.lightGreyColor: AppColors.appThemeColor,fontWeight: FontWeight.w600,fontSize: 12),
+                ),
+                if(objEarning.receiptText!=null)
+                Text(
+                  objEarning.receiptText!.toUpperCase(),
+                  style: mediumTextStyle(txtColor: AppColors.appThemeColor,fontWeight: FontWeight.w600,fontSize: 12),
+                ),
+              ],
             ),
           ),
         ],

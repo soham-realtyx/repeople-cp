@@ -10,10 +10,13 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:repeoplecp/Config/Utils/SizeConfig.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/constant.dart';
+import 'package:repeoplecp/Config/Utils/constant.dart';
+import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/BottomNavigationBarController/BottomNavigationBarController.dart';
 import 'package:repeoplecp/Model/DrawerModal/DrawerModal.dart';
+import 'package:repeoplecp/View/BottomNavigationBarPage/BottomNavigationBarPage.dart';
 import 'package:repeoplecp/View/EarningsPage/EarningsPage.dart';
 import 'package:repeoplecp/View/FavoritePage/FavoritePage.dart';
 import 'package:repeoplecp/View/HomePage/HomePage.dart';
@@ -21,10 +24,10 @@ import 'package:repeoplecp/View/LeadsPage/LeadsPage.dart';
 import 'package:repeoplecp/View/OffersPage/OffersPage.dart';
 import 'package:repeoplecp/View/PrivacyPolicyPage/PrivacyPolicyPage.dart';
 import 'package:repeoplecp/View/PropertiesPage/PropertiesPage.dart';
+import 'package:repeoplecp/View/PropfilePage/ProfilePage.dart';
 import 'package:repeoplecp/View/SendOTPPage/SendOTPPage.dart';
 import 'package:repeoplecp/View/TeamPage/TeamPage.dart';
 import 'package:repeoplecp/Widget/CustomBoxDecoration.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 typedef void OnTaplogoutbutton();
 
@@ -52,6 +55,7 @@ class CustomDrawerController extends GetxController {
        Get.to(()=>const HomePage());
     }else if(i==2){
       Get.to(()=>const FavoritePage());
+      // NavigateFavoritePage();
     }else if(i==3){
       Get.to(()=>const OffersPage());
     }
@@ -60,21 +64,23 @@ class CustomDrawerController extends GetxController {
   navigateScreen_2(int i){
     if(i==0){
       Get.to(()=>const LeadsPage());
+      BottomNavigationBarPage().selectedIndex=1;
     }else if(i==1){
       Get.to(()=>const TeamPage());
     }else if(i==2){
-      Get.to(()=>const PropertiesPage());
+      Get.to(()=>const ProfilePage())?.whenComplete(() => BottomNavigationBarPage().selectedIndex=4);
     }
   }
 
   navigateProjectScreen_1(int i){
     if(i==0){
-      Get.to(()=>const PropertiesPage());
+      Get.to(()=>const PropertiesPage())?.whenComplete(() => BottomNavigationBarPage().selectedIndex=3);
     }
   }
 
-  navigateEmiCalculatorScreen_1(int i){
+  navigateEarningScreen_1(int i){
     if(i==3){
+      BottomNavigationBarPage().selectedIndex=2;
       Get.to(()=>const EarningsPage());
     }
   }
@@ -298,27 +304,17 @@ class CustomDrawerController extends GetxController {
   }
 
   NavigateFavoritePage() {
-    // Get.to(FavoritePage());
-    // int index = cnt_bottom.arrBottomnavigationList
-    //     .indexWhere((element) => element.uniquename == FAVMENU);
-    // cnt_bottom.selectedIndex.value = index;
+    Get.to(()=>const FavoritePage());
+    int index = cnt_bottom.arrBottomNavigationList
+        .indexWhere((element) => element.name == FAVMENU);
+    BottomNavigationBarPage().selectedIndex = index;
   }
 
-  NavigateReferAFriendPage() {
-    // Get.to(ReferAFriendFormPage());
-  }
 
   NavigateOfferPage() {
-    // Get.to(OffersPage());
+    Get.to(()=>const OffersPage());
   }
 
-
-
-
-
-  NavigateAwardsPage() {
-    // Get.to(AwardsPage());
-  }
 
   NavigateTechnicalPage() {
     Get.back();
@@ -345,7 +341,11 @@ class CustomDrawerController extends GetxController {
   // Close Button
   Widget CloseIcon() {
     return GestureDetector(
-      onTap: () => Get.back(),
+      onTap: () {
+        Get.back();
+
+          // check.refresh();
+        },
       child: Container(
           height: 24,
           width: 24,
@@ -409,7 +409,7 @@ class CustomDrawerController extends GetxController {
   ImagePicker imagePicker = ImagePicker();
   RxString image = "".obs;
 
-  profileimagepicker() {
+  profileImagePicker() {
     showCupertinoModalPopup(
         context: Get.context!,
         builder: (context) {

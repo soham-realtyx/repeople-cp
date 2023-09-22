@@ -8,9 +8,11 @@ import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
+import 'package:repeoplecp/Controller/CommonHeaderController/CommenHeaderController.dart';
 import 'package:repeoplecp/Controller/HomeController/HomeController.dart';
 import 'package:repeoplecp/Model/ProjectListModel/ProjectListModel.dart';
 import 'package:repeoplecp/View/BottomNavigationBarPage/BottomNavigationBarPage.dart';
+import 'package:repeoplecp/View/PropertiesDetailsPage/PropertiesDetailsPage.dart';
 import 'package:repeoplecp/Widget/CustomAppBar/CustomAppBar.dart';
 import 'package:repeoplecp/Widget/CustomDrawer/CustomDrawer.dart';
 import 'package:repeoplecp/Widget/HorizontalDividerWidget.dart';
@@ -25,19 +27,26 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   HomeController cntHome = Get.put(HomeController());
+  CommonHeaderController cntDashHeader = Get.put(CommonHeaderController());
+  GlobalKey<ScaffoldState> scaffoldHomeKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     super.initState();
-    cntHome.getDashBoardCount();
-    cntHome.getProjectList();
-    check.value=cntHome.scaffoldHomeKey;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      cntHome.getDashBoardCount();
+      cntHome.getProjectList();
+      cntDashHeader.check.value=scaffoldHomeKey;
+      BottomNavigationBarPage().selectedIndex = 0;
+        // check.refresh();
+
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: cntHome.scaffoldHomeKey,
-      backgroundColor: AppColors.whiteColor,
+      key: scaffoldHomeKey,
+      backgroundColor: AppColors.pageBackgroundColor,
       bottomNavigationBar: BottomNavigationBarPage(selectedIndex: 0),
       endDrawer: CustomDrawer(
         animatedOffset: const Offset(1.0, 0),
@@ -47,14 +56,14 @@ class _HomePageState extends State<HomePage> {
           children: [
             SingleChildScrollView(
                 child: Column(
-              children: [
-                const SizedBox(height: 90),
-                companyDetails(),
-                dashBoardCountDetails(),
-                const SizedBox(height: 20),
-                projectListData(),
-                const SizedBox(height: 20),
-              ],
+                  children: [
+                      const SizedBox(height: 90),
+                      companyDetails(),
+                      dashBoardCountDetails(),
+                      const SizedBox(height: 20),
+                      projectListData(),
+                      const SizedBox(height: 20),
+                  ],
             )),
             const DashBoardHeader()
           ],
@@ -73,8 +82,9 @@ class _HomePageState extends State<HomePage> {
           boxShadow: [
             BoxShadow(
                 color: AppColors.newBlack.withOpacity(0.1),
-                offset: const Offset(3, 3),
-                blurRadius: 4)
+                offset: const Offset(0, 3),
+                blurRadius: 4,
+            spreadRadius: 0)
           ]),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -407,7 +417,7 @@ class _HomePageState extends State<HomePage> {
     ProjectListModel obj = cntHome.arrProjectList[index];
     return GestureDetector(
       onTap: () {
-
+        Get.to(()=>const PropertiesDetailsPage());
       },
       child: Stack(
         clipBehavior: Clip.none,

@@ -14,6 +14,7 @@ import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/Drawer/DrawerController.dart';
 import 'package:repeoplecp/Model/DrawerModal/DrawerModal.dart';
 import 'package:repeoplecp/View/PropfilePage/ProfilePage.dart';
+import 'package:repeoplecp/View/RelationShipManagerPage/RelationShipManagerPage.dart';
 import 'package:repeoplecp/View/SendOTPPage/SendOTPPage.dart';
 import 'package:repeoplecp/Widget/AnimationDrawer/AnimatedDrawer.dart';
 
@@ -38,7 +39,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
   Widget build(BuildContext context) {
     return AnimatedDrawer(
         offset: widget.animatedOffset,
-        duration: const Duration(milliseconds: 800),
+        duration: const Duration(milliseconds: 500),
     child: SafeArea(
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
@@ -60,7 +61,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
         height: Get.height,
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
-            color: AppColors.appGreyColor,
+            color: AppColors.pageBackgroundColor,
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10),
                 bottomLeft: Radius.circular(10))),
@@ -72,7 +73,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 newDrawerAllData(),
               ],
             ),
-
           ],
         ),
       ),
@@ -350,7 +350,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           SizedBox(height: 12.w),
           GestureDetector(
             onTap: (){
-              // Get.to(()=>const ScheduleSitePage());
+              Get.to(()=>const RelationShipManagerPage());
             },
             child: Container(
               width:Get.width,
@@ -361,9 +361,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 color: AppColors.whiteColor,
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.black.withOpacity(0.1),
-                    // spreadRadius: 0,
-                    blurRadius: 4,
+                    color: AppColors.black.withOpacity(0.08),
+                    spreadRadius: 0,
+                    blurRadius: 6,
                     offset: const Offset(0, 3), // changes position of shadow
                   ),
                 ],
@@ -503,8 +503,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
                             color: AppColors.whiteColor,
                             boxShadow: [
                               BoxShadow(
-                                color: AppColors.black.withOpacity(0.1),
-                                blurRadius: 4,
+                                color: AppColors.black.withOpacity(0.08),
+                                blurRadius: 6,
                                 offset: const Offset(
                                     0, 3), // changes position of shadow
                               ),
@@ -592,9 +592,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                 color: AppColors.whiteColor,
                                 boxShadow: [
                                   BoxShadow(
-                                    color: AppColors.black.withOpacity(0.1),
-                                    // spreadRadius: 0,
-                                    blurRadius: 4,
+                                    color: AppColors.black.withOpacity(0.08),
+                                    spreadRadius: 0,
+                                    blurRadius: 6,
                                     offset: const Offset(
                                         0, 3), // changes position of shadow
                                   ),
@@ -652,7 +652,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ? Expanded(
             child: GestureDetector(
               onTap: (){
-                cntDrawer.navigateEmiCalculatorScreen_1(index3);
+                cntDrawer.navigateEarningScreen_1(index3);
               },
               child: Container(
                 height: 192.w,

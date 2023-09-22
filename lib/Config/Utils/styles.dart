@@ -51,7 +51,7 @@ BoxShadow fullcontainerboxShadow = BoxShadow(
     offset: const Offset(0, 0),
     spreadRadius: 4);
 BoxShadow newContainerBoxShadow =  BoxShadow(
-    color: AppColors.black.withOpacity(0.1),
+    color: AppColors.black.withOpacity(0.05),
     offset: const Offset(0, 3),
     blurRadius: 6,
     spreadRadius: 0
