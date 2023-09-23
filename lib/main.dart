@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/constant.dart';
-import 'package:repeoplecp/View/HomePage/HomePage.dart';
-import 'package:repeoplecp/View/SplashScreen/SplashScreen.dart';
+import 'package:repeoplecp/View/HomePage/home_page.dart';
+import 'package:repeoplecp/View/SplashScreen/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());

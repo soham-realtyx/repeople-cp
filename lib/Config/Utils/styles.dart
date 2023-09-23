@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
-import 'package:repeoplecp/Config/Utils/SizeConfig.dart';
+import 'package:repeoplecp/Config/Utils/size_config.dart';
 
 String fontFamily = "Montserrat";
 

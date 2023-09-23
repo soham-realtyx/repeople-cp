@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:repeoplecp/Config/Helper/HexColor.dart';
+import 'package:repeoplecp/Config/Helper/hex_color.dart';
 
 class AppColors {
   static Color black = const Color(0xff000000);
@@ -27,6 +27,8 @@ class AppColors {
   static Color pinkRedColor = const Color(0xffF0B0B0);
   static Color lightYellowColor = const Color(0xffFFE297);
   static Color darkGreenishBlue  = const Color(0xff00A5A1);
+  static Color offWhiteShadeYellowColor  = const Color(0xffFFF1CE);
+  static Color offWhiteShadeRedColor  = const Color(0xffFFCECE);
   static Color transParent = HexColor("#00FFFFFF");
   static Color appFontColor = HexColor("#000000");
 

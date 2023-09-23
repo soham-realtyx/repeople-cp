@@ -26,8 +26,8 @@ const siteProgressPngImage = "assets/images/site-progress.png";
 const layoutImagePngImage = "assets/images/layout-image.png";
 const projectImage = "assets/images/project-images.png";
 const earningsImage = "assets/images/ernings-image.png";
-const IMG_DATE_SVG_NEW = "assets/myimages/site_visit_icons/date.svg";
-const LOGIN_KEY_PNG_IMAGE = "assets/images/login-keys-image.png";
+const dateSvgIcons = "assets/myimages/site_visit_icons/date.svg";
+const loginKeyPngImage = "assets/images/login-keys-image.png";
 const managerPngImage = "assets/images/manager-image.png";
 const userPngImage1 = "assets/images/user1.png";
 const userPngImage2 = "assets/images/user2.png";
@@ -75,6 +75,7 @@ const newWhatsAppSvgIcons = "assets/svgIcons/brand-whatsapp.svg";
 const mailForwardSvgIcons = "assets/svgIcons/mail-forward.svg";
 const homeCancel2SvgIcons = "assets/svgIcons/home-cancel2.svg";
 const plusSvgIcons = "assets/svgIcons/plus.svg";
+const webSiteSvgIcons = "assets/svgIcons/website.svg";
 
 const offersSvgIcons ='assets/svgIcons/offers.svg';
 

@@ -1,65 +1,31 @@
-
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
-import 'package:repeoplecp/Widget/select_dailog.dart';
 
-class EditProfileController extends GetxController{
+class MarketingInformationController extends GetxController{
 
-  @override
-  void onInit() {
-    super.onInit();
-    roleTypeData();
-  }
-
-  GlobalKey<ScaffoldState> globalEditProfilePageKey = GlobalKey<ScaffoldState>();
-
-  var formKey = GlobalKey<FormState>();
-
-  Rxn<TextEditingController> txtFirstName = Rxn(TextEditingController());
-  Rxn<TextEditingController> txtLastName = Rxn(TextEditingController());
-  Rxn<TextEditingController> txtContactNew = Rxn(TextEditingController());
+  Rxn<TextEditingController> txtMobile = Rxn(TextEditingController());
+  Rxn<TextEditingController> txtWhatsAppMobile = Rxn(TextEditingController());
   Rxn<TextEditingController> txtEmail = Rxn(TextEditingController());
-  Rxn<TextEditingController> txtAlternateContactNew = Rxn(TextEditingController());
-  Rxn<TextEditingController> txtEmailNew = Rxn(TextEditingController());
-  TextEditingController txtUserRole = TextEditingController();
+  Rxn<TextEditingController> txtWebsite = Rxn(TextEditingController());
+  Rxn<TextEditingController> txtAddress = Rxn(TextEditingController());
+
+  final marketingInfoKey = GlobalKey<FormState>();
+
+  RxString emailText = ''.obs;
+  RxString whatsAppMobileText = ''.obs;
+  RxString websiteText = ''.obs;
+  RxString addressText = ''.obs;
+  RxString companyImage = ''.obs;
 
   ImagePicker imagePicker = ImagePicker();
-  RxString image="".obs;
- Rx<RoleModel> objRoleType = RoleModel().obs;
- RxList<RoleModel> arrRoleList = RxList([]);
- roleTypeData(){
-   arrRoleList = RxList([
-     RoleModel(label: "User"),
-     RoleModel(label: "Admin"),
-   ]);
-   objRoleType.value = arrRoleList[0];
- }
-  selectRoleType() {
-    selectRoleTypeDialog((value) {
-      objRoleType.value=value;
-      txtUserRole.text = objRoleType.value.label??"";
-    });
-  }
-
-  Future<dynamic> selectRoleTypeDialog(ValueChanged<RoleModel> onChange) {
-    return SelectDialog1.showModal<RoleModel>(
-
-      Get.context!,
-      label: "Select Role Type",
-      items: arrRoleList,
-      onChange: onChange,
-      searchBoxDecoration: InputDecoration(prefixIcon: Icon(Icons.search,color: AppColors.greyColor), hintText: "Search",hintStyle: TextStyle(color: AppColors.greyColor)),
-    );
-  }
-
-  profileImagePicker(){
+  RxString companyLogoImage = "".obs;
+  companyLogoImagePicker(){
     showCupertinoModalPopup(
         context: Get.context!,
         builder: (context) {
@@ -73,6 +39,7 @@ class EditProfileController extends GetxController{
             actions: [
               CupertinoActionSheetAction(
                 onPressed: () {
+                  // reRaImage.value='';
                   Get.back();
                   checkCameraPermission();
                 },
@@ -83,8 +50,9 @@ class EditProfileController extends GetxController{
               ),
               CupertinoActionSheetAction(
                 onPressed: () {
+                  // reRaImage.value='';
                   Get.back();
-                  ChooseImage();
+                  chooseImage();
                 },
                 child: Text(
                   "Choose Photo",
@@ -100,18 +68,13 @@ class EditProfileController extends GetxController{
     if (Platform.isAndroid) {
       bool status = await Permission.camera.isGranted;
       if (status) {
-        // further process
         cameraSelect();
       } else if (await Permission.camera.isDenied) {
         await Permission.camera.request().then((value) {
           if (value == PermissionStatus.granted) {
-            // further process
             cameraSelect();
           } else if (value == PermissionStatus.denied) {
-            // dialog
-            // ValidationMsg("you can not access camera");
             print("you can not access camera");
-
           }
         });
       }
@@ -126,12 +89,7 @@ class EditProfileController extends GetxController{
           source: ImageSource.camera,
           preferredCameraDevice: CameraDevice.front);
       if (response != null) {
-        // ProfilePath.value=response.path;
-        // ProfilePath.refresh();
-        //
-        // txt_image.text=ProfilePath.value.split("/").last.toString();
         File file = File(response.path);
-        // SendUpdatedProfile(file);
         _cropImage(file);
       } else {
         print("No image selected");
@@ -140,67 +98,48 @@ class EditProfileController extends GetxController{
       print("Error :--- \n $e");
     }
   }
-  Future<void> _cropImage(File _pickedFile) async {
+  Future<void> _cropImage(File pickedFile) async {
     final croppedFile = await ImageCropper().cropImage(
-      sourcePath: _pickedFile.path,
+      sourcePath: pickedFile.path,
       compressFormat: ImageCompressFormat.jpg,
       compressQuality: 100,
-      // uiSettings: buildUiSettings(context),
     );
     if (croppedFile != null) {
-      image.value=croppedFile.path;
-      print(image.value);
-      // SendUpdatedProfile(croppedFile);
-      print("photo update succesfully");
+      companyLogoImage.value='';
+
+      if(companyLogoImage.value=="") {
+        companyLogoImage.value = croppedFile.path;
+      }
     }
   }
 
-  Future<void> CheckStoargePermission() async {
+  Future<void> checkStoragePermission() async {
     if (Platform.isAndroid) {
       bool status = await Permission.storage.isGranted;
       if (status) {
-        // further process
-        ChooseImage();
+        chooseImage();
       } else if (await Permission.storage.isDenied) {
         await Permission.storage.request().then((value) {
           if (value == PermissionStatus.granted) {
-            // further process
-            ChooseImage();
+            chooseImage();
           } else if (value == PermissionStatus.denied) {
-            // dialog
-            // ValidationMsg("you can not access gallery");
             print("you can not access gallery");
-            // BottomSheetDialog(
-            //     isDismissible: false,
-            //     child: Column(
-            //       mainAxisSize: MainAxisSize.min,
-            //       children: [
-            //         ShowMessage("You can not access Gallery"),
-            //       ],
-            //     ),
-            //     isHideAutoDialog: true,
-            //     message: "error",
-            //     backgroundColor: AppColors.RED);
           }
         });
       }
     } else {
-      ChooseImage();
+      chooseImage();
     }
   }
 
-  void ChooseImage() async {
+  void chooseImage() async {
     try {
       var response = await imagePicker.pickImage(
         source: ImageSource.gallery,
       );
       if (response != null) {
-        // ProfilePath.value=response.path;
-        // ProfilePath.refresh();
-        // txt_image.text=FilePath.value.split("/").last.toString();
         File file = File(response.path);
         _cropImage(file);
-        // SendUpdatedProfile(file);
       } else {
         print("No Image Selected");
       }
@@ -209,10 +148,4 @@ class EditProfileController extends GetxController{
     }
   }
 
-
-}
-
-class RoleModel{
-  String? label;
-  RoleModel({this.label});
 }

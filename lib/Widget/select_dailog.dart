@@ -216,7 +216,7 @@ class _SelectDialog1State<T> extends State<SelectDialog1<T>> {
   ButtonBuilderType get okButtonBuilder =>
       widget.okButtonBuilder ??
       (context, onPressed) =>
-          ElevatedButton(child: const Text("Ok"), onPressed: onPressed);
+          ElevatedButton(onPressed: onPressed, child: const Text("Ok"));
 
   @override
   Widget build(BuildContext context) {
