@@ -2,11 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl_phone_field/countries.dart';
+import 'package:repeoplecp/Config/Utils/size_config.dart';
+
+const googleMapKey="AIzaSyCPYLUPMcdMC45LWtPTKdOd19eQ4ia5dXU";
+
 BuildContext contextCommon = Get.context!;
 const appName = "RepeopleCP";
-double appBarHeight = 70;
+double appBarHeight = 70.w;
 RxBool isBadgeShow=false.obs;
 
+RxString isFavourite = "0".obs;
 // RxInt selectedIndex = 0.obs;
 
 // Rxn<dynamic> check=Rxn();
@@ -22,34 +27,34 @@ Rx<Country> countryIndia = const Country(
 
 RxString isRegistered = "0".obs;
 
-RxBool Is_Login = false.obs;
-RxBool Is_WhatsApp_Active = false.obs;
+RxBool isLogin = false.obs;
+RxBool isWhatsAppActive = false.obs;
 RxString username = "".obs;
-RxString profile_pic = "".obs;
+RxString profilePic = "".obs;
 RxString email = "".obs;
 RxString firstname = "".obs;
 RxString lastname = "".obs;
 RxString mobile = "".obs;
-RxString alternate_mobile = "".obs;
-RxString customer_id = "".obs;
+RxString alternateMobile = "".obs;
+RxString customerId = "".obs;
 RxString userLoginType = "".obs;
 RxString customerID = "".obs;
 RxString isWhatsApp = "".obs;
 RxString isAlternateWSwitch = "".obs;
-RxString userProffessionName = "".obs;
+RxString userProfessionName = "".obs;
 RxInt redeemPoints = 0.obs;
 
 const homeMenu = "home";
-const SECONDMENU = "second";
+const secondMenu = "second";
 const earningMenu = "earning";
-const FAVMENU = "favorite";
+const favMenu = "favorite";
 const accountMenu = "account";
-const PROFILE = "Profile";
-const KEYMENU = "key";
+const profile = "Profile";
+const keyMenu = "key";
 const leadsMenu = "leads";
 const propertiesMenu = "properties";
-const NOTIFICTIONMENU = "notification";
-const EDITPROFILE = "Edit Profile";
-const ADDNEWHOME = "Add New Property";
+const notificationMenu = "notification";
+const editProfile = "Edit Profile";
+const addHome = "Add New Property";
 
 bool isBottomPageNavigate = false;

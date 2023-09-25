@@ -12,7 +12,6 @@ import 'package:repeoplecp/View/EditProfilePage/edit_profile_page.dart';
 import 'package:repeoplecp/View/HomePage/home_page.dart';
 import 'package:repeoplecp/Widget/custom_boxDecoration.dart';
 import 'package:repeoplecp/Widget/CustomButton/custom_button.dart';
-import 'package:repeoplecp/Widget/custom_textField.dart';
 
 
 class VerifyOTPPage extends StatefulWidget {

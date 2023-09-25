@@ -1,4 +1,4 @@
-import 'dart:convert';
+
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
@@ -12,9 +12,9 @@ import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
-import 'package:repeoplecp/Controller/BottomNavigationBarController/bottom_navigationBar_controller.dart';
+import 'package:repeoplecp/Controller/BottomNavigationBarController/bottom_navigationbar_controller.dart';
 import 'package:repeoplecp/Model/DrawerModal/drawer_modal.dart';
-import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationBar_page.dart';
+import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationbar_page.dart';
 import 'package:repeoplecp/View/EarningsPage/earnings_page.dart';
 import 'package:repeoplecp/View/FavoritePage/favorite_page.dart';
 import 'package:repeoplecp/View/HomePage/home_page.dart';
@@ -25,6 +25,10 @@ import 'package:repeoplecp/View/ProfilePage/profile_page.dart';
 import 'package:repeoplecp/View/PropertiesPage/properties_page.dart';
 import 'package:repeoplecp/View/SendOTPPage/send_otp_page.dart';
 import 'package:repeoplecp/View/TeamPage/team_page.dart';
+import 'package:repeoplecp/View/TechnicalQueryPage/technical_query_page.dart';
+import 'package:repeoplecp/View/TermsAndConditionsPage/terms_and_conditions_page.dart';
+import 'package:repeoplecp/Widget/CustomBottomSheet/custom_bottom_sheet.dart';
+import 'package:repeoplecp/Widget/LogOutDialogue/logout_dialogue.dart';
 import 'package:repeoplecp/Widget/custom_boxDecoration.dart';
 
 typedef OnTapLogoutButton = void Function();
@@ -84,7 +88,7 @@ class CustomDrawerController extends GetxController {
   }
 
   String? loginClickData(){
-    if(Is_Login.value==false) {
+    if(isLogin.value==false) {
       "Login";
     }else if(isRegistered.value){
       "Link My Properties";
@@ -157,7 +161,7 @@ class CustomDrawerController extends GetxController {
         title: "Terms & Conditions",
       ),
       DrawerModal(
-        onTap: (){},
+        onTap: (){navigateTechnicalPage();},
         images: contactSvgIcons,
         title: "Technical Query",
       ),
@@ -178,8 +182,7 @@ class CustomDrawerController extends GetxController {
           ))
       ),
       DrawerModal(
-        onTap: (){
-          },
+        onTap: (){logoutDialog();},
         images: logOutSvgIcons,
         title: "Logout",
       )
@@ -304,7 +307,7 @@ class CustomDrawerController extends GetxController {
   navigateFavoritePage() {
     Get.to(()=>const FavoritePage());
     int index = cntBottom.arrBottomNavigationList
-        .indexWhere((element) => element.name == FAVMENU);
+        .indexWhere((element) => element.name == favMenu);
     BottomNavigationBarPage().selectedIndex = index;
   }
 
@@ -316,7 +319,7 @@ class CustomDrawerController extends GetxController {
 
   navigateTechnicalPage() {
     Get.back();
-    // Get.to(TechnicalQueryPage());
+    Get.to(()=>const TechnicalQueryPage());
   }
 
   navigateContactUsPage() {
@@ -326,11 +329,9 @@ class CustomDrawerController extends GetxController {
 
   navigateTermCondition() {
     Get.back();
-  //   Get.to(
-  //       PrivacyTermPage(
-  //         title: "Terms & Conditions",
-  //       ),
-  //       preventDuplicates: false);
+    Get.to(()=>
+        const TermsAndConditionsPage(),
+        preventDuplicates: false);
   }
 
 
@@ -382,27 +383,27 @@ class CustomDrawerController extends GetxController {
 
 
 
-/*  LoginDialog() {
-    LoginDialoge(
-        dialogtext: "You should login first to proceed further.",
+  loginDialog() {
+    loginDialogue(
+        dialogText: "You should login first to proceed further.",
         // stackicon: Icon(Icons.exit_to_app,size: 40.0,color:Colors.white,),
-        stackicon: SvgPicture.asset(
-          IMG_APPLOGO1_SVG,
+        stackIcon: SvgPicture.asset(
+            appLogoSvgIcons,
           width: 40,
           height: 40,
           fit: BoxFit.fill,
-          color: white,
+          color: AppColors.whiteColor,
         ),
-        firstbuttontap: () {
+        firstButtonTap: () {
           Get.back();
         },
-        secondbuttontap: () {
+        secondButtonTap: () {
           Get.back();
-          Get.to(LoginPage());
+          Get.to(()=>const SendOTPPage());
         },
-        secondbuttontext: "Yes",
-        firstbuttontext: "No");
-  }*/
+        secondButtonText: "Yes",
+        firstButtonText: "No");
+  }
 
   ImagePicker imagePicker = ImagePicker();
   RxString image = "".obs;

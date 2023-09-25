@@ -13,8 +13,8 @@ import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Widget/country_code_dialog.dart';
 import 'package:repeoplecp/Widget/intel_country_code.dart';
 
-typedef void OnTapPress();
-typedef void OnChange(String value);
+typedef OnTapPress = void Function();
+typedef OnChange = void Function(String value);
 String cCode = "91";
 String isoCode = "IN";
 RxString isoCode1 = "INDIA".obs;
@@ -52,14 +52,14 @@ String? validation(String? value, String message) {
   }
 }
 
-String? emailvalidation(String? value) {
+String? emailValidation(String? value) {
   bool emailValid = RegExp(
           r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
       .hasMatch(value!);
   if (value.trim().isEmpty) {
-    return "" + "Please enter your email";
+    return "" "Please enter your email";
   } else if (!emailValid) {
-    return "" + "Please enter your valid email";
+    return "" "Please enter your valid email";
   } else {
     return null;
   }
@@ -78,10 +78,10 @@ Widget commonDropDownTextField(
     String? Function(String?)? onFieldSubmitted,
     TextInputType? textInputType,
     int? maxLength,
-    int maxline = 1,
+    int maxLine = 1,
     double leftIconPadding = 0,
     bool labelAlwaysOpen = true,
-    bool noautovalidation = false,
+    bool noAutoValidation = false,
     double padding = 0,
     bool isFocus = false}) {
   return TextFormField(
@@ -116,7 +116,7 @@ Widget commonDropDownTextField(
         hintText: hintText,
         hintStyle: TextStyle(
             height: 1.8,
-            fontSize: 16,
+            fontSize: 15.sp,
             fontFamily: fontFamily,
             color: HexColor("#898989"),
             fontWeight: FontWeight.w700),
@@ -167,7 +167,7 @@ Widget phoneNumberTextField(Rxn<TextEditingController>? controller,
     hintText: "9876543210",
     hintStyle: TextStyle(
         height: 1.3,
-        fontSize: 16,
+        fontSize: 15.sp,
         fontFamily: fontFamily,
         color: HexColor("#898989"),
         fontWeight: FontWeight.w700),
@@ -200,7 +200,7 @@ Widget phoneNumberTextField(Rxn<TextEditingController>? controller,
       hintText: "9876543210",
       hintStyle: TextStyle(
           height: 1.8,
-          fontSize: 16,
+          fontSize: 15.sp,
           fontFamily: fontFamily,
           color: HexColor("#898989"),
           fontWeight: FontWeight.w700),
@@ -293,7 +293,7 @@ Widget simpleTextFieldNewWithCustomization(
           hintText: hintText,
           hintStyle: TextStyle(
               height: 1.5,
-              fontSize: 16,
+              fontSize: 15.sp,
               fontFamily: fontFamily,
               color: HexColor("#898989"),
               fontWeight: FontWeight.w700),
@@ -306,71 +306,7 @@ Widget simpleTextFieldNewWithCustomization(
       ));
 }
 
-Widget CommonDropDownTextField(
-    {OnTapPress? onTap,
-      bool autoFocus = false,
-      String? imageIcon,
-      String? labelText,
-      String? hintText,
-      TextEditingController? controller,
-      List<TextInputFormatter>? inputformat,
-      String? Function(String?)? validator,
-      String? Function(String?)? onChanged,
-      String? Function(String?)? onFieldSubmitted,
-      TextInputType? textInputType,
-      int? maxLength,
-      int maxline = 1,
-      double leftIconPadding = 0,
-      bool labelAlwaysOpen = true,
-      bool noautovalidation=false,
-      double padding=0,
-      bool isFocus = false}) {
-  return TextFormField(
-    onTap: onTap,
-    style: boldTextStyle(fontSize: 16, txtColor: AppColors.black),
-    // TextStyle(fontSize: 18, color: APP_FONT_COLOR, fontWeight: FontWeight.w600),
-    readOnly: true,
-    controller: controller,
-    autovalidateMode: AutovalidateMode.onUserInteraction,
-    validator: validator,
-
-    // validator: (value) =>
-    //     validation(value, "Please select project"),
-    decoration: InputDecoration(
-        border: InputBorder.none,
-        enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.labelGreyColor)),
-        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: AppColors.labelGreyColor)),
-        errorBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-        disabledBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-        focusedErrorBorder: const UnderlineInputBorder(borderSide: BorderSide(color: Colors.red)),
-
-        labelStyle:  TextStyle(
-            fontSize: 14.sp,
-            color:AppColors.labelGreyColor,
-            fontFamily: fontFamily,
-            fontWeight: FontWeight.w500),
-        labelText: labelText,
-        hintText: hintText,
-        hintStyle:  TextStyle(
-            height: 1.8,
-            fontSize: 16.sp,
-            fontFamily: fontFamily,
-            color: HexColor("#898989"),
-            fontWeight: FontWeight.w700),
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIconConstraints: const BoxConstraints(maxWidth: 30,minWidth: 10 ),
-        // prefixIconConstraints: BoxConstraints(maxWidth: 50),
-        suffixIcon: Padding(
-            padding: const EdgeInsets.only(top: 16.0),
-            child:
-            SvgPicture.asset(dropDownSvgIcons,height: 24,width: 24,)
-          //Icon(Icons.arrow_drop_down),
-        )
-    ),
-  );
-}
-
-Widget ScheduleSiteVisite(String imageIcon, String labelText, String hintText,
+Widget scheduleSiteVisit(String imageIcon, String labelText, String hintText,
     Rxn<TextEditingController>? controller,
     [double leftPadding = 0,
       bool labelOpen = true,
@@ -383,7 +319,7 @@ Widget ScheduleSiteVisite(String imageIcon, String labelText, String hintText,
       readOnly: true,
       validator: (value) => validation(value, "Please select date"),
       onTap: () {
-        OpenDatePickerDOBDialog(DateTime.now(),DateTime(DateTime.now().year+5), controller);
+        openDatePickerDOBDialog(DateTime.now(),DateTime(DateTime.now().year+5), controller);
       },
       controller: controller?.value,
       style: boldTextStyle(fontSize: 16, txtColor: AppColors.black),
@@ -405,7 +341,7 @@ Widget ScheduleSiteVisite(String imageIcon, String labelText, String hintText,
         hintText: hintText,
         hintStyle: TextStyle(
             height: 1.8,
-            fontSize: 16.sp,
+            fontSize: 15.sp,
             fontFamily: fontFamily,
             color: HexColor("#898989"),
             fontWeight: FontWeight.w700),
@@ -427,7 +363,7 @@ Widget ScheduleSiteVisite(String imageIcon, String labelText, String hintText,
   );
 }
 
-Future<void> selectTime_with_no2(BuildContext context, int startTime, Rxn<TextEditingController>? timecontroller) async {
+Future<void> selectTimeWithNo2(BuildContext context, int startTime, Rxn<TextEditingController>? timecontroller) async {
   final TimeOfDay? picked = await showTimePicker(
     builder: (BuildContext? context, Widget? child) {
       return Column(
@@ -439,14 +375,14 @@ Future<void> selectTime_with_no2(BuildContext context, int startTime, Rxn<TextEd
                 onPrimary: AppColors.whiteColor, // <-- SEE HERE
                 onSurface: AppColors.appThemeColor, // <-- SEE HERE
               ),
-              textTheme: const TextTheme(
-                  bodyText1: TextStyle(
+              textTheme:  const TextTheme(
+                  bodyLarge: TextStyle(
                       fontSize: 10), // <-- here you can do your font smaller
-                  bodyText2:
+                  bodyMedium:
                   TextStyle(fontSize: 8.0, fontFamily: 'Poppins-Medium')),
               textButtonTheme: TextButtonThemeData(
                 style: TextButton.styleFrom(
-                  primary: AppColors.appThemeColor, // button text color
+                  foregroundColor: AppColors.appThemeColor, // button text color
                 ),
               ),
             ),
@@ -465,18 +401,17 @@ Future<void> selectTime_with_no2(BuildContext context, int startTime, Rxn<TextEd
     final dt = DateTime(now.year, now.month, now.day, picked.hour, picked.minute);
     final format = DateFormat.jm();
     timecontroller!.value!.text = format.format(dt);
-    print(timecontroller.toString() + "scheduledtimedsg");
     timecontroller.update((val) {});
   }
 }
 
-OpenDatePickerDOBDialog(DateTime firstdate, DateTime lastdate,
-    Rxn<TextEditingController>? datecontroller) async {
-  DateTime? _datePicker = await showDatePicker(
+openDatePickerDOBDialog(DateTime firstDate, DateTime lastDate,
+    Rxn<TextEditingController>? dateController) async {
+  DateTime? datePicker = await showDatePicker(
     context: Get.context!,
     initialDate: currentData,
-    firstDate: firstdate,
-    lastDate: lastdate,
+    firstDate: firstDate,
+    lastDate: lastDate,
     builder: (context, child) {
       return Theme(
         data: Theme.of(context).copyWith(
@@ -501,19 +436,16 @@ OpenDatePickerDOBDialog(DateTime firstdate, DateTime lastdate,
     },
   );
 
-  if (_datePicker != null) {
-    currentData = _datePicker;
+  if (datePicker != null) {
+    currentData = datePicker;
     var dateFormat = DateFormat("d MMMM y");
 
-    print(_datePicker);
-    datecontroller?.value?.text = dateFormat.format(_datePicker);
-    datecontroller?.update((val) { });
+    dateController?.value?.text = dateFormat.format(datePicker);
+    dateController?.update((val) { });
   }
 }
 
 String? mobileValidation(String value) {
-  print(isoCode1.value.toString());
-  print("isocode1.value.toString()");
   if (value.isEmpty) {
     return "       " "Please enter mobile number";
   } else if (value.trim().isNotEmpty && !value.trim().isNumericOnly) {

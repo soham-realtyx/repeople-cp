@@ -140,14 +140,14 @@ class _BankFormDetailsPageState extends State<BankFormDetailsPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10)),
                       child: Image(
-                          image: NetworkImage(profile_pic.value),
+                          image: NetworkImage(profilePic.value),
                           fit: BoxFit.cover)),
                 ),
                 Obx(() => cntRegistration.banPassbookImage.value == ""
                     ? const SizedBox()
                     : GestureDetector(
                   onTap: () {
-                    cntRegistration.CameraSelect(DocumentType.bankPassBookPhoto);
+                    cntRegistration.cameraSelects(DocumentType.bankPassBookPhoto);
                   },
                   child: Container(
                     width: Get.width-52.w,
@@ -173,7 +173,7 @@ class _BankFormDetailsPageState extends State<BankFormDetailsPage> {
             ))
                 : GestureDetector(
               onTap: () {
-                cntRegistration.CameraSelect(DocumentType.bankPassBookPhoto);
+                cntRegistration.cameraSelects(DocumentType.bankPassBookPhoto);
               },
               child: Container(
                 width: Get.width-52.w,

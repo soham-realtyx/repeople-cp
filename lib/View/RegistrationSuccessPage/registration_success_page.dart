@@ -7,7 +7,6 @@ import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/common_header_controller.dart';
 import 'package:repeoplecp/Controller/RegistrationController/registration_controller.dart';
-import 'package:repeoplecp/View/OTPPage/otp_page.dart';
 import 'package:repeoplecp/View/SendOTPPage/send_otp_page.dart';
 
 class RegistrationSuccessPage extends StatefulWidget {

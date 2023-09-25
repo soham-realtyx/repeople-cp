@@ -144,7 +144,7 @@ class RegistrationController extends GetxController{
   RxString gstImage="".obs;
   RxString banPassbookImage="".obs;
 
-  Future  CameraSelect(DocumentType logotype) async {
+  Future  cameraSelects(DocumentType logotype) async {
     try {
       var response = await imagePicker.pickImage(
           source: ImageSource.camera,

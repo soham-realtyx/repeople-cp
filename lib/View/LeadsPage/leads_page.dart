@@ -3,13 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:repeoplecp/Config/Utils/size_config.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
-import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/common_header_controller.dart';
 import 'package:repeoplecp/Controller/LeadsController/leads_controller.dart';
 import 'package:repeoplecp/Model/LeadsModel/leads_model.dart';
-import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationBar_page.dart';
+import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationbar_page.dart';
 import 'package:repeoplecp/View/HomePage/home_page.dart';
 import 'package:repeoplecp/Widget/CustomAppBar/custom_appbar.dart';
 import 'package:repeoplecp/Widget/CustomDrawer/custom_drawer.dart';
@@ -58,9 +57,9 @@ class _LeadsPageState extends State<LeadsPage> {
                 child: Column(
                   crossAxisAlignment:  CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 85),
+                    SizedBox(height: 85.w),
                     leadFilterListData(),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 20.w),
                     leadListData(),
 
                     const SizedBox(height: 40),
@@ -104,7 +103,7 @@ class _LeadsPageState extends State<LeadsPage> {
       child: Container(
         width: 85.w,
         margin: const EdgeInsets.only(right: 10),
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.all(8.w),
         decoration: BoxDecoration(
             color: cntLeads.filterIndex.value==index?AppColors.appThemeColor:AppColors.whiteColor,
             borderRadius: BorderRadius.circular(6),
@@ -112,6 +111,7 @@ class _LeadsPageState extends State<LeadsPage> {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(objFilter.totalCount??"",style: boldTextStyle(fontSize: 16,fontWeight: FontWeight.w700,txtColor: cntLeads.filterIndex.value==index?AppColors.whiteColor:AppColors.newBlack),),
             Text(objFilter.title??"",style: mediumTextStyle(fontSize: 10,fontWeight: FontWeight.w500,txtColor: cntLeads.filterIndex.value==index?AppColors.whiteColor:AppColors.newBlack),)

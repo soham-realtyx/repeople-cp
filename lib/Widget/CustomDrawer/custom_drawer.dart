@@ -13,6 +13,7 @@ import 'package:repeoplecp/Config/Utils/string.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/Drawer/drawer_controller.dart';
 import 'package:repeoplecp/Model/DrawerModal/drawer_modal.dart';
+import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationbar_page.dart';
 import 'package:repeoplecp/View/ProfilePage/profile_page.dart';
 import 'package:repeoplecp/View/RelationShipManagerPage/relationship_manager_page.dart';
 import 'package:repeoplecp/View/SendOTPPage/send_otp_page.dart';
@@ -39,7 +40,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
   Widget build(BuildContext context) {
     return AnimatedDrawer(
         offset: widget.animatedOffset,
-        duration: const Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 200),
     child: SafeArea(
       child: SingleChildScrollView(
         physics: const NeverScrollableScrollPhysics(),
@@ -166,7 +167,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                 )),
-            height: 88.w,
+            height: 90.w,
             width: Get.width,
           ),
           Padding(
@@ -190,13 +191,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
       top: 55.w,
       left: 20,
       child: Row(
-        crossAxisAlignment: !Is_Login.isTrue?CrossAxisAlignment.center:CrossAxisAlignment.start,
+        crossAxisAlignment: !isLogin.isTrue?CrossAxisAlignment.center:CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           GestureDetector(
             child: InkWell(
               onTap: () {
-                if (Is_Login.isTrue) {
+                if (isLogin.isTrue) {
                   const ProfilePage();
                 } else {
                   Get.back();
@@ -210,7 +211,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: AppColors.whiteColor, width: 1),
                     color: AppColors.whiteColor),
-                child: !Is_Login.isTrue
+                child: !isLogin.isTrue
                     ? Image.asset(  width: 74,
                   height: 74,userPngImage, fit: BoxFit.fill,)
                     : cntDrawer.image.value != ""
@@ -225,7 +226,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     : ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image(
-                        image: NetworkImage(profile_pic.value),
+                        image: NetworkImage(profilePic.value),
                         fit: BoxFit.fill)),
               ),
             ),
@@ -233,7 +234,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           const SizedBox(width: 12),
           GestureDetector(
             onTap: (){
-              Is_Login.isFalse ? Get.to(()=>const SendOTPPage()) : Get.to(()=>const ProfilePage());
+              isLogin.isFalse ? Get.to(()=>const SendOTPPage()) : Get.to(()=>const ProfilePage());
             },
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -243,9 +244,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   clipBehavior: Clip.none,
                   children: <Widget>[
                     Text(
-                        Is_Login.isTrue
+                        isLogin.isTrue
                             ? lblAppMenu
-                            : /*firstname.value*/"Yash",
+                            : /*firstname.value*/"Yash".toUpperCase(),
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                             fontSize: 22.sp,
@@ -259,10 +260,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           ),
                         )),
                     Text(
-                        Is_Login.isTrue
+                        isLogin.isTrue
                             ? lblAppMenu
                             : /*firstname.value*/
-                        "Yash",
+                        "Yash".toUpperCase(),
                         style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                               fontFamily: fontFamily,
@@ -274,12 +275,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   ],
                 ),
                 Container(
-                  margin: const EdgeInsets.only(bottom: 10),
+                  margin: const EdgeInsets.only(bottom: 0),
                   child: Stack(
                     clipBehavior: Clip.none,
                     children: <Widget>[
                       Text(
-                          "Goswami",
+                          "Goswami".toUpperCase(),
                           style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                               fontSize: 22.sp,
@@ -296,7 +297,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           // !Is_Login.isTrue
                           //     ? lblAppMenuLoginSignUp
                           //     :
-                          /*lastname.value*/"Goswami",
+                          /*lastname.value*/"Goswami".toUpperCase(),
                           style: GoogleFonts.montserrat(
                             textStyle: TextStyle(
                                 fontFamily: fontFamily,
@@ -312,9 +313,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 GestureDetector(
                   onTap: () {
                     Get.to(()=>const ProfilePage());
+                    BottomNavigationBarPage().selectedIndex = 4;
                   },
                   child: Text(
-                    !Is_Login.isTrue ? "" : lblViewProfile.toUpperCase(),
+                    /*!Is_Login.isTrue ? "" :*/ lblViewProfile.toUpperCase(),
                     style: TextStyle(
                         fontFamily: fontFamily,
                         fontSize: 10.sp,
@@ -322,6 +324,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         fontWeight: FontWeight.w600),
                   ),
                 ),
+                const SizedBox(height: 8),
               ],
             ),
           ),

@@ -4,7 +4,6 @@ import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/size_config.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/common_header_controller.dart';
-import 'package:repeoplecp/Controller/RegistrationController/registration_controller.dart';
 import 'package:repeoplecp/Controller/rera_details_controller/rera_details_controller.dart';
 import 'package:repeoplecp/Widget/CustomButton/custom_button.dart';
 import 'package:repeoplecp/Widget/CustomDrawer/custom_drawer.dart';

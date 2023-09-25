@@ -5,7 +5,7 @@ import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/common_header_controller.dart';
 import 'package:repeoplecp/Controller/TeamController/team_controller.dart';
-import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationBar_page.dart';
+import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationbar_page.dart';
 import 'package:repeoplecp/Widget/custom_boxDecoration.dart';
 import 'package:repeoplecp/Widget/CustomButton/custom_button.dart';
 import 'package:repeoplecp/Widget/CustomDrawer/custom_drawer.dart';
@@ -34,8 +34,8 @@ class _AddTeamsPageState extends State<AddTeamsPage> {
     return Scaffold(
       backgroundColor: AppColors.pageBackgroundColor,
       key: globalAddTeamPageKey,
-      endDrawer: CustomDrawer(
-        animatedOffset: const Offset(1.0, 0),
+      endDrawer: const CustomDrawer(
+        animatedOffset: Offset(1.0, 0),
       ),
       body: SafeArea(
         child: Stack(

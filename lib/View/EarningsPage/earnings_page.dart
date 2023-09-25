@@ -9,8 +9,8 @@ import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/common_header_controller.dart';
 import 'package:repeoplecp/Controller/EarningsController/earnings_controller.dart';
-import 'package:repeoplecp/Model/EarngingModel/earning_model.dart';
-import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationBar_page.dart';
+import 'package:repeoplecp/Model/EarningModel/earning_model.dart';
+import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationbar_page.dart';
 import 'package:repeoplecp/View/HomePage/home_page.dart';
 import 'package:repeoplecp/View/ShareInvoicePage/share_invoice_page.dart';
 import 'package:repeoplecp/Widget/CustomDrawer/custom_drawer.dart';
@@ -235,7 +235,7 @@ class _EarningsPageState extends State<EarningsPage> {
   Widget _generateEarningList(int index){
     EarningModel objEarning = cntEarning.arrEarningList[index];
     return Container(
-      padding:  EdgeInsets.only(right: 20,bottom:objEarning.receiptText=="Receipt"||objEarning.invoiceText=="Share Invoice"||objEarning.invoiceText=="View Invoice"?20: 0,top: 20,left: 20),
+      padding:  const EdgeInsets.only(right: 20,bottom:20,top: 20,left: 20),
       margin: const EdgeInsets.only(right: 20,bottom: 20,left: 20),
       decoration: BoxDecoration(
         color: AppColors.whiteColor,
@@ -345,29 +345,69 @@ class _EarningsPageState extends State<EarningsPage> {
           HorizontalDivider(color: AppColors.lightGreyColor, height: 1),
           if(objEarning.invoiceText!=null||objEarning.receiptText!=null)
           const SizedBox(height: 20),
-          GestureDetector(
+        objEarning.invoiceText=="1"?GestureDetector(
             onTap: (){
-              if(objEarning.invoiceText=="Share Invoice"){
+              if(objEarning.invoiceText=="1"){
                 Get.to(()=>ShareInvoicePage(objEarning: objEarning));
               }
             },
             child: Row(
-              mainAxisAlignment: objEarning.invoiceText!="Share Invoice"?MainAxisAlignment.center:MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if(objEarning.invoiceText!=null)
                 Text(
-                  objEarning.invoiceText!.toUpperCase(),
+                  "Share Invoice".toUpperCase(),
                   // textAlign: TextAlign.center,
-                  style: mediumTextStyle(txtColor: objEarning.isInvoiceText=="1"?AppColors.lightGreyColor: AppColors.appThemeColor,fontWeight: FontWeight.w600,fontSize: 12),
+                  style: mediumTextStyle(txtColor: objEarning.isShareTextColor=="1"?AppColors.lightGreyColor:AppColors.appThemeColor,fontWeight: FontWeight.w600,fontSize: 12),
                 ),
-                if(objEarning.receiptText!=null)
-                Text(
-                  objEarning.receiptText!.toUpperCase(),
-                  style: mediumTextStyle(txtColor: AppColors.appThemeColor,fontWeight: FontWeight.w600,fontSize: 12),
-                ),
+
               ],
             ),
-          ),
+          ):const SizedBox(),
+          objEarning.isInvoiceText=="1"?GestureDetector(
+            onTap: (){
+              // if(objEarning.invoiceText=="1"){
+              //   Get.to(()=>ShareInvoicePage(objEarning: objEarning));
+              // }
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if(objEarning.isInvoiceText!=null)
+                  Text(
+                    "View Invoice".toUpperCase(),
+                    // textAlign: TextAlign.center,
+                    style: mediumTextStyle(txtColor: AppColors.appThemeColor,fontWeight: FontWeight.w600,fontSize: 12),
+                  ),
+
+              ],
+            ),
+          ):const SizedBox(),
+          objEarning.receiptText=="1"?GestureDetector(
+            onTap: (){
+              // if(objEarning.invoiceText=="1"){
+              //   Get.to(()=>ShareInvoicePage(objEarning: objEarning));
+              // }
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                if(objEarning.isInvoiceText!=null)
+                  Text(
+                    "View Invoice".toUpperCase(),
+                    // textAlign: TextAlign.center,
+                    style: mediumTextStyle(txtColor: AppColors.appThemeColor,fontWeight: FontWeight.w600,fontSize: 12),
+                  ),
+                Text(
+                    "Receipt".toUpperCase(),
+                    // textAlign: TextAlign.center,
+                    style: mediumTextStyle(txtColor: AppColors.appThemeColor,fontWeight: FontWeight.w600,fontSize: 12),
+                  ),
+
+              ],
+            ),
+          ):const SizedBox(),
+          // const SizedBox(height: 20),
         ],
       ),
     );

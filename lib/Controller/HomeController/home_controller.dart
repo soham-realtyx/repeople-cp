@@ -1,10 +1,16 @@
 
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Model/ProjectListModel/project_list_model.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:path_provider/path_provider.dart';
 
 class HomeController extends GetxController{
 
@@ -13,6 +19,8 @@ class HomeController extends GetxController{
   RxList<ProjectListModel> arrProjectList = RxList([]);
   Rx<Future<List<ProjectListModel>>> futureArrProjectList =
       Future.value(<ProjectListModel>[]).obs;
+
+  ScreenshotController screenshotController = ScreenshotController();
 
   CarouselController controllerEvent = CarouselController();
 
@@ -62,6 +70,30 @@ class HomeController extends GetxController{
     ));
    return arrProjectList;
   }
+
+  Future saveAndShare(Uint8List bytes, String title) async {
+    final directory = await getApplicationSupportDirectory();
+    final image = File('${directory.path}/logo.png');
+    image.writeAsBytesSync(bytes);
+    Share.share("Hello Repeople");
+  }
+
+  Widget shareBuildImage() => Screenshot(
+      controller: screenshotController,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(0.0),
+          color: Colors.white,
+          border: Border.all(width: 1.0, color: Colors.white),
+        ),
+        child: Image.asset('assets/images/logo.png', fit: BoxFit.cover),
+      ));
+
+  Future shareData() async {
+    final image = await screenshotController.captureFromWidget(shareBuildImage());
+    saveAndShare(image, 'Repeople CP');
+  }
+
 }
 
 class DashBoardCountModel{

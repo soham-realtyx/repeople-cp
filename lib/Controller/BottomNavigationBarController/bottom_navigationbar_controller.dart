@@ -23,31 +23,31 @@ class BottomNavigationBarController extends GetxController{
   Future<RxList<MenuItemModel>> bottomMenuData()async{
     arrBottomNavigationList = RxList([]);
     arrBottomNavigationList.add(MenuItemModel(id: '1',name: "Dashboard",icon: dashBoardSvgIcon,alias: "home"));
-    arrBottomNavigationList.add(MenuItemModel(id: '1',name: "Leads",icon: leadsSvgIcon,alias: "leads"));
-    arrBottomNavigationList.add(MenuItemModel(id: '1',name: "earning",icon: leadsSvgIcon,alias: "earning"));
-    arrBottomNavigationList.add(MenuItemModel(id: '1',name: "Properties",icon: propertiesSvgIcon,alias: "properties"));
-    arrBottomNavigationList.add(MenuItemModel(id: '1',name: "Account",icon: userSvgIcon,alias: "account"));
+    arrBottomNavigationList.add(MenuItemModel(id: '2',name: "Leads",icon: leadsSvgIcon,alias: "leads"));
+    arrBottomNavigationList.add(MenuItemModel(id: '3',name: "Earning",icon: leadsSvgIcon,alias: "earning"));
+    arrBottomNavigationList.add(MenuItemModel(id: '4',name: "Properties",icon: propertiesSvgIcon,alias: "properties"));
+    arrBottomNavigationList.add(MenuItemModel(id: '5',name: "Account",icon: userSvgIcon,alias: "account"));
     return arrBottomNavigationList;
   }
   RxInt selectedIndex = 0.obs;
 
   selectIndex(int index){
-    if(index!=4){
+    // if(index!=4){
       selectedIndex.value = index;
       selectedIndex.update((val) { });
       selectedIndex.refresh();
       selectedIndex.value = index;
       onInit();
-    }
-    else{
-      if(Is_Login.isTrue){
-        selectedIndex.value = index;
-        selectedIndex.obs;
-        selectedIndex.refresh();
-        selectedIndex.value = index;
-        onInit();
-      }
-    }
+    // }
+    // else{
+    //   if(Is_Login.isTrue){
+    //     selectedIndex.value = index;
+    //     selectedIndex.obs;
+    //     selectedIndex.refresh();
+    //     selectedIndex.value = index;
+    //     onInit();
+    //   }
+    // }
 
     onNavigation(index);
     arrBottomNavigationList.refresh();

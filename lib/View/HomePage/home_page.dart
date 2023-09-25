@@ -11,11 +11,10 @@ import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/common_header_controller.dart';
 import 'package:repeoplecp/Controller/HomeController/home_controller.dart';
 import 'package:repeoplecp/Model/ProjectListModel/project_list_model.dart';
-import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationBar_page.dart';
+import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationbar_page.dart';
 import 'package:repeoplecp/View/PropertiesDetailsPage/properties_details_page.dart';
 import 'package:repeoplecp/Widget/CustomAppBar/custom_appbar.dart';
 import 'package:repeoplecp/Widget/CustomDrawer/custom_drawer.dart';
-import 'package:repeoplecp/Widget/horizontal_divider_widget.dart';
 import 'package:repeoplecp/Widget/ShimmerWidget/shimmer_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,10 +32,12 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      cntHome.arrCountList.refresh();
       cntHome.getDashBoardCount();
       cntHome.getProjectList();
       cntDashHeader.check.value=scaffoldHomeKey;
       BottomNavigationBarPage().selectedIndex = 0;
+      isFavourite.value="0";
         // check.refresh();
 
     });
@@ -57,7 +58,7 @@ class _HomePageState extends State<HomePage> {
             SingleChildScrollView(
                 child: Column(
                   children: [
-                      const SizedBox(height: 90),
+                      SizedBox(height: 85.w),
                       companyDetails(),
                       dashBoardCountDetails(),
                       const SizedBox(height: 20),
@@ -99,7 +100,11 @@ class _HomePageState extends State<HomePage> {
                   width: 117.w,
                   height: 28.w,
                 ),
-                SvgPicture.asset(homeShareSvgIcons, height: 24.w, width: 24.w)
+                GestureDetector(
+                    onTap: (){
+                      cntHome.shareData();
+                    },
+                    child: SvgPicture.asset(homeShareSvgIcons, height: 24.w, width: 24.w))
               ],
             ),
           ),
@@ -249,11 +254,12 @@ class _HomePageState extends State<HomePage> {
                 spreadRadius: 0
             )
           ]),
-      child: Column(
+      child: Obx(() =>Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+
           for (int i = 0; i < cntHome.arrCountList.length; i++)
-            dashBoardCountWidget(
+             dashBoardCountWidget(
               color: cntHome.arrCountList[i].color,
               count: cntHome.arrCountList[i].count,
               icons: cntHome.arrCountList[i].icons,
@@ -262,7 +268,6 @@ class _HomePageState extends State<HomePage> {
             ),
 
           Container(
-
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
               color: AppColors.green.withOpacity(0.2),
@@ -302,7 +307,7 @@ class _HomePageState extends State<HomePage> {
             ),
           )
         ],
-      ),
+      )),
     );
   }
 
@@ -510,9 +515,9 @@ class _HomePageState extends State<HomePage> {
                                                 fontSize: 10, txtColor: AppColors.newBlack)),
                                       ],
                                     ),
-                                    GestureDetector(
+                                   Obx(() =>  GestureDetector(
                                       onTap: () {
-
+                                        isFavourite.value="1";
                                       },
                                       child: Container(
                                         height: 35,
@@ -522,13 +527,13 @@ class _HomePageState extends State<HomePage> {
                                           borderRadius: BorderRadius.circular(5),
                                           color: AppColors.whiteColor.withOpacity(0.8),
                                         ),
-                                        child:/* obj.isfavorite.toString() == "1"
-                                            ? SvgPicture.asset(IMG_FAVORITE_SVG_2)
-                                            : */SvgPicture.asset(
+                                        child: isFavourite.value == "1"
+                                            ? SvgPicture.asset(isFavouriteTrueIcons)
+                                            : SvgPicture.asset(
                                           favouriteSvgIcons,
                                         )
                                       ),
-                                    ),
+                                    )),
                                   ],
                                 ),
                               ),
@@ -657,24 +662,26 @@ class _HomePageState extends State<HomePage> {
                   )
                 ]
               ),
-              child: CachedNetworkImage(
-                width: 60.w,
-                height: 47.w,
-                placeholder: (context, url) => shimmerWidget(
-                    width: 60.w,
-                    height: 47.w, radius: 10),
-                fadeInDuration: Duration.zero,
-                fadeOutDuration: Duration.zero,
-                placeholderFadeInDuration: Duration.zero,
-                imageUrl: obj.projectLogo ?? "",
-                fit: BoxFit.fill,
-                errorWidget: (context, url, error) {
-                  return Image.asset(obj.projectLogo ?? "",
+              child:
+              // CachedNetworkImage(
+              //   width: 60.w,
+              //   height: 47.w,
+              //   placeholder: (context, url) => shimmerWidget(
+              //       width: 60.w,
+              //       height: 47.w, radius: 10),
+              //   fadeInDuration: Duration.zero,
+              //   fadeOutDuration: Duration.zero,
+              //   placeholderFadeInDuration: Duration.zero,
+              //   imageUrl: obj.projectLogo ?? "",
+              //   fit: BoxFit.fill,
+              //   errorWidget: (context, url, error) {
+              //     return
+                    Image.asset(obj.projectLogo ?? "",
                       width: 60.w,
                       height: 47.w,
-                      fit: BoxFit.fill);
-                },
-              ),
+                      fit: BoxFit.fill)
+              //   },
+              // ),
             ),
           ),
 

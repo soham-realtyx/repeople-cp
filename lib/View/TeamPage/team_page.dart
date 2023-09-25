@@ -9,7 +9,7 @@ import 'package:repeoplecp/Controller/CommonHeaderController/common_header_contr
 import 'package:repeoplecp/Controller/TeamController/team_controller.dart';
 import 'package:repeoplecp/Model/TeamsModel/teams_model.dart';
 import 'package:repeoplecp/View/AddTeamsPage/add_teams_page.dart';
-import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationBar_page.dart';
+import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationbar_page.dart';
 import 'package:repeoplecp/Widget/CustomDrawer/custom_drawer.dart';
 import 'package:repeoplecp/Widget/horizontal_divider_widget.dart';
 

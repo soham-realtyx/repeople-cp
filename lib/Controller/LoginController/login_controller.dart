@@ -1,12 +1,9 @@
 
 import 'dart:async';
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:otp_autofill/otp_autofill.dart';
 import 'package:repeoplecp/Widget/custom_textField.dart';
-
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
 
@@ -43,10 +40,6 @@ class LoginController extends GetxController {
   OTPTextEditController? txtOtp1 = OTPTextEditController(codeLength: 6);
   Rxn<TextEditingController> txtContactNew = Rxn(TextEditingController());
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 
   @override
   void onClose() {
@@ -138,9 +131,7 @@ class LoginController extends GetxController {
           (code) {
             final exp = RegExp(r'(\d{4})');
             return exp.stringMatch(code ?? '') ?? '';
-            if (code?.length == 4) {
-              // Verify_otp();
-            }
+
           },
           strategies: [],
         );

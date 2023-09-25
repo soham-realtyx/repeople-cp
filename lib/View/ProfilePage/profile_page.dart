@@ -13,15 +13,17 @@ import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/common_header_controller.dart';
 import 'package:repeoplecp/Controller/MyAccountController/myaccount_controller.dart';
 import 'package:repeoplecp/View/BankDetailsPage/bank_details_page.dart';
-import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationBar_page.dart';
+import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationbar_page.dart';
 import 'package:repeoplecp/View/ContactDetailsPage/contact_details_page.dart';
 import 'package:repeoplecp/View/EditProfilePage/edit_profile_page.dart';
 import 'package:repeoplecp/View/GSTDetailsPage/gst_details_page.dart';
+import 'package:repeoplecp/View/HomePage/home_page.dart';
 import 'package:repeoplecp/View/MarketingInformation/marketing_information_page.dart';
 import 'package:repeoplecp/View/PanDetailsPage/pan_details_page.dart';
 import 'package:repeoplecp/View/RERADetailsPage/rera_details_page.dart';
 import 'package:repeoplecp/Widget/CustomDrawer/custom_drawer.dart';
 import 'package:repeoplecp/Widget/CustomStyledSwitch/custom_styled_switch.dart';
+import 'package:repeoplecp/Widget/LogOutDialogue/logout_dialogue.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -45,45 +47,45 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return
-        // WillPopScope(
-        // onWillPop: ()async{
-        //   BottomNavigationBarPage().selectedIndex=4;
-        //   Get.offAll(const HomePage());
-        //   return false;
-        // },
-        // child:
-        Scaffold(
-      backgroundColor: AppColors.pageBackgroundColor,
-      key: globalMyAccountPageKey,
-      endDrawer: const CustomDrawer(
-        animatedOffset: Offset(1.0, 0),
-      ),
-      body: SafeArea(
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(height: appBarHeight),
-                  accountHeaderData(),
-                  const SizedBox(height: 20),
-                  myLoginDetailsData(),
-                  const SizedBox(height: 20),
-                  whatsAppStatusData(),
-                  const SizedBox(height: 40),
-                  loginDetailsListData()
-                ],
-              ),
+    return WillPopScope(
+        onWillPop: () async {
+          BottomNavigationBarPage().selectedIndex = 4;
+          Get.offAll(const HomePage());
+          return false;
+        },
+        child: Scaffold(
+          backgroundColor: AppColors.pageBackgroundColor,
+          key: globalMyAccountPageKey,
+          endDrawer: const CustomDrawer(
+            animatedOffset: Offset(1.0, 0),
+          ),
+          body: SafeArea(
+            child: Stack(
+              children: [
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(height: 220.w),
+                      myLoginDetailsData(),
+                      const SizedBox(height: 20),
+                      whatsAppStatusData(),
+                      const SizedBox(height: 40),
+                      loginDetailsListData()
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: 70.w,
+                  // alignment: Alignment.topCenter,
+                  child: accountHeaderData(),
+                ),
+                cntCommonHeader.commonAppBar("Profile", globalMyAccountPageKey,
+                    isMenuIconHide: true)
+              ],
             ),
-            cntCommonHeader.commonAppBar("Profile", globalMyAccountPageKey,
-                isMenuIconHide: true)
-          ],
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBarPage(selectedIndex: 4),
-    );
-    // );
+          ),
+          bottomNavigationBar: BottomNavigationBarPage(selectedIndex: 4),
+        ));
   }
 
   Widget accountHeaderData() {
@@ -97,7 +99,7 @@ class _ProfilePageState extends State<ProfilePage> {
             decoration: BoxDecoration(
               color: AppColors.appThemeColor,
             ),
-            height: 88.w,
+            height: 85.w,
             width: Get.width,
           ),
           Align(
@@ -217,7 +219,7 @@ class _ProfilePageState extends State<ProfilePage> {
           color: AppColors.whiteColor),
       child: InkWell(
         onTap: () {
-          if (Is_Login.isTrue) {
+          if (isLogin.isTrue) {
             Get.to(const EditProfilePage());
           } else {
             Get.back();
@@ -231,7 +233,7 @@ class _ProfilePageState extends State<ProfilePage> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: AppColors.whiteColor),
-          child: !Is_Login.isTrue
+          child: !isLogin.isTrue
               ? SvgPicture.asset(userDefaultImage)
               : cntAccount.userImage.value != ""
                   ? Container(
@@ -249,7 +251,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Image(
-                          image: NetworkImage(profile_pic.value),
+                          image: NetworkImage(profilePic.value),
                           fit: BoxFit.cover)),
         ),
       ),
@@ -443,8 +445,7 @@ class _ProfilePageState extends State<ProfilePage> {
             onTap: () {
               Get.to(() => const ReRaDetailsPage(),
                   transition: Transition.rightToLeft,
-                  duration: const Duration(milliseconds: 350)
-              );
+                  duration: const Duration(milliseconds: 400));
             },
             icons: reportSvgIcons,
             title: "RERA Details",
@@ -453,8 +454,7 @@ class _ProfilePageState extends State<ProfilePage> {
             onTap: () {
               Get.to(() => const PanDetailsPage(),
                   transition: Transition.rightToLeft,
-                  duration: const Duration(milliseconds: 350)
-              );
+                  duration: const Duration(milliseconds: 400));
             },
             icons: reportSvgIcons,
             title: "PAN Details",
@@ -463,8 +463,7 @@ class _ProfilePageState extends State<ProfilePage> {
             onTap: () {
               Get.to(() => const GSTDetailsPage(),
                   transition: Transition.rightToLeft,
-                  duration: const Duration(milliseconds: 350)
-              );
+                  duration: const Duration(milliseconds: 400));
             },
             icons: reportSvgIcons,
             title: "GST Details",
@@ -473,61 +472,48 @@ class _ProfilePageState extends State<ProfilePage> {
             onTap: () {
               Get.to(() => const BankDetailsPage(),
                   transition: Transition.rightToLeft,
-                  duration: const Duration(milliseconds: 350)
-              );
+                  duration: const Duration(milliseconds: 400));
             },
             icons: buildingBankSvgIcons,
             title: "Bank Account Details",
             count: "2"),
         loginActionListData(
             onTap: () {
-              Get.to(() => const ContactDetailsPage(
-                    mobileNo: "9876543210",
-                    address:
-                        "203, 2nd Floor, Ackruti Star, MIDC Central Road, Andheri East, Mumbai, 400093",
-                    designation: "Accountant",
-                    email: "johnbrikkin.com",
-                    fName: "John",
-                    lName: "Doe",
-                    poinOfMobileNo: "9876543210",
-                    website: "https://brikkin.com",
-                  ),
+              Get.to(
+                  () => const ContactDetailsPage(
+                        mobileNo: "9876543210",
+                        address:
+                            "203, 2nd Floor, Ackruti Star, MIDC Central Road, Andheri East, Mumbai, 400093",
+                        designation: "Accountant",
+                        email: "johnbrikkin.com",
+                        fName: "John",
+                        lName: "Doe",
+                        poinOfMobileNo: "9876543210",
+                        website: "https://brikkin.com",
+                      ),
                   transition: Transition.rightToLeft,
-                  duration: const Duration(milliseconds: 350)
-              );
+                  duration: const Duration(milliseconds: 400));
             },
             icons: reportSvgIcons,
             title: "Contact Details",
             count: "0"),
         loginActionListData(
             onTap: () {
-              Get.to(()=>const MarketingInformation(),
+              Get.to(() => const MarketingInformation(),
                   transition: Transition.rightToLeft,
-                  duration: const Duration(milliseconds: 350)
-              );
+                  duration: const Duration(milliseconds: 400));
             },
             icons: reportSvgIcons,
             title: "Marketing Information",
             count: "0"),
         loginActionListData(
-            onTap: () {}, icons: logOutSvgIcons, title: "Logout", count: "0"),
+            onTap: () {
+              logoutDialog();
+            },
+            icons: logOutSvgIcons,
+            title: "Logout",
+            count: "0"),
       ],
     );
-    /*return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      scrollDirection: Axis.vertical,
-      shrinkWrap: true,
-      itemCount: cntAccount.arrLoginDetailsList.length,
-      itemBuilder: (context, index) {
-        LoginDetailsModel objLoginDetails = cntAccount.arrLoginDetailsList[index];
-        return
-          loginActionListData(
-          count: objLoginDetails.count??"",
-          title: objLoginDetails.name??"",
-          icons: objLoginDetails.icon??"",
-          onTap: objLoginDetails.onTap
-        );
-      },
-    );*/
   }
 }

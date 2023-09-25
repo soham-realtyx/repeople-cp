@@ -138,14 +138,14 @@ class _GSTFormDetailsPageState extends State<GSTFormDetailsPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10)),
                       child: Image(
-                          image: NetworkImage(profile_pic.value),
+                          image: NetworkImage(profilePic.value),
                           fit: BoxFit.cover)),
                 ),
                 Obx(() => cntRegistration.gstImage.value == ""
                     ? const SizedBox()
                     : GestureDetector(
                   onTap: () {
-                    cntRegistration.CameraSelect(DocumentType.gsTPhoto);
+                    cntRegistration.cameraSelects(DocumentType.gsTPhoto);
                   },
                   child: Container(
                     width: Get.width-52.w,
@@ -171,7 +171,7 @@ class _GSTFormDetailsPageState extends State<GSTFormDetailsPage> {
             ))
                 : GestureDetector(
               onTap: () {
-                cntRegistration.CameraSelect(DocumentType.gsTPhoto);
+                cntRegistration.cameraSelects(DocumentType.gsTPhoto);
               },
               child: Container(
                 width: Get.width-52.w,

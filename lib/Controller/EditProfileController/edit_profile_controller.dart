@@ -84,7 +84,7 @@ class EditProfileController extends GetxController{
               CupertinoActionSheetAction(
                 onPressed: () {
                   Get.back();
-                  ChooseImage();
+                  chooseImage();
                 },
                 child: Text(
                   "Choose Photo",
@@ -155,17 +155,17 @@ class EditProfileController extends GetxController{
     }
   }
 
-  Future<void> CheckStoargePermission() async {
+  Future<void> checkStoragePermission() async {
     if (Platform.isAndroid) {
       bool status = await Permission.storage.isGranted;
       if (status) {
         // further process
-        ChooseImage();
+        chooseImage();
       } else if (await Permission.storage.isDenied) {
         await Permission.storage.request().then((value) {
           if (value == PermissionStatus.granted) {
             // further process
-            ChooseImage();
+            chooseImage();
           } else if (value == PermissionStatus.denied) {
             // dialog
             // ValidationMsg("you can not access gallery");
@@ -185,11 +185,11 @@ class EditProfileController extends GetxController{
         });
       }
     } else {
-      ChooseImage();
+      chooseImage();
     }
   }
 
-  void ChooseImage() async {
+  void chooseImage() async {
     try {
       var response = await imagePicker.pickImage(
         source: ImageSource.gallery,

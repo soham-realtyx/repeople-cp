@@ -54,7 +54,7 @@ class LayoutModal {
     lable = json['lable'];
 
     if (json['data'] != null && json['data'].length>0 && json['data'].toString().contains("[")) {
-      print(json['data'].toString()+"our json dataaaa");
+      print("${json['data']}our json dataaaa");
       layoutdata = <LayoutDataModal>[];
       json['data'].forEach((v) {
         layoutdata!.add(LayoutDataModal.fromJson(v));

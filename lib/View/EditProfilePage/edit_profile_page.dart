@@ -7,7 +7,7 @@ import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/common_header_controller.dart';
-import 'package:repeoplecp/Controller/EditProfileController/EditProfileController.dart';
+import 'package:repeoplecp/Controller/EditProfileController/edit_profile_controller.dart';
 import 'package:repeoplecp/View/SelectRegistrationPage/select_registration_page.dart';
 import 'package:repeoplecp/Widget/custom_boxDecoration.dart';
 import 'package:repeoplecp/Widget/CustomButton/custom_button.dart';
@@ -166,7 +166,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Obx(() => cntEditProfile.image.value != "" ||
-                    profile_pic.value != ""
+                    profilePic.value != ""
                 ? Obx(() => Stack(
                       clipBehavior: Clip.none,
                       children: [
@@ -192,7 +192,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Image(
-                                      image: NetworkImage(profile_pic.value),
+                                      image: NetworkImage(profilePic.value),
                                       fit: BoxFit.cover)),
                         ),
                       ],

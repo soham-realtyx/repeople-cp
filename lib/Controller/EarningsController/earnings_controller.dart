@@ -7,7 +7,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
-import 'package:repeoplecp/Model/EarngingModel/earning_model.dart';
+import 'package:repeoplecp/Model/EarningModel/earning_model.dart';
 
 class EarningsController extends GetxController {
   RxList<EarningFilterModel> arrEarningFilterList = RxList([]);
@@ -33,8 +33,9 @@ class EarningsController extends GetxController {
     arrEarningList.add(EarningModel(
         name: "Yash Goswami",
         address: "101, Tower-A, WorldHome Superstar",
-        invoiceText: "Share Invoice",
-        isInvoiceText: "1",
+        invoiceText: "1",
+        isInvoiceText: "0",
+        isShareTextColor: "1",
         earningCountList: [
           EarningCountModel(earningText: "Site Visit",isEarningCount: "1"),
           EarningCountModel(earningText: "EOI",isEarningCount: "1"),
@@ -54,8 +55,9 @@ class EarningsController extends GetxController {
     arrEarningList.add(EarningModel(
         name: "Harshil Chauhan",
         address: "809, Tower-C, WorldHome Superstar",
-        invoiceText: "Share Invoice",
+        invoiceText: "1",
         isInvoiceText: "0",
+        isShareTextColor: "0",
         earningCountList: [
           EarningCountModel(earningText: "Site Visit",isEarningCount: "1"),
           EarningCountModel(earningText: "EOI",isEarningCount: "1"),
@@ -75,8 +77,8 @@ class EarningsController extends GetxController {
     arrEarningList.add(EarningModel(
         name: "Vimal Patel",
         address: "702, Tower-B, WorldHome Superstar",
-        invoiceText: "View Invoice",
-        isInvoiceText: "0",
+        invoiceText: "0",
+        isInvoiceText: "1",
         earningCountList: [
           EarningCountModel(earningText: "Site Visit",isEarningCount: "1"),
           EarningCountModel(earningText: "EOI",isEarningCount: "1"),
@@ -96,9 +98,9 @@ class EarningsController extends GetxController {
     arrEarningList.add(EarningModel(
         name: "Vimal Patel",
         address: "702, Tower-B, WorldHome Superstar",
-        invoiceText: "View Invoice",
+        invoiceText: "0",
         isInvoiceText: "0",
-        receiptText: "Receipt",
+        receiptText: "1",
         earningCountList: [
           EarningCountModel(earningText: "Site Visit",isEarningCount: "1"),
           EarningCountModel(earningText: "EOI",isEarningCount: "1"),

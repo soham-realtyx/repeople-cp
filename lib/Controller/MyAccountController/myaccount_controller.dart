@@ -5,7 +5,7 @@ import 'package:repeoplecp/Config/Utils/images.dart';
 
 class MyAccountController extends GetxController{
   RxString userImage = "".obs;
-  RxBool isWhatsAppEnable = false.obs;
+  RxBool isWhatsAppEnable = true.obs;
 
 
   @override

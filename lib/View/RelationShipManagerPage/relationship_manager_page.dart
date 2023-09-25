@@ -4,12 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:repeoplecp/Config/Utils/size_config.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
-import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/common_header_controller.dart';
 import 'package:repeoplecp/Controller/RelationShipManagerController/relationship_manager_controller.dart';
-import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationBar_page.dart';
+import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationbar_page.dart';
 import 'package:repeoplecp/Widget/CustomDrawer/custom_drawer.dart';
 import 'package:repeoplecp/Widget/ShimmerWidget/shimmer_widget.dart';
 

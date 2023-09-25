@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
+import 'package:repeoplecp/Config/Utils/size_config.dart';
+import 'package:repeoplecp/View/NotificationPage/notification_page.dart';
 
 Widget trailingHistoryIcon(Color color, {String notificationIcon = ""}){
   return Stack(
@@ -43,8 +45,8 @@ Widget trailingIconDrawer(String drawerIcon, Color color , VoidCallback onTap) {
             child:
             SvgPicture.asset(
               sideMenuSvgIcons,
-              height: 25,
-              width: 25,
+              height: 24.w,
+              width: 24.w,
               color: color,
             )
         ),
@@ -62,18 +64,18 @@ Widget trailingIconNotification(Color color,{String notificationIcon = "",VoidCa
         highlightColor: AppColors.transParent,
         hoverColor:  AppColors.transParent,
         onTap: (){
-          // Get.to(
-          //     NotificationCustomDrawer(
-          //       animatedOffset: Offset(1.0, 0),
-          //     )
-          // );
+          Get.to(
+              const NotificationPage(),
+              transition: Transition.rightToLeft,
+              duration: const Duration(milliseconds: 400)
+          );
         },
         child:
         SvgPicture.asset(
           notificationIcon,
           color: color,
-          height: 24,
-          width: 24,
+          height: 24.w,
+          width: 24.w,
         ),
       ),
 
@@ -103,9 +105,9 @@ Widget leadingIconOfAppbar(/*MaterialColor color*/) {
           child:
           SvgPicture.asset(
             rePeopleAppLogo,
-            width: 126,
+            width: 126.w,
             color: hex("006CB5"),
-            height: 20,
+            height: 20.w,
           )
       ),
     ],

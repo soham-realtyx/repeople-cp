@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -13,12 +12,11 @@ import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/common_header_controller.dart';
 import 'package:repeoplecp/Controller/PropertiestController/properties_controller.dart';
 import 'package:repeoplecp/Model/ProjectListModel/project_list_model.dart';
-import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationBar_page.dart';
+import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationbar_page.dart';
 import 'package:repeoplecp/View/HomePage/home_page.dart';
 import 'package:repeoplecp/View/PropertiesDetailsPage/properties_details_page.dart';
 import 'package:repeoplecp/Widget/custom_boxDecoration.dart';
 import 'package:repeoplecp/Widget/CustomDrawer/custom_drawer.dart';
-import 'package:repeoplecp/Widget/ShimmerWidget/shimmer_widget.dart';
 
 class PropertiesPage extends StatefulWidget {
   const PropertiesPage({super.key});
@@ -369,29 +367,33 @@ class _PropertiesPageState extends State<PropertiesPage> {
 
                           },
                           child: ClipRRect(
-                              child: CachedNetworkImage(
-                                height: 211.w,
-                                width: Get.width,
-                                placeholder: (context, url) => shimmerWidget(
-                                  height: 211.w,
-                                  width: Get.width,
-                                ),
-                                fadeInDuration: Duration.zero,
-                                fadeOutDuration: Duration.zero,
-                                placeholderFadeInDuration: Duration.zero,
-                                imageUrl:
-                                obj.projectImageList?[index2] ?? "",
-                                fit: BoxFit.cover,
-                                errorWidget: (context, url, error) {
-                                  return Image.asset(
+                              child:
+                              // CachedNetworkImage(
+                              //   height: 211.w,
+                              //   width: Get.width,
+                              //   placeholder: (context, url) => shimmerWidget(
+                              //     height: 211.w,
+                              //     width: Get.width,
+                              //   ),
+                              //   fadeInDuration: Duration.zero,
+                              //   fadeOutDuration: Duration.zero,
+                              //   placeholderFadeInDuration: Duration.zero,
+                              //   imageUrl:
+                              //   obj.projectImageList?[index2] ?? "",
+                              //   fit: BoxFit.cover,
+                              //   errorWidget: (context, url, error) {
+                              //     return
+
+                                    Image.asset(
                                     // IMG_BUILD4,
                                     obj.projectImageList?[index2]?? "",
                                     // height: 250,
                                     width: Get.width,
                                     fit: BoxFit.cover,
-                                  );
-                                },
-                              )),
+                                  )
+                              //   },
+                              // )
+                          ),
                         );
                       },
                       options: CarouselOptions(
@@ -584,24 +586,27 @@ class _PropertiesPageState extends State<PropertiesPage> {
                     )
                   ]
               ),
-              child: CachedNetworkImage(
-                width: 60.w,
-                height: 47.w,
-                placeholder: (context, url) => shimmerWidget(
-                    width: 60.w,
-                    height: 47.w, radius: 98),
-                fadeInDuration: Duration.zero,
-                fadeOutDuration: Duration.zero,
-                placeholderFadeInDuration: Duration.zero,
-                imageUrl: obj.projectLogo ?? "",
-                fit: BoxFit.fill,
-                errorWidget: (context, url, error) {
-                  return Image.asset(obj.projectLogo ?? "",
+              child:
+              // CachedNetworkImage(
+              //   width: 60.w,
+              //   height: 47.w,
+              //   placeholder: (context, url) => shimmerWidget(
+              //       width: 60.w,
+              //       height: 47.w, radius: 98),
+              //   fadeInDuration: Duration.zero,
+              //   fadeOutDuration: Duration.zero,
+              //   placeholderFadeInDuration: Duration.zero,
+              //   imageUrl: obj.projectLogo ?? "",
+              //   fit: BoxFit.fill,
+              //   errorWidget: (context, url, error) {
+              //     return
+                    Image.asset(obj.projectLogo ?? "",
                       width: 60.w,
                       height: 47.w,
-                      fit: BoxFit.fill);
-                },
-              ),
+
+                      fit: BoxFit.fill)
+              //   },
+              // ),
             ),
           ),
 

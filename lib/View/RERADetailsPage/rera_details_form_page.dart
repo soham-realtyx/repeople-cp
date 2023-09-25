@@ -130,14 +130,14 @@ class _RERADetailsPageState extends State<RERADetailsPage> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Image(
-                                      image: NetworkImage(profile_pic.value),
+                                      image: NetworkImage(profilePic.value),
                                       fit: BoxFit.cover)),
                         ),
                         Obx(() => cntRegistration.reRaImage.value == ""
                             ? const SizedBox()
                             : GestureDetector(
                                 onTap: () {
-                                  cntRegistration.CameraSelect(DocumentType.reRaPhoto);
+                                  cntRegistration.cameraSelects(DocumentType.reRaPhoto);
                                 },
                                 child: Container(
                                   width: Get.width-52.w,
@@ -163,7 +163,7 @@ class _RERADetailsPageState extends State<RERADetailsPage> {
                     ))
                 : GestureDetector(
                     onTap: () {
-                      cntRegistration.CameraSelect(DocumentType.reRaPhoto);
+                      cntRegistration.cameraSelects(DocumentType.reRaPhoto);
                     },
                     child: Container(
                       width: Get.width-52.w,

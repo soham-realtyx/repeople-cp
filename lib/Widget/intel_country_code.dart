@@ -415,7 +415,6 @@ class _IntlPhoneFieldState extends State<IntlPhoneCustomField> {
         } else if ((value.length < widget.selectedCountry!.minLength ||
             value.length > widget.selectedCountry!.maxLength) &&
             value.length < 10) {
-        print("$value this is value");
         return "      ""Invalid mobile number";
 
         }

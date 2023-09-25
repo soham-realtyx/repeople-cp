@@ -16,7 +16,6 @@ import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/common_header_controller.dart';
 import 'package:repeoplecp/Controller/PropertiestController/properties_controller.dart';
 import 'package:repeoplecp/Model/ProjectListModel/project_list_model.dart';
-import 'package:repeoplecp/View/BottomNavigationBarPage/bottom_navigationBar_page.dart';
 import 'package:repeoplecp/Widget/custom_boxDecoration.dart';
 import 'package:repeoplecp/Widget/CustomButton/custom_button.dart';
 import 'package:repeoplecp/Widget/CustomDrawer/custom_drawer.dart';
@@ -54,8 +53,8 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
     return Scaffold(
       backgroundColor: AppColors.pageBackgroundColor,
       key: globalPropertiesDetailsPageKey,
-      endDrawer: CustomDrawer(
-        animatedOffset: const Offset(1.0, 0),
+      endDrawer: const CustomDrawer(
+        animatedOffset: Offset(1.0, 0),
       ),
       body: SafeArea(
         child: Stack(
@@ -203,23 +202,26 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                         height: 73.w,
                         padding: const EdgeInsets.symmetric(
                             horizontal: 140, vertical: 64),
-                        child: CachedNetworkImage(
-                          width: 93.w,
-                          height: 73.w,
-                          placeholder: (context, url) => shimmerWidget(
-                              width: 93.w, height: 73.w, radius: 10),
-                          fadeInDuration: Duration.zero,
-                          fadeOutDuration: Duration.zero,
-                          placeholderFadeInDuration: Duration.zero,
-                          imageUrl: obj.projectLogo ?? "",
-                          fit: BoxFit.fill,
-                          errorWidget: (context, url, error) {
-                            return Image.asset(obj.projectLogo ?? "",
+                        child:
+                        // CachedNetworkImage(
+                        //   width: 93.w,
+                        //   height: 73.w,
+                        //   placeholder: (context, url) => shimmerWidget(
+                        //       width: 93.w, height: 73.w, radius: 10),
+                        //   fadeInDuration: Duration.zero,
+                        //   fadeOutDuration: Duration.zero,
+                        //   placeholderFadeInDuration: Duration.zero,
+                        //   imageUrl: obj.projectLogo ?? "",
+                        //   fit: BoxFit.fill,
+                        //   errorWidget: (context, url, error) {
+                        //     return
+
+                              Image.asset(obj.projectLogo ?? "",
                                 width: 93.w,
                                 height: 73.w,
-                                fit: BoxFit.fill);
-                          },
-                        ),
+                                fit: BoxFit.fill)
+                        //   },
+                        // ),
                       ),
                     ),
                   ],
@@ -303,7 +305,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                                         margin:
                                             const EdgeInsets.only(right: 10),
                                         padding: EdgeInsets.symmetric(
-                                            horizontal: 8.h, vertical: 6.w),
+                                            horizontal: 12.w, vertical: 6.w),
                                         decoration: BoxDecoration(
                                           boxShadow: [
                                             BoxShadow(
@@ -691,7 +693,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
           ),
           const SizedBox(height: 5),
           SizedBox(
-            height: 135,
+            height: 135.w,
             child: ListView(
               physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.horizontal,
@@ -1003,7 +1005,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
   }
 
   Widget googleMap() {
-    cntProperties.currentLocation = LatLng(19.262224, 72.9565016);
+    cntProperties.currentLocation = const LatLng(19.262224, 72.9565016);
     // print(currentLocation);
     // print("currentLocation123");
     return Container(
@@ -1134,13 +1136,11 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
           return Obx(() => _amenitiesData(index));
         },
         physics: const BouncingScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          mainAxisSpacing: 10,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          mainAxisSpacing: 10.w,
             crossAxisCount: 3, childAspectRatio: 0.4),
         itemCount:
-        cntProperties.arrAmenitiesList != null &&
-            cntProperties.arrAmenitiesList != null &&
-            cntProperties.arrAmenitiesList.length != 0
+        cntProperties.arrAmenitiesList.isNotEmpty
             ? cntProperties.arrAmenitiesList.length
             : 0,
       ),
@@ -1281,7 +1281,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
           return Padding(
             padding: EdgeInsets.only(
                 left: index == 0 ? 20 : 10,
-                right: (cntProperties.arrSiteProgressList.length)! -
+                right: (cntProperties.arrSiteProgressList.length)-
                     1 ==
                     index
                     ? 20
@@ -1360,7 +1360,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
 
   Widget planLayoutSection() {
     LayoutModal? layoutList;
-    layoutList = cntProperties.obj_svprojectdetails.value.layout;
+    layoutList = cntProperties.objSvProjectDetails.value.layout;
     final seen = <String>{};
     final unique = layoutList?.layoutdata
         ?.where((str) => seen.add(str.layouttype.toString()))
@@ -1372,7 +1372,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
             if (snapshot.connectionState == ConnectionState.done &&
                 !snapshot.hasError &&
                 snapshot.data != null) {
-              if (cntProperties.obj_svprojectdetails.value.layout != null) {
+              if (cntProperties.objSvProjectDetails.value.layout != null) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1480,11 +1480,11 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         itemCount: cntProperties
-            .obj_svprojectdetails.value.layout?.layoutdata?.length,
+            .objSvProjectDetails.value.layout?.layoutdata?.length,
         // plan_layout.length,
         itemBuilder: (context, index) {
           return Obx(() => cntProperties.layoutString.value ==
-              cntProperties.obj_svprojectdetails.value.layout!
+              cntProperties.objSvProjectDetails.value.layout!
                   .layoutdata![index].layouttype
               ? Padding(
               padding: const EdgeInsets.only(
@@ -1501,13 +1501,13 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                     fadeInDuration: Duration.zero,
                     fadeOutDuration: Duration.zero,
                     placeholderFadeInDuration: Duration.zero,
-                    imageUrl: cntProperties.obj_svprojectdetails
+                    imageUrl: cntProperties.objSvProjectDetails
                         .value.layout!.layoutdata![index].icon ??
                         "",
                     fit: BoxFit.cover,
                     errorWidget: (context, url, error) {
                       return Image.network(
-                        cntProperties.plan_layout[index].toString(),
+                        cntProperties.planLayout[index].toString(),
                         height: 110.h,
                         width: 190.w,
                       );
@@ -1617,7 +1617,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                             inputFormat: [
                               FilteringTextInputFormatter.allow(RegExp("[0-9a-zA-Z@.]")),
                             ],
-                            validator: (value) => emailvalidation(value)),
+                            validator: (value) => emailValidation(value)),
                         const SizedBox(
                           height: 16,
                         ),
@@ -1626,7 +1626,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                         const SizedBox(
                           height: 16,
                         ),
-                        CommonDropDownTextField(
+                        commonDropDownTextField(
                           labelText: "Project*",
 
                           onTap: () {
@@ -1643,7 +1643,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                         const SizedBox(
                           height: 16,
                         ),
-                        CommonDropDownTextField(
+                        commonDropDownTextField(
                           labelText: "Budget*",
                           onTap: () {
                             // SelectBudget();
@@ -1656,16 +1656,16 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                         const SizedBox(
                           height: 16,
                         ),
-                        ScheduleSiteVisite(
+                        scheduleSiteVisit(
                             dateSvgIcons,
                             "Schedule Date*", "Select", cntProperties.txtScheduleDateNew),
                         const SizedBox(
                           height: 16,
                         ),
-                        CommonDropDownTextField(
+                        commonDropDownTextField(
                             labelText: "Schedule Time*",
                             onTap: () {
-                              selectTime_with_no2(contextCommon, 0, cntProperties.txtScheduleTimeNew);
+                              selectTimeWithNo2(contextCommon, 0, cntProperties.txtScheduleTimeNew);
                             },
                             // imageIcon: IMG_DOLLAR_SVG,
                             validator: (value) => validation(value, "Please select time"),
@@ -1676,7 +1676,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                         const SizedBox(
                           height: 16,
                         ),
-                        QueryTextField_1(cntProperties.txtQueryNew),
+                        queryTextField(cntProperties.txtQueryNew),
                         // SizedBox(
                         //   height: 60,
                         // ),
@@ -1702,7 +1702,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
     ));
   }
 
-  Widget QueryTextField_1(Rxn<TextEditingController>? controller) {
+  Widget queryTextField(Rxn<TextEditingController>? controller) {
     return Obx(() =>TextFormField(
       maxLines: 2,
       inputFormatters: [

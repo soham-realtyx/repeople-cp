@@ -5,6 +5,7 @@ import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
 import 'package:repeoplecp/Controller/LoginController/login_controller.dart';
+import 'package:repeoplecp/View/HomePage/home_page.dart';
 import 'package:repeoplecp/View/OTPPage/otp_page.dart';
 import 'package:repeoplecp/Widget/custom_boxDecoration.dart';
 import 'package:repeoplecp/Widget/CustomButton/custom_button.dart';
@@ -110,6 +111,7 @@ class _SendOTPPageState extends State<SendOTPPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 0.0),
                       child: onLoginTapButton(
                           onTap: (){
+                            Get.to(()=>const HomePage());
                             // GetWhatsappText();
                             // WALunchUrl("whatsapp://send?phone=$whatsAppLoginNo&text=${Uri.encodeFull(whatsAppLoginMessage)}");
                           },

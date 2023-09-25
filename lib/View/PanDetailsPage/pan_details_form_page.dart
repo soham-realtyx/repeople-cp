@@ -138,14 +138,14 @@ class _PanFormDetailsPageState extends State<PanFormDetailsPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10)),
                       child: Image(
-                          image: NetworkImage(profile_pic.value),
+                          image: NetworkImage(profilePic.value),
                           fit: BoxFit.cover)),
                 ),
                 Obx(() => cntRegistration.panImage.value == ""
                     ? const SizedBox()
                     : GestureDetector(
                   onTap: () {
-                    cntRegistration.CameraSelect(DocumentType.panPhoto);
+                    cntRegistration.cameraSelects(DocumentType.panPhoto);
                   },
                   child: Container(
                     width: Get.width-52.w,
@@ -171,7 +171,7 @@ class _PanFormDetailsPageState extends State<PanFormDetailsPage> {
             ))
                 : GestureDetector(
               onTap: () {
-                cntRegistration.CameraSelect(DocumentType.panPhoto);
+                cntRegistration.cameraSelects(DocumentType.panPhoto);
               },
               child: Container(
                 width: Get.width-52.w,

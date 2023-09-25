@@ -5,7 +5,7 @@ import 'package:repeoplecp/Config/Utils/size_config.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
-import 'package:repeoplecp/Controller/BottomNavigationBarController/bottom_navigationBar_controller.dart';
+import 'package:repeoplecp/Controller/BottomNavigationBarController/bottom_navigationbar_controller.dart';
 import 'package:repeoplecp/Model/MenuItemModel/menu_item_model.dart';
 
 class BottomNavigationBarPage extends StatefulWidget {
@@ -20,6 +20,9 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
   BottomNavigationBarController cntBottom = Get.put(BottomNavigationBarController());
   @override
   void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      cntBottom.selectedIndex.value = widget.selectedIndex ?? 0;
+    });
     super.initState();
   }
   @override
@@ -71,7 +74,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
           // }
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0,vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 14.0,vertical: 16),
           child: SizedBox(
             height: Get.height,
             child: Container(
@@ -95,7 +98,7 @@ class _BottomNavigationBarPageState extends State<BottomNavigationBarPage> {
             cntBottom.selectIndex(index);
           },
           child: Container(
-              width: Get.width / 5.2,
+              width: Get.width / 5.3,
               height: 40,
               alignment: Alignment.center,
               padding: const EdgeInsets.only(left: 0,right: 0,top: 20),

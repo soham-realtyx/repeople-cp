@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:repeoplecp/Config/Utils/size_config.dart';
 import 'package:repeoplecp/Config/functions.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/constant.dart';
@@ -60,14 +61,14 @@ class CommonHeaderController extends GetxController {
                 onTap: backOnTap,
                 child: Container(
                   margin: const EdgeInsets.only(left: 14),
-                  width: 24,
-                  height: 24,
+                  width: 24.w,
+                  height: 24.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
                       color: hex("006CB5").withOpacity(0.2)),
                   child: Center(
                     child: SvgPicture.asset(leftBackArrowSvgIcons,
-                        height: 12, width: 6, color: AppColors.appThemeColor),
+                        height: 12.w, width: 6.w, color: AppColors.appThemeColor),
                   ),
                 ),
               )
@@ -75,14 +76,14 @@ class CommonHeaderController extends GetxController {
               onTap:() =>  backOnTap??closePageCallback(),
               child: Container(
                 margin: const EdgeInsets.only(left: 14),
-                width: 24,
-                height: 24,
+                width: 24.w,
+                height: 24.w,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(6),
                     color: hex("006CB5").withOpacity(0.2)),
                 child: Center(
                   child: SvgPicture.asset(leftBackArrowSvgIcons,
-                      height: 12, width: 6, color: AppColors.appThemeColor),
+                      height: 12.w, width: 6.w, color: AppColors.appThemeColor),
                 ),
               ),
             ),
@@ -94,7 +95,7 @@ class CommonHeaderController extends GetxController {
                         child: Text(
                           title,
                           style: TextStyle(
-                            color: AppColors.appThemeColor, fontSize: 18,
+                            color: AppColors.appThemeColor, fontSize: 18.sp,
                             fontWeight: FontWeight.w700,
                             fontFamily: fontFamily,
                             // overflow: TextOverflow.ellipsis,
@@ -120,8 +121,8 @@ class CommonHeaderController extends GetxController {
               trailingIconSearch(imgSearch, AppColors.appFontColor, () {}),
             if (!isNotificationHide)
               trailingIconNotification(AppColors.appFontColor),
-            const SizedBox(
-              width: 12,
+             SizedBox(
+              width: 12.w,
             ),
             if (isShowHistoryIcon) trailingHistoryIcon(AppColors.appFontColor),
             if (isMenuIconHide)

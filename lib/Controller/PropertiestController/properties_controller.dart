@@ -31,7 +31,7 @@ class PropertiesController extends GetxController{
   // Rx<Future<List<ProjectListModel>>> futureHeaderBlockList =
   //     Future.value(<ProjectListModel>[]).obs;
 
-  Rx<ProjectListModel> obj_svprojectdetails = ProjectListModel().obs;
+  Rx<ProjectListModel> objSvProjectDetails = ProjectListModel().obs;
 
   CarouselController controllerEvent = CarouselController();
   TextEditingController txtSearch = TextEditingController();
@@ -57,7 +57,7 @@ class PropertiesController extends GetxController{
   MarkerId markerId = const MarkerId("Marker");
   bool smallScreen = Get.width <= 400;
   GoogleMapController? googleMapController;
-  final Set<Marker> markers = Set();
+  final Set<Marker> markers = {};
 
   RxList<bool> isSelected=RxList();
   RxString layoutString='Initialized'.obs;
@@ -261,14 +261,12 @@ class PropertiesController extends GetxController{
         projectTitle: "WorldHome Superstar"
     ));
     // for(int i=0;i<arrProjectDetailsList.length;i++) {
-      obj_svprojectdetails.value=arrProjectDetailsList[0];
-      print(obj_svprojectdetails.value.layout?.lable);
-      print("obj_svprojectdetails.value.address");
+      objSvProjectDetails.value=arrProjectDetailsList[0];
     // }
     return arrProjectDetailsList;
   }
 
-  List<String> plan_layout = [
+  List<String> planLayout = [
     "https://www.livehome3d.com/assets/img/articles/how-to-draw-a-floor-plan/floor-plan-of-a-house-with-a-pool.jpg",
     "https://wpmedia.roomsketcher.com/content/uploads/2022/01/06145940/What-is-a-floor-plan-with-dimensions.png",
     "https://cdn.shopify.com/s/files/1/2829/0660/products/Wynnchester-First-Floor_M_1200x.jpg",
@@ -276,7 +274,6 @@ class PropertiesController extends GetxController{
   ];
 
   onSearchTextChanged(String text) async {
-    print("text" + text);
     arrProjectList = RxList([]);
     if (text.isEmpty) {
       futureArrProjectList.value = getProjectList();
