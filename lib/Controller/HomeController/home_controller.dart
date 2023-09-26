@@ -1,4 +1,5 @@
 
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -14,6 +15,7 @@ import 'package:path_provider/path_provider.dart';
 
 class HomeController extends GetxController{
 
+
   GlobalKey<ScaffoldState> scaffoldHomeKey = GlobalKey<ScaffoldState>();
   RxList<DashBoardCountModel> arrCountList = RxList([]);
   RxList<ProjectListModel> arrProjectList = RxList([]);
@@ -25,6 +27,13 @@ class HomeController extends GetxController{
   CarouselController controllerEvent = CarouselController();
 
   RxInt current = 0.obs;
+
+
+  @override
+  void onInit() {
+    super.onInit();
+
+  }
 
   Future <RxList<DashBoardCountModel>> getDashBoardCount()async{
     arrCountList = RxList([]);

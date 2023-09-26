@@ -58,7 +58,7 @@ class _EarningsPageState extends State<EarningsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: appBarHeight),
+                    SizedBox(height: 70.w),
                     lastUpdateWidget(
                         titleText: 'Last Update: ',
                         subText: "28 Jul, 2024 11:30 AM",

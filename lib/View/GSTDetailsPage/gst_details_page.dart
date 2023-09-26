@@ -41,7 +41,7 @@ class _GSTDetailsPageState extends State<GSTDetailsPage> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 84),
+                  SizedBox(height: 85.w),
                   gstDetailListData(),
                   const SizedBox(height: 40),
                 ],

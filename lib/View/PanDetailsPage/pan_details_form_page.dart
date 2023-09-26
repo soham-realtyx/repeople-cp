@@ -85,7 +85,9 @@ class _PanFormDetailsPageState extends State<PanFormDetailsPage> {
             height: cntRegistration.isOpenPanDetails.value == true? 16.w:10,
           )),
           Obx(() => cntRegistration.isOpenPanDetails.value == true? verifyButton() : const SizedBox()),
-
+          Obx(() =>SizedBox(
+            height: cntRegistration.isOpenPanDetails.value == true? 20.w:0,
+          )),
           Obx(() =>  cntRegistration.isOpenPanDetails.value != true ? panDetailsData() :const SizedBox())
         ],
       ),

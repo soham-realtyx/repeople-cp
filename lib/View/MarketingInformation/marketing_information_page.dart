@@ -53,7 +53,7 @@ class _MarketingInformationState extends State<MarketingInformation> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 90),
+                  SizedBox(height: 85.w),
                   marketingInformationData(),
                   const SizedBox(height: 12),
                   Center(

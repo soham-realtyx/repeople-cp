@@ -6,10 +6,10 @@ class BankDetailsController extends GetxController{
 
   Future<RxList<BankCertificatesModel>> getBankDetailsData()async{
     arrBankDetailsList = RxList([]);
-    arrBankDetailsList.add(BankCertificatesModel(
+    arrBankDetailsList.add(
+        BankCertificatesModel(
         isExpiryCertificates: "0",
         isWrongCompanyInfo: "0",
-
         bankDetailsList: [
           BankDetailsModel(
             title: "Bank",

@@ -1,3 +1,4 @@
+import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserSimplePreference{
@@ -26,5 +27,16 @@ class UserSimplePreference{
 
 
 
+}
+
+Future setNotificationCount(int count) async {
+  SharedPreferences sp = await SharedPreferences.getInstance();
+  sp.setInt(notificationCount, count);
+  sp.commit();
+}
+
+Future<int> getNotificationCount() async {
+  SharedPreferences sp = await SharedPreferences.getInstance();
+  return sp.getInt(notificationCount) ?? 0;
 }
 

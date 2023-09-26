@@ -32,8 +32,8 @@ class _OffersPageState extends State<OffersPage> {
     return Scaffold(
       backgroundColor: AppColors.pageBackgroundColor,
       key: globalAddTeamPageKey,
-      endDrawer: CustomDrawer(
-        animatedOffset: const Offset(1.0, 0),
+      endDrawer: const CustomDrawer(
+        animatedOffset: Offset(1.0, 0),
       ),
       body: SafeArea(
         child: Stack(

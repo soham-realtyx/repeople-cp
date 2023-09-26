@@ -81,7 +81,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
   }
 
   Widget newDrawerAllData(){
-    return  Expanded(
+    return Expanded(
       child: ListView(
         physics: const ScrollPhysics(),
         clipBehavior: Clip.hardEdge,
@@ -91,14 +91,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 10),
+              SizedBox(height: 12.w),
               newDrawerListData(),
               SizedBox(height: 20.w),
               newDrawerOtherListData(),
               const SizedBox(height: 80,)
             ],
           ),
-
         ],
       ),
     );
@@ -126,7 +125,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     SvgPicture.asset(
                       objList.images??"",
                       color: Colors.black,
-                      height: 24.h,width: 24.w, fit: BoxFit.cover,),
+                      height: 24.w,width: 24.w, fit: BoxFit.cover,),
                     SizedBox(
                       width: 12.w,
                     ),
@@ -144,7 +143,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 ),
                 SvgPicture.asset(
                   rightArrowSvgIcons,
-                  height: 15.h,
+                  height: 15.w,
                   width: 15.w,
                   color: AppColors.black,
                 ),
@@ -205,27 +204,33 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 }
               },
               child: Container(
-                width: 74,
-                height: 74,
+                width: 74.w,
+                height: 74.w,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(color: AppColors.whiteColor, width: 1),
                     color: AppColors.whiteColor),
                 child: !isLogin.isTrue
-                    ? Image.asset(  width: 74,
-                  height: 74,userPngImage, fit: BoxFit.fill,)
+                    ? Image.asset(
+                  width: 74.w,
+                  height: 74.w,
+                  userPngImage,
+                  fit: BoxFit.fill,
+                )
                     : cntDrawer.image.value != ""
                     ? ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image.file(
                       File(cntDrawer.image.value),
                       fit: BoxFit.fill,
-                      width: 74,
-                      height: 74,
+                      width: 74.w,
+                      height: 74.w,
                     ))
                     : ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: Image(
+                        width: 74.w,
+                        height: 74.w,
                         image: NetworkImage(profilePic.value),
                         fit: BoxFit.fill)),
               ),
@@ -252,7 +257,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                             fontSize: 22.sp,
                             fontFamily: fontFamily,
                             fontWeight: FontWeight.w900,
-                            height: 1.w,
+                            height: 1,
                             foreground: Paint()
                               ..style = PaintingStyle.stroke
                               ..strokeWidth = 6
@@ -270,7 +275,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                               fontWeight: FontWeight.w900,
                               fontSize: 22.sp,
                               color: AppColors.whiteColor,
-                              height: 1.w),
+                              height: 1),
                         )),
                   ],
                 ),
@@ -286,7 +291,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                               fontSize: 22.sp,
                               fontFamily: fontFamily,
                               fontWeight: FontWeight.w900,
-                              height: 0.8.w,
+                              height: 0.9,
                               foreground: Paint()
                                 ..style = PaintingStyle.stroke
                                 ..strokeWidth = 6
@@ -304,7 +309,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                 fontWeight: FontWeight.w900,
                                 fontSize: 22.sp,
                                 color: AppColors.whiteColor,
-                                height: 0.8.w),
+                                height: 0.9),
                           )),
                     ],
                   ),
@@ -337,7 +342,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
   Widget newDrawerListData() {
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
-      physics: const ScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       clipBehavior: Clip.hardEdge,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -389,7 +394,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       SvgPicture.asset(
                         relationShipManagerSvgIcons,
                         height: 24.w,
-                        width: 24.h,
+                        width: 24.w,
                         color: AppColors.whiteColor,
                       )),
                   const SizedBox(width: 8),
@@ -463,7 +468,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                       Align(
                         alignment: Alignment.bottomRight,
                         child: Padding(
-                          padding: EdgeInsets.only(right: 14.w,bottom: 10.h),
+                          padding: EdgeInsets.only(right: 14.w,bottom: 10.w),
                           child: Text(
                             objDrawerList_1.title!,
                             // textAlign: TextAlign.end,
@@ -496,7 +501,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         cntDrawer.navigateScreen_1(i);
                       },
                       child: Padding(
-                        padding:  EdgeInsets.only(bottom: i==2?13.w:0,top: i==2?13.w:0),
+                        padding:  EdgeInsets.only(bottom: i==2?14.w:0,top: i==2?14.w:0),
                         child: Container(
                           // height: 56.h,
                           width:134.w,
@@ -585,7 +590,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                             cntDrawer.navigateScreen_2(i);
                           },
                           child: Padding(
-                            padding:  EdgeInsets.only(bottom: i==1?13.w:0,top: i==1?13.w:0),
+                            padding:  EdgeInsets.only(bottom: i==1?14.w:0,top: i==1?14.w:0),
                             child: Container(
                               width:134.w,
                               // margin: EdgeInsets.only(right: 10),
@@ -681,7 +686,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                             objDrawerList_2.images ?? "",
                             height: 192.w,
                             width: 140.w,
-                            fit: BoxFit.fill  ,
+                            fit: BoxFit.fill,
                           );
                         },
                       ),

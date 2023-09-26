@@ -26,7 +26,7 @@ class VerifyOTPPage extends StatefulWidget {
 class _VerifyOTPPageState extends State<VerifyOTPPage> with TickerProviderStateMixin{
 
   LoginController cntOtp = Get.put(LoginController());
-
+  GlobalKey<ScaffoldState> globalOtpPageKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     super.initState();
@@ -48,7 +48,7 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> with TickerProviderStateM
     return Scaffold(
       backgroundColor: AppColors.pageBackgroundColor,
       resizeToAvoidBottomInset: true,
-      key: cntOtp.globalOtpPageKey,
+      key: globalOtpPageKey,
       body: SafeArea(
         child: Stack(
           children: [
@@ -126,15 +126,15 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> with TickerProviderStateM
                         }
                       },
                       child: Container(
-                        height: 51,
-                        width: 185,
+                        height: 51.w,
+                        width: 185.w,
                         padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 0),
                         decoration: BoxDecoration(
                             color: AppColors.appThemeColor,
                             borderRadius: BorderRadius.circular(6)),
                         child: Image.asset(
-                          width: 185,
-                          height: 36,
+                          width: 185.w,
+                          height: 36.w,
                           otpProgressGif,
                           color: AppColors.whiteColor,
                           fit: BoxFit.cover,
@@ -163,7 +163,7 @@ class _VerifyOTPPageState extends State<VerifyOTPPage> with TickerProviderStateM
                       Get.back();
                     },
                     child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 6),
+                        padding: EdgeInsets.symmetric(horizontal: 10.w,vertical: 6.w),
                         decoration: BoxDecoration(
                           color: AppColors.whiteColor,
                           borderRadius: BorderRadius.circular(6),

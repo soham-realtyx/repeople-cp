@@ -47,7 +47,7 @@ class _ShareInvoicePageState extends State<ShareInvoicePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 90),
+                  SizedBox(height: 85.w),
                   shareInvoiceData(),
 
                   const SizedBox(height: 10),

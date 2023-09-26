@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1000577958534",
+    "project_id": "repeoplecp",
+    "storage_bucket": "repeoplecp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000577958534:android:cbf4b259be1458c9f90707",
+        "android_client_info": {
+          "package_name": "com.totality.repeoplecp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkMkfqQ2pbV7odcKhS5ALTGmzU7za793g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

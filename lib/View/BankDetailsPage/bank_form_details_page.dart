@@ -87,7 +87,9 @@ class _BankFormDetailsPageState extends State<BankFormDetailsPage> {
             height: cntRegistration.isOpenBankDetails.value == true? 16.w:10,
           )),
           Obx(() => cntRegistration.isOpenBankDetails.value == true? verifyButton() : const SizedBox()),
-
+          Obx(() =>SizedBox(
+            height: cntRegistration.isOpenBankDetails.value == true? 20.w:10,
+          )),
           Obx(() =>  cntRegistration.isOpenBankDetails.value != true ? bankDetailsData() :const SizedBox())
         ],
       ),

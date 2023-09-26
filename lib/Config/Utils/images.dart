@@ -32,7 +32,7 @@ const managerPngImage = "assets/images/managerImage.png";
 const userPngImage1 = "assets/images/user1.png";
 const userPngImage2 = "assets/images/user2.png";
 const offerPngImage = "assets/images/offersImage.png";
-
+const noConnectionPng = "assets/images/no_connection.png";
 
 
 //SVG Icons

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -5,6 +7,8 @@ import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/size_config.dart';
+import 'package:repeoplecp/Config/Utils/styles.dart';
+import 'package:repeoplecp/View/NoConnectionPage/noconnection_page.dart';
 import 'package:repeoplecp/View/NotificationPage/notification_page.dart';
 
 Widget trailingHistoryIcon(Color color, {String notificationIcon = ""}){
@@ -131,4 +135,111 @@ Widget trailingIconSearch(String drawerIcon, Color color , VoidCallback onTap) {
       )
     ],
   );
+}
+
+void showAlertDialog() {
+  showHideDlg.value = true;
+  showDialog(
+    context: Get.context!,
+    barrierDismissible: true,
+    builder: (BuildContext context) {
+      return WillPopScope(
+        onWillPop: () async {
+          return true;
+        },
+        child: SimpleDialog(
+          backgroundColor: AppColors.transParent,
+          children: [
+            Stack(
+              children: [
+                Container(
+                  width: Get.width,
+                  padding: EdgeInsets.only(top: 20.w, bottom: 10.w, left: 10.w, right: 10.w),
+                  // height: Get.height ,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      ClipRRect(
+                        child: Image.asset(
+                          "assets/images/no-internet-connection.png",
+                          height: 100.w,
+                          // width: 80.w,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.w,
+                      ),
+                      Text(
+                        'No Internet Connection',
+                        style: TextStyle(
+                            fontSize: 18.0,
+                            fontFamily: fontFamily,
+                            fontWeight: FontWeight.w600),
+                        textAlign: TextAlign.center,
+                      ),
+
+                      SizedBox(
+                        height: 20.w,
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  right: 16,
+                  top: 16,
+                  child:  GestureDetector(
+                    onTap: (){
+                      Get.back();
+                    },
+                    child: SvgPicture.asset(
+                        "assets/icon/close.svg",
+                        height: 14.h,
+                        // color: sh_black,
+                        fit: BoxFit.cover),
+                  ),)
+              ],
+            )
+          ],
+        ),
+      );
+    },
+  );
+}
+
+Future<bool> checkInternetStatus() async {
+  bool status = false;
+  try {
+    final result = await InternetAddress.lookup('example.com')
+        .timeout(const Duration(seconds: 20));
+    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+      status = true;
+    }
+  } on SocketException catch (_) {
+    status = false;
+  } catch (e) {
+    status = false;
+  }
+  return status;
+}
+
+void showNoInternetDialog() async {
+  await showDialog(
+      useSafeArea: true,
+      barrierDismissible: false,
+      context: Get.context!,
+      builder: (_) {
+        return AlertDialog(
+          backgroundColor: AppColors.appThemeColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          content: const SizedBox(
+              height: 150, width: 200, child: NoConnectionPage()),
+        );
+      });
 }

@@ -67,7 +67,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                     searchProjectTextField(),
                     const SizedBox(height: 16),
                     trendingData(),
-                    const SizedBox(height: 60),
+                    SizedBox(height: 60.w),
                     projectListData(),
                   ],
                 ),
@@ -227,12 +227,12 @@ class _PropertiesPageState extends State<PropertiesPage> {
 
   Widget trendingData() {
     return Container(
-      padding: const EdgeInsets.only(top: 16,bottom: 11,left: 20,right: 20),
+      padding: const EdgeInsets.only(top: 16,bottom: 6,left: 20,right: 20),
       child: Align(
         alignment: Alignment.topLeft,
         child: Obx(() => Wrap(
-          spacing: 8.0,
-          runSpacing: 5.0,
+          spacing: 8.0.w,
+          runSpacing: 5.0.w,
           direction: Axis.horizontal,
           children: List.generate(
             cntProperties.arrTrendingList.length+1,
@@ -252,7 +252,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                         style: TextStyle(
                             color: AppColors.labelGreyColor,
                             fontWeight: FontWeight.w500,
-                            fontSize: 12.0,
+                            fontSize: 12.0.sp,
                             fontFamily: fontFamily),
                       ),
                       const SizedBox(width: 0),
@@ -276,13 +276,13 @@ class _PropertiesPageState extends State<PropertiesPage> {
         cntProperties.isTrending.value = i;
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+        padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.w),
         decoration: BoxDecoration(
           color: cntProperties.isTrending.value==i?AppColors.appThemeColor:null,
           borderRadius: const BorderRadius.all(Radius.circular(4)),
           border:  Border.all(
             color: AppColors.labelGreyColor,
-            width: 1,
+            width: 1.2,
           ),
         ),
         child: Row(
@@ -295,11 +295,11 @@ class _PropertiesPageState extends State<PropertiesPage> {
                 style: TextStyle(
                     color: cntProperties.isTrending.value==i?AppColors.whiteColor:AppColors.labelGreyColor,
                     fontWeight: FontWeight.w500,
-                    fontSize: 12.0,
+                    fontSize: 12.0.sp,
                     fontFamily: fontFamily),
               ),
             ),
-            SvgPicture.asset(rightArrowSvgIcons,color: cntProperties.isTrending.value==i?AppColors.whiteColor:AppColors.labelGreyColor,)
+            SvgPicture.asset(rightArrowSvgIcons,color: cntProperties.isTrending.value==i?AppColors.whiteColor:AppColors.labelGreyColor)
           ],
         ),
       ),
@@ -412,7 +412,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                       children: [
                         Container(
                           width: Get.width,
-                          height: 138.w,
+                          height: 135.w,
                           margin: const EdgeInsets.symmetric(horizontal: 20),
                           // padding: EdgeInsets.only(top: 10.w,bottom: 10.w,right: 8.w,left: 8.w),
                           decoration: BoxDecoration(
@@ -479,7 +479,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
                                     return Container(
                                       margin: const EdgeInsets.only(right: 10),
                                       padding: EdgeInsets.symmetric(
-                                          horizontal: 8.h, vertical: 6.w),
+                                          horizontal: 12.w, vertical: 6.w),
                                       decoration: BoxDecoration(
                                         boxShadow: [
                                           BoxShadow(
@@ -570,9 +570,9 @@ class _PropertiesPageState extends State<PropertiesPage> {
             ),
           ),
           Positioned(
-            top: -45,
+            top: -45.h,
             child: Container(
-              padding: const EdgeInsets.only(left: 10,right: 10,top: 16,bottom: 16),
+              padding: EdgeInsets.only(left: 10.h,right: 10.h,top: 16.w,bottom: 16.w),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(90),
                   color: AppColors.whiteColor,

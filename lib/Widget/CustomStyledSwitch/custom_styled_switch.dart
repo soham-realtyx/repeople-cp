@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
+import 'package:repeoplecp/Config/Utils/size_config.dart';
 
 class StyledSwitch extends StatefulWidget {
   final void Function(bool isToggled) onToggled;
@@ -44,8 +45,8 @@ class _StyledSwitchState extends State<StyledSwitch> {
           color: isToggled ? AppColors.lightGrey : AppColors.green,
         ),
         child: Container(
-          width: size - innerPadding * 2.5,
-          height: size - innerPadding * 2.5,
+          width: size - innerPadding * 2.5.w,
+          height: size - innerPadding * 2.5.w,
           padding: const EdgeInsets.only(right: 4,left: 4),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(102),

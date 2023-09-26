@@ -40,7 +40,7 @@ class _ReRaDetailsPageState extends State<ReRaDetailsPage> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 84),
+                  SizedBox(height: 85.w),
                   reRaDetailListData(),
                   const SizedBox(height: 40),
                 ],

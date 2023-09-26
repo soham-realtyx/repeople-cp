@@ -61,7 +61,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 80),
+                  SizedBox(height: 85.w),
                   checkIfMyCompanyIsRegisteredData(),
                   const SizedBox(height: 12),
                   pointOfContactDetailsData(),

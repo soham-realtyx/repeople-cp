@@ -236,7 +236,7 @@ class _FavoritePageState extends State<FavoritePage> {
                                     return Container(
                                       margin: const EdgeInsets.only(right: 10),
                                       padding: EdgeInsets.symmetric(
-                                          horizontal: 8.h, vertical: 6.w),
+                                          horizontal: 12.w, vertical: 6.w),
                                       decoration: BoxDecoration(
                                         boxShadow: [
                                           BoxShadow(

@@ -41,7 +41,7 @@ class _BankDetailsPageState extends State<BankDetailsPage> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 84),
+                  SizedBox(height: 85.w),
                   bankDetailListData(),
                   const SizedBox(height: 40),
                 ],

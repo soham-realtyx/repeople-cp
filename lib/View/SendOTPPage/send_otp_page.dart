@@ -21,6 +21,7 @@ class SendOTPPage extends StatefulWidget {
 
 class _SendOTPPageState extends State<SendOTPPage> {
   LoginController cntLogin = Get.put(LoginController());
+  GlobalKey<ScaffoldState> globalLoginPageKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     super.initState();
@@ -31,7 +32,7 @@ class _SendOTPPageState extends State<SendOTPPage> {
     return Scaffold(
       backgroundColor: AppColors.pageBackgroundColor,
       resizeToAvoidBottomInset: true,
-      key: cntLogin.globalLoginPageKey,
+      key: globalLoginPageKey,
       body: SafeArea(
         child: Stack(
           children: [

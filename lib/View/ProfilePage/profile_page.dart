@@ -130,7 +130,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   fontSize: 22.sp,
                                   fontFamily: fontFamily,
                                   fontWeight: FontWeight.w900,
-                                  height: 0.9.w,
+                                  height: 0.9,
                                   // letterSpacing: 0.8,
                                   foreground: Paint()
                                     ..style = PaintingStyle.stroke
@@ -147,7 +147,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       fontWeight: FontWeight.w900,
                                       fontSize: 22.sp,
                                       color: AppColors.whiteColor,
-                                      height: 0.9.w),
+                                      height: 0.9),
                                 )),
                           ],
                         ),
@@ -161,7 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   fontSize: 22.sp,
                                   fontFamily: fontFamily,
                                   fontWeight: FontWeight.w900,
-                                  height: 0.9.w,
+                                  height: 0.9,
                                   foreground: Paint()
                                     ..style = PaintingStyle.stroke
                                     ..strokeWidth = 6
@@ -176,7 +176,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       fontWeight: FontWeight.w900,
                                       fontSize: 22.sp,
                                       color: AppColors.whiteColor,
-                                      height: 0.9.w),
+                                      height: 0.9),
                                 )),
                           ],
                         ),
@@ -195,7 +195,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
-                        SizedBox(height: 12.h),
+                        SizedBox(height: 14.w),
                       ],
                     ),
                   ),
@@ -393,7 +393,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget whatsAppStatusData() {
     return Container(
-      padding: const EdgeInsets.only(right: 20, left: 20, bottom: 20, top: 20),
+      padding: EdgeInsets.only(right: 20.h, left: 20.h, bottom: 20.w, top: 20.w),
       margin: const EdgeInsets.only(left: 20, right: 20),
       decoration: BoxDecoration(
         color: hex("D0EEE1"),
@@ -402,8 +402,8 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SvgPicture.asset(whatsAppSvgIcons, width: 32, height: 32),
-          const SizedBox(width: 8),
+          SvgPicture.asset(whatsAppSvgIcons, width: 32.w, height: 32.w),
+          SizedBox(width: 8.h),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -414,7 +414,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     fontWeight: FontWeight.w600,
                     fontSize: 12),
               ),
-              const SizedBox(height: 4),
+              SizedBox(height: 4.w),
               SizedBox(
                   width: 185.w,
                   child: Text(
@@ -426,7 +426,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   )),
             ],
           ),
-          const SizedBox(width: 10),
+          SizedBox(width: 10.h),
           StyledSwitch(
             onToggled: (isToggled) {
               cntAccount.isWhatsAppEnable.value = isToggled;
@@ -505,14 +505,16 @@ class _ProfilePageState extends State<ProfilePage> {
             },
             icons: reportSvgIcons,
             title: "Marketing Information",
-            count: "0"),
+            count: "0"
+        ),
         loginActionListData(
             onTap: () {
               logoutDialog();
             },
             icons: logOutSvgIcons,
             title: "Logout",
-            count: "0"),
+            count: "0"
+        ),
       ],
     );
   }

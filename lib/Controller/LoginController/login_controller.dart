@@ -25,8 +25,8 @@ class LoginController extends GetxController {
   FocusNode mobileFocusNode = FocusNode();
   FocusNode referFocusNode = FocusNode();
   FocusNode otpFocusNode = FocusNode();
-  GlobalKey<ScaffoldState> globalLoginPageKey = GlobalKey<ScaffoldState>();
-  GlobalKey<ScaffoldState> globalOtpPageKey = GlobalKey<ScaffoldState>();
+
+
   TextEditingController txtFirstName = TextEditingController();
   TextEditingController txtLastName = TextEditingController();
   TextEditingController txtEmail = TextEditingController();

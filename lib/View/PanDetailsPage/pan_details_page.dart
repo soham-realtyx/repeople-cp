@@ -41,7 +41,7 @@ class _PanDetailsPageState extends State<PanDetailsPage> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 84),
+                  SizedBox(height: 85.w),
                   panDetailListData(),
                   const SizedBox(height: 40),
                 ],

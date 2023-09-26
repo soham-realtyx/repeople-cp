@@ -62,7 +62,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: appBarHeight),
+                  const SizedBox(height: 70),
                   projectHeaderData(),
                   const SizedBox(height: 20),
                   projectDetailsBlockHeader(),
@@ -151,25 +151,25 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                           onTap: () {},
                           child: ClipRRect(
                               child: CachedNetworkImage(
-                            height: 211.w,
-                            width: Get.width,
-                            placeholder: (context, url) => shimmerWidget(
-                              height: 211.w,
-                              width: Get.width,
-                            ),
-                            fadeInDuration: Duration.zero,
-                            fadeOutDuration: Duration.zero,
-                            placeholderFadeInDuration: Duration.zero,
-                            imageUrl: obj.projectImageList?[index2] ?? "",
-                            fit: BoxFit.cover,
-                            errorWidget: (context, url, error) {
-                              return Image.asset(
-                                // IMG_BUILD4,
-                                obj.projectImageList?[index2] ?? "",
-                                // height: 250,
+                                height: 211.w,
                                 width: Get.width,
+                                // placeholder: (context, url) => shimmerWidget(
+                                //   height: 211.w,
+                                //   width: Get.width,
+                                // ),
+                                fadeInDuration: Duration.zero,
+                                fadeOutDuration: Duration.zero,
+                                placeholderFadeInDuration: Duration.zero,
+                                imageUrl: obj.projectImageList?[index2] ?? "",
                                 fit: BoxFit.cover,
-                              );
+                                errorWidget: (context, url, error) {
+                                  return Image.asset(
+                                    // IMG_BUILD4,
+                                    obj.projectImageList?[index2] ?? "",
+                                    // height: 250,
+                                    width: Get.width,
+                                    fit: BoxFit.cover,
+                                  );
                             },
                           )),
                         );
@@ -215,7 +215,6 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                         //   fit: BoxFit.fill,
                         //   errorWidget: (context, url, error) {
                         //     return
-
                               Image.asset(obj.projectLogo ?? "",
                                 width: 93.w,
                                 height: 73.w,
@@ -233,7 +232,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                   children: [
                     Container(
                       width: Get.width,
-                      height: 138.w,
+                      height: 135.w,
                       margin: const EdgeInsets.symmetric(horizontal: 20),
                       // padding: EdgeInsets.only(top: 10.w,bottom: 10.w,right: 8.w,left: 8.w),
                       decoration: BoxDecoration(
@@ -298,7 +297,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                                     itemCount: obj.configureList?.length,
                                     scrollDirection: Axis.horizontal,
                                     padding:
-                                        EdgeInsets.only(right: 8.w, left: 8.w),
+                                        EdgeInsets.only(right: 8.w, left: 8.w,),
                                     physics: const BouncingScrollPhysics(),
                                     itemBuilder: (BuildContext context, int i) {
                                       return Container(
@@ -360,10 +359,6 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                                   ),
                                 )
                               : const SizedBox(),
-                          const SizedBox(
-                            height: 9.2,
-                          ),
-
                         ],
                       ),
                     ),
@@ -908,12 +903,12 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                 borderRadius: BorderRadius.circular(8),
                 child: CachedNetworkImage(
                   width: 120.w,
-                  height: 120.h,
+                  height: 120.w,
                   fadeInDuration: Duration.zero,
                   fadeOutDuration: Duration.zero,
                   placeholderFadeInDuration: Duration.zero,
                   placeholder: (context, url) => shimmerWidget(
-                      width: 120.w, height: 120.h, radius: 8),
+                      width: 120.w, height: 120.w, radius: 8),
                   imageUrl: cntProperties.arrGalleryList[index].image ??
                       "",
                   fit: BoxFit.cover,
@@ -933,10 +928,10 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                     },
                     child: Container(
                       width: 120.w,
-                      height: 120.h,
+                      height: 120.w,
                       decoration: BoxDecoration(
                           borderRadius:
-                          BorderRadius.circular(6),
+                          BorderRadius.circular(8),
                           color: AppColors.appThemeColor.withOpacity(0.4)),
                       child: Center(
                           child: Text(

@@ -41,7 +41,7 @@ class _RERADetailsPageState extends State<RERADetailsPage> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 80),
+                  SizedBox(height: 85.w),
                   reRaDetailForm(),
                   const SizedBox(height: 40),
                 ],
@@ -211,7 +211,8 @@ class _RERADetailsPageState extends State<RERADetailsPage> {
     return Obx(() => AnimatedContainer(
       clipBehavior: Clip.hardEdge,
       curve: Curves.fastOutSlowIn,
-      height: cntRegistration.isOpenReRaDetails.value == true ? 320.w : 530.w,
+
+      height:  cntRegistration.isOpenReRaDetails.value == true  ? 340.w : 530.w,
       width: Get.width,
       //margin: const EdgeInsets.only(left: 0, right:0, bottom: 35, top: 0),
       decoration: BoxDecoration(
@@ -289,24 +290,28 @@ class _RERADetailsPageState extends State<RERADetailsPage> {
   }
 
   Widget verifyButton() {
-    return onTapButton(
-        onTap: () {
-          if(cntRegistration.isRERAValidationShow.value==true) {
-            setState(() {
-              cntRegistration.isOpenReRaDetails.value =
-              !cntRegistration.isOpenReRaDetails.value;
-            });
-          }
-       },
-        height: 40.w,
-        decoration: CustomDecorations().backgroundLocal(
-            AppColors.appThemeColor, 6, 0, AppColors.whiteColor),
-        text: "verify".toUpperCase(),
-        style: TextStyle(
-            color: AppColors.whiteColor,
-            fontFamily: fontFamily,
-            fontWeight: FontWeight.w500,
-            fontSize: 12.sp));
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: onTapButton(
+          onTap: () {
+            if(cntRegistration.isRERAValidationShow.value==true) {
+              setState(() {
+                cntRegistration.isOpenReRaDetails.value =
+                !cntRegistration.isOpenReRaDetails.value;
+              });
+            }
+         },
+          height: 40.w,
+
+          decoration: CustomDecorations().backgroundLocal(
+              AppColors.appThemeColor, 6, 0, AppColors.whiteColor),
+          text: "verify".toUpperCase(),
+          style: TextStyle(
+              color: AppColors.whiteColor,
+              fontFamily: fontFamily,
+              fontWeight: FontWeight.w500,
+              fontSize: 12.sp)),
+    );
   }
 
   Widget submitButton() {

@@ -85,7 +85,9 @@ class _GSTFormDetailsPageState extends State<GSTFormDetailsPage> {
             height: cntRegistration.isOpenGSTDetails.value == true? 16.w:10,
           )),
           Obx(() => cntRegistration.isOpenGSTDetails.value == true? verifyButton() : const SizedBox()),
-
+          // Obx(() =>SizedBox(
+          //   height: cntRegistration.isOpenPanDetails.value == true? 16.w:10,
+          // )),
           Obx(() =>  cntRegistration.isOpenGSTDetails.value != true ? gstDetailsData() :const SizedBox())
         ],
       ),

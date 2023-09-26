@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:repeoplecp/Config/Helper/AppUpgrade/app_upgrade.dart';
 import 'package:repeoplecp/Config/Utils/size_config.dart';
 import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/constant.dart';
@@ -102,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 GestureDetector(
                     onTap: (){
-                      cntHome.shareData();
+                      Get.to(()=>AppUpgradePage(forceUpdate: true, msg: 'helloooooooooooo', versioncode: '10100',));
                     },
                     child: SvgPicture.asset(homeShareSvgIcons, height: 24.w, width: 24.w))
               ],
@@ -163,7 +164,7 @@ class _HomePageState extends State<HomePage> {
               width: 84.w,
               height: 84.w,
               placeholder: (context, url) =>
-                  shimmerWidget(width: 84.w, height: 84.w, radius: 8),
+                  shimmerWidget(width: 84.w, height: 84.w, radius: 12),
               fadeInDuration: Duration.zero,
               fadeOutDuration: Duration.zero,
               placeholderFadeInDuration: Duration.zero,
@@ -553,7 +554,7 @@ class _HomePageState extends State<HomePage> {
                                     return Container(
                                       margin: const EdgeInsets.only(right: 10),
                                       padding: EdgeInsets.symmetric(
-                                          horizontal: 8.h, vertical: 6.w),
+                                          horizontal: 12.w, vertical: 6.w),
                                       decoration: BoxDecoration(
                                         boxShadow: [
                                           BoxShadow(

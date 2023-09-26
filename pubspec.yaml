@@ -56,6 +56,17 @@ dependencies:
   share_plus: ^4.5.3
   screenshot: ^2.1.0
   path_provider: ^2.1.1
+  firebase_core: ^2.16.0
+  firebase_messaging: ^14.6.8
+  firebase_crashlytics: ^3.3.6
+
+  dio: ^5.3.3
+  flutter_local_notifications: ^15.1.1
+  connectivity_plus: ^4.0.2
+  firebase_remote_config: ^4.2.6
+  lottie: ^2.6.0
+  package_info: ^2.0.2
+  event_bus: ^2.0.0
 
 dev_dependencies:
   flutter_test:

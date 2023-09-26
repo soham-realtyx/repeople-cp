@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -204,10 +205,14 @@ class EarningsController extends GetxController {
         File file = File(response.path);
         _cropImage(file);
       } else {
-        print("No image selected");
+        if (kDebugMode) {
+          print("No image selected");
+        }
       }
     } catch (e) {
-      print("Error :--- \n $e");
+      if (kDebugMode) {
+        print("Error :--- \n $e");
+      }
     }
   }
   Future<void> _cropImage(File pickedFile) async {
@@ -235,7 +240,9 @@ class EarningsController extends GetxController {
           if (value == PermissionStatus.granted) {
             chooseImage();
           } else if (value == PermissionStatus.denied) {
-            print("you can not access gallery");
+            if (kDebugMode) {
+              print("you can not access gallery");
+            }
           }
         });
       }
@@ -253,7 +260,9 @@ class EarningsController extends GetxController {
         File file = File(response.path);
         _cropImage(file);
       } else {
-        print("No Image Selected");
+        if (kDebugMode) {
+          print("No Image Selected");
+        }
       }
     } catch (e) {
       print("Error :--- \n $e");

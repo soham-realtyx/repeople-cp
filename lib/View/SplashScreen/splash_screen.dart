@@ -29,6 +29,7 @@ class _SplashScreenState extends State<SplashScreen>
   void dispose() {
     timer.cancel();
     WidgetsBinding.instance.removeObserver(this);
+    cntSplash.check_app_update();
     super.dispose();
   }
 
