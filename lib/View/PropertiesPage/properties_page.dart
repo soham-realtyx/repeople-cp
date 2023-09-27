@@ -352,7 +352,7 @@ class _PropertiesPageState extends State<PropertiesPage> {
             child: Container(
               height: 328.w,
               width: Get.width,
-              margin: const EdgeInsets.only(bottom: 60),
+              margin: EdgeInsets.only(bottom: 60.w),
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [

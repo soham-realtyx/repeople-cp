@@ -19,6 +19,7 @@ String cCode = "91";
 String isoCode = "IN";
 RxString isoCode1 = "INDIA".obs;
 FocusNode mobileFocusNode = FocusNode();
+FocusNode mobileFocusNode2 = FocusNode();
 Rx<Country> selectedCountry = countryIndia().obs;
 RxString countrystr = "IN".obs;
 RxString countrycode = "+91".obs;
@@ -135,7 +136,7 @@ Widget commonDropDownTextField(
   );
 }
 
-Widget phoneNumberTextField(Rxn<TextEditingController>? controller,
+Widget phoneNumberTextField(Rxn<TextEditingController>? controller,FocusNode? focusNode,
     [bool? readonly = false,
     bool? showCursor = true,
     bool? isPrefix = true,
@@ -147,7 +148,7 @@ Widget phoneNumberTextField(Rxn<TextEditingController>? controller,
     disableLengthCheck: false,
     autovalidateMode: AutovalidateMode.onUserInteraction,
     textAlign: TextAlign.left,
-    focusNode: mobileFocusNode,
+    focusNode: focusNode,
     autofocus: false,
     mobilNo: false,
     keyboardType: TextInputType.number,
@@ -221,6 +222,8 @@ Widget phoneNumberTextField(Rxn<TextEditingController>? controller,
     ),
   );
 }
+
+
 
 
 

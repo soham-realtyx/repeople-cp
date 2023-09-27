@@ -46,6 +46,9 @@ class PropertiesController extends GetxController{
   TextEditingController txtProject = TextEditingController();
   TextEditingController txtBudget = TextEditingController();
 
+  FocusNode mobileFocusNode = FocusNode();
+  FocusNode secondMobileFocusNode = FocusNode();
+
   var siteVisitFormKey = GlobalKey<FormState>();
   FocusNode fcmSearch = FocusNode();
 

@@ -70,6 +70,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           children: [
             Column(
               children: [
+
                 drawerHeaderData(),
                 newDrawerAllData(),
               ],

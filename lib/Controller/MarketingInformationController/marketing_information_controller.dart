@@ -17,6 +17,9 @@ class MarketingInformationController extends GetxController{
 
   final marketingInfoKey = GlobalKey<FormState>();
 
+  FocusNode mobileFocusNode = FocusNode();
+  FocusNode secondMobileFocusNode = FocusNode();
+
   RxString emailText = ''.obs;
   RxString whatsAppMobileText = ''.obs;
   RxString websiteText = ''.obs;

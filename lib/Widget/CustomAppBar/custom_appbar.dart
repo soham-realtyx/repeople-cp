@@ -14,7 +14,7 @@ class DashBoardHeader extends StatefulWidget {
   const DashBoardHeader({super.key});
 
   @override
-  _DashBoardHeaderState createState() => _DashBoardHeaderState();
+  State<DashBoardHeader> createState() => _DashBoardHeaderState();
 }
 
 class _DashBoardHeaderState extends State<DashBoardHeader> {
@@ -72,7 +72,9 @@ class _DashBoardHeaderState extends State<DashBoardHeader> {
                         child: Row(
                           children: [
                             trailingIconNotification(AppColors.appFontColor,
-                                notificationIcon: notificationSvgIcons),
+                                notificationIcon: notificationSvgIcons,
+                            onTap: ()=>() => cntCommonHeader.check.value.currentState?.openEndDrawer()
+                            ),
                             const SizedBox(width: 12),
                             trailingIconDrawer(imgMenu, AppColors.appFontColor,
                                 () => cntCommonHeader.check.value.currentState?.openEndDrawer())

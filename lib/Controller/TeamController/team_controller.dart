@@ -27,6 +27,9 @@ class TeamController extends GetxController {
   Rx<RoleModel> objRoleType = RoleModel().obs;
   RxList<RoleModel> arrRoleList = RxList([]);
 
+  FocusNode mobileFocusNode = FocusNode();
+  FocusNode secondMobileFocusNode = FocusNode();
+
   clearFormData(){
     txtFirstName.value?.text='';
     txtLastName.value?.text='';

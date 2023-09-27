@@ -50,6 +50,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
 
   CommonHeaderController cntCommonHeader = Get.put(CommonHeaderController());
   RegistrationController cntRegistration = Get.put(RegistrationController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,7 +112,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
             key: cntRegistration.contactDetailsFormKey,
             child: Column(
               children: [
-                phoneNumberTextField(cntRegistration.txtMobileNo),
+                phoneNumberTextField(cntRegistration.txtMobileNo,cntRegistration.mobileFocusNode),
                 const SizedBox(
                   height: 16,
                 ),
@@ -207,7 +208,7 @@ class _ContactDetailsPageState extends State<ContactDetailsPage> {
             const SizedBox(
               height: 16,
             ),
-            phoneNumberTextField(cntRegistration.txtPointOfMobile),
+            phoneNumberTextField(cntRegistration.txtPointOfMobile,cntRegistration.secondMobileFocusNode),
             const SizedBox(
               height: 16,
             ),

@@ -61,15 +61,11 @@ class _LeadsPageState extends State<LeadsPage> {
                     leadFilterListData(),
                     SizedBox(height: 20.w),
                     leadListData(),
-
                     const SizedBox(height: 40),
                   ],
                 ),
               ),
               const DashBoardHeader()
-              // cntCommonHeader.commonAppBar(
-              //     "Leads", cntLeads.globalLeadsPageKey,
-              // )
             ],
           ),
         ),

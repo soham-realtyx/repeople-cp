@@ -61,7 +61,7 @@ class _NotificationPageState extends State<NotificationPage> {
             decoration: const BoxDecoration(),
             child: Column(
               children: [
-                SizedBox(height: 110.w),
+                SizedBox(height: 110.h),
                 notificationListData()
               ],
             ),

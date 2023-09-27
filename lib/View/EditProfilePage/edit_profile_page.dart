@@ -24,6 +24,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
   CommonHeaderController cntCommonHeader = Get.put(CommonHeaderController());
   EditProfileController cntEditProfile = Get.put(EditProfileController());
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    cntEditProfile.roleTypeData();
+  }
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.pageBackgroundColor,
@@ -108,7 +114,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         height: 16,
                       ),
                       phoneNumberTextField(
-                          cntEditProfile.txtContactNew),
+                          cntEditProfile.txtContactNew,cntEditProfile.mobileFocusNode),
                     ],
                   ),
                 ),

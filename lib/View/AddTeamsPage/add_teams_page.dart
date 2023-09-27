@@ -106,7 +106,7 @@ class _AddTeamsPageState extends State<AddTeamsPage> {
                   height: 16,
                 ),
                 phoneNumberTextField(
-                    cntTeam.txtContactNew),
+                    cntTeam.txtContactNew,cntTeam.mobileFocusNode),
                 const SizedBox(
                   height: 16,
                 ),

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ import 'package:repeoplecp/Config/Utils/colors.dart';
 import 'package:repeoplecp/Config/Utils/constant.dart';
 import 'package:repeoplecp/Config/Utils/images.dart';
 import 'package:repeoplecp/Config/Utils/styles.dart';
+import 'package:repeoplecp/Config/functions.dart';
 import 'package:repeoplecp/Controller/CommonHeaderController/common_header_controller.dart';
 import 'package:repeoplecp/Controller/HomeController/home_controller.dart';
 import 'package:repeoplecp/Model/ProjectListModel/project_list_model.dart';
@@ -43,6 +46,8 @@ class _HomePageState extends State<HomePage> {
 
     });
   }
+
+  GlobalKey<ScaffoldState> globalOpenDrawerKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 GestureDetector(
                     onTap: (){
-                      Get.to(()=>AppUpgradePage(forceUpdate: true, msg: 'helloooooooooooo', versioncode: '10100',));
+                      cntHome.shareData();
                     },
                     child: SvgPicture.asset(homeShareSvgIcons, height: 24.w, width: 24.w))
               ],
@@ -693,6 +698,66 @@ class _HomePageState extends State<HomePage> {
 
   Widget projectShimmerWidget(){
     return Container();
+  }
+
+  Widget appBarHeader() {
+    return ClipRect(
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+        child: Container(
+          //color: APP_GRAY_COLOR,
+          height: 70.w,
+          width: Get.width,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.0),
+              boxShadow: [fullcontainerboxShadow]),
+          child: SafeArea(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned(
+                        left: 20,
+                        top: 5,
+                        bottom: 5,
+                        child: Row(
+                          children: [leadingIconOfAppbar()],
+                        ),
+                      ),
+                      Positioned(
+                        right: 7,
+                        top: 5,
+                        bottom: 5,
+                        child: Row(
+                          children: [
+                            trailingIconNotification(AppColors.appFontColor,
+                                notificationIcon: notificationSvgIcons,
+                              onTap: (){
+
+                              }
+                            ),
+                            const SizedBox(width: 12),
+                            trailingIconDrawer(
+                                imgMenu, AppColors.appFontColor,
+                                    (){
+
+                                    })
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
 }

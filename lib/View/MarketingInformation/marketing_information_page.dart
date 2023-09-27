@@ -99,7 +99,7 @@ class _MarketingInformationState extends State<MarketingInformation> {
           const SizedBox(
             height: 16,
           ),
-          Form(key: cntMarketingInfo.marketingInfoKey,child: phoneNumberTextField(cntMarketingInfo.txtMobile)),
+          Form(key: cntMarketingInfo.marketingInfoKey,child: phoneNumberTextField(cntMarketingInfo.txtMobile,cntMarketingInfo.mobileFocusNode)),
           const SizedBox(
             height: 16,
           ),

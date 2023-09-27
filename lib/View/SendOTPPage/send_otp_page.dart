@@ -76,7 +76,7 @@ class _SendOTPPageState extends State<SendOTPPage> {
                       child: Column(
                         children: [
                           // LoginForm_5(),
-                          phoneNumberTextField(cntLogin.txtContactNew),
+                          phoneNumberTextField(cntLogin.txtContactNew,cntLogin.mobileFocusNode),
                           SizedBox(height: 24.w),
                           onLoginTapButton(
                             onTap: () {

@@ -334,20 +334,16 @@ class CustomDrawerController extends GetxController {
         preventDuplicates: false);
   }
 
-
-
-
   // Close Button
   Widget closeIcon() {
     return GestureDetector(
       onTap: () {
         Get.back();
-
-          // check.refresh();
+        // check.refresh();
         },
       child: Container(
-          height: 24,
-          width: 24,
+          height: 24.w,
+          width: 24.w,
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
@@ -356,8 +352,8 @@ class CustomDrawerController extends GetxController {
             closeSvgIcons,
             color: AppColors.whiteColor,
             fit: BoxFit.cover,
-            height: 24,
-            width: 24,
+            height: 24.w,
+            width: 24.w,
           )
       ),
     );

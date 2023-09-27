@@ -1133,7 +1133,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
         physics: const BouncingScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           mainAxisSpacing: 10.w,
-            crossAxisCount: 3, childAspectRatio: 0.4),
+            crossAxisCount: 3, childAspectRatio: 0.2.w),
         itemCount:
         cntProperties.arrAmenitiesList.isNotEmpty
             ? cntProperties.arrAmenitiesList.length
@@ -1152,7 +1152,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(width: 12.w),
+          SizedBox(width: 12.h),
           Container(
             alignment: Alignment.center,
             child: cntProperties.arrAmenitiesList[index].image
@@ -1171,7 +1171,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
               height: 28.w,
             ),
           ),
-          SizedBox(width: 10.w),
+          SizedBox(width: 10.h),
           SizedBox(
             width: 100.h,
             child: Text(
@@ -1617,7 +1617,7 @@ class _PropertiesDetailsPageState extends State<PropertiesDetailsPage> {
                           height: 16,
                         ),
                         //ContactTextField(txtContactNew),
-                        phoneNumberTextField(cntProperties.txtContactNew),
+                        phoneNumberTextField(cntProperties.txtContactNew,cntProperties.mobileFocusNode),
                         const SizedBox(
                           height: 16,
                         ),

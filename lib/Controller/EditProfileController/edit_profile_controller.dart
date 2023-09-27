@@ -15,12 +15,13 @@ class EditProfileController extends GetxController{
   @override
   void onInit() {
     super.onInit();
-    roleTypeData();
   }
 
   GlobalKey<ScaffoldState> globalEditProfilePageKey = GlobalKey<ScaffoldState>();
 
   var formKey = GlobalKey<FormState>();
+
+  FocusNode mobileFocusNode = FocusNode();
 
   Rxn<TextEditingController> txtFirstName = Rxn(TextEditingController());
   Rxn<TextEditingController> txtLastName = Rxn(TextEditingController());
@@ -31,17 +32,21 @@ class EditProfileController extends GetxController{
   TextEditingController txtUserRole = TextEditingController();
 
   ImagePicker imagePicker = ImagePicker();
-  RxString image="".obs;
- Rx<RoleModel> objRoleType = RoleModel().obs;
- RxList<RoleModel> arrRoleList = RxList([]);
- roleTypeData(){
-   arrRoleList = RxList([
-     RoleModel(label: "User"),
-     RoleModel(label: "Admin"),
-   ]);
-   objRoleType.value = arrRoleList[0];
+  RxString image = "".obs;
+  Rx<RoleModel> objRoleType = RoleModel().obs;
+  RxList<RoleModel> arrRoleList = RxList([]);
+
+ Future<RxList<RoleModel>> roleTypeData() async {
+   arrRoleList = RxList([]);
+   arrRoleList.add(RoleModel(label: "User"));
+   arrRoleList.add(RoleModel(label: "Admin"));
+   for(int i = 0; i < arrRoleList.length; i++) {
+     objRoleType.value = arrRoleList[i];
+   }
+   return arrRoleList;
  }
-  selectRoleType() {
+
+ selectRoleType() {
     selectRoleTypeDialog((value) {
       objRoleType.value=value;
       txtUserRole.text = objRoleType.value.label??"";
@@ -50,7 +55,6 @@ class EditProfileController extends GetxController{
 
   Future<dynamic> selectRoleTypeDialog(ValueChanged<RoleModel> onChange) {
     return SelectDialog1.showModal<RoleModel>(
-
       Get.context!,
       label: "Select Role Type",
       items: arrRoleList,
@@ -100,16 +104,12 @@ class EditProfileController extends GetxController{
     if (Platform.isAndroid) {
       bool status = await Permission.camera.isGranted;
       if (status) {
-        // further process
         cameraSelect();
       } else if (await Permission.camera.isDenied) {
         await Permission.camera.request().then((value) {
           if (value == PermissionStatus.granted) {
-            // further process
             cameraSelect();
           } else if (value == PermissionStatus.denied) {
-            // dialog
-            // ValidationMsg("you can not access camera");
             print("you can not access camera");
 
           }
@@ -126,12 +126,7 @@ class EditProfileController extends GetxController{
           source: ImageSource.camera,
           preferredCameraDevice: CameraDevice.front);
       if (response != null) {
-        // ProfilePath.value=response.path;
-        // ProfilePath.refresh();
-        //
-        // txt_image.text=ProfilePath.value.split("/").last.toString();
         File file = File(response.path);
-        // SendUpdatedProfile(file);
         _cropImage(file);
       } else {
         print("No image selected");
@@ -145,13 +140,10 @@ class EditProfileController extends GetxController{
       sourcePath: _pickedFile.path,
       compressFormat: ImageCompressFormat.jpg,
       compressQuality: 100,
-      // uiSettings: buildUiSettings(context),
     );
     if (croppedFile != null) {
       image.value=croppedFile.path;
-      print(image.value);
-      // SendUpdatedProfile(croppedFile);
-      print("photo update succesfully");
+      print("photo update successful");
     }
   }
 
@@ -159,28 +151,13 @@ class EditProfileController extends GetxController{
     if (Platform.isAndroid) {
       bool status = await Permission.storage.isGranted;
       if (status) {
-        // further process
         chooseImage();
       } else if (await Permission.storage.isDenied) {
         await Permission.storage.request().then((value) {
           if (value == PermissionStatus.granted) {
-            // further process
             chooseImage();
           } else if (value == PermissionStatus.denied) {
-            // dialog
-            // ValidationMsg("you can not access gallery");
             print("you can not access gallery");
-            // BottomSheetDialog(
-            //     isDismissible: false,
-            //     child: Column(
-            //       mainAxisSize: MainAxisSize.min,
-            //       children: [
-            //         ShowMessage("You can not access Gallery"),
-            //       ],
-            //     ),
-            //     isHideAutoDialog: true,
-            //     message: "error",
-            //     backgroundColor: AppColors.RED);
           }
         });
       }
@@ -195,9 +172,6 @@ class EditProfileController extends GetxController{
         source: ImageSource.gallery,
       );
       if (response != null) {
-        // ProfilePath.value=response.path;
-        // ProfilePath.refresh();
-        // txt_image.text=FilePath.value.split("/").last.toString();
         File file = File(response.path);
         _cropImage(file);
         // SendUpdatedProfile(file);
@@ -208,8 +182,6 @@ class EditProfileController extends GetxController{
       print("Error :--- \n $e");
     }
   }
-
-
 }
 
 class RoleModel{

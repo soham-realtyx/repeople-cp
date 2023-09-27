@@ -40,6 +40,9 @@ class RegistrationController extends GetxController{
   GlobalKey<ScaffoldState> globalBankDetailsPageKey = GlobalKey<ScaffoldState>();
   GlobalKey<ScaffoldState> globalContactDetailsPageKey = GlobalKey<ScaffoldState>();
 
+  FocusNode mobileFocusNode = FocusNode();
+  FocusNode secondMobileFocusNode = FocusNode();
+
   var formKey = GlobalKey<FormState>();
   var reRaFormKey = GlobalKey<FormState>();
   var bankFormKey = GlobalKey<FormState>();
