@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Repeoplecp</string>
+	<string>RepeopleCP</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -28,6 +28,14 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSCameraUsageDescription</key>
+    <string>Access camera</string>
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>Library</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>Your location is required for xyz benefits for you</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>Your location is required for xyz benefits for you</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
